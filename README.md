@@ -33,6 +33,7 @@ PlayerManagement/
 │   ├── CauThuTest.java
 │   └── DanhSachCauThuTest.java
 └── README.md              # Mô tả dự án
+
 🧱 Viết 3 class chính (Câu 4)
 1. CauThu.java
 
