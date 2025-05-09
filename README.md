@@ -1,7 +1,6 @@
 # OOP_N03_Term3_2025_K17_Group9
 📌 Giới thiệu dự án: Hệ thống quản lý cầu thủ bằng Java
-Dự án "Quản lý cầu thủ bóng đá" được xây dựng bằng ngôn ngữ lập trình Java theo mô hình hướng đối tượng. Hệ thống hỗ trợ người dùng lưu trữ, cập nhật và quản lý thông tin cầu thủ trong đội bóng, từ đó giúp việc quản lý trở nên hiệu quả và khoa học hơn. Giao diện sử dụng console, thích hợp cho sinh viên học lập trình Java cơ bản đến trung cấp.
-
+Dự án "Quản lý cầu thủ bóng đá" được xây dựng bằng ngôn ngữ lập trình Java theo mô hình hướng đối tượng. Hệ thống hỗ trợ người dùng lưu trữ, cập nhật và quản lý thông tin cầu thủ trong đội bóng, từ đó giúp việc quản lý trở nên hiệu quả và khoa học hơn.
 🧩 Phân tích 3 đối tượng chính trong hệ thống
 1. Lớp CauThu (Player)
 Đại diện cho thông tin một cầu thủ.
@@ -34,7 +33,8 @@ PlayerManagement/
 │   └── DanhSachCauThuTest.java
 └── README.md              # Mô tả dự án
 
-🧱 Viết 3 class chính (Câu 4)
+
+Viết 3 class chính (Câu 4)
 1. CauThu.java
 
 package model;
@@ -106,7 +106,7 @@ public class Main {
         ds.hienThi();
     }
 }
-✅ Kiểm định (Câu 5): 01–03 class test
+Kiểm định (Câu 5): 01–03 class test
 1. CauThuTest.java
 
 package test;
