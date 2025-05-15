@@ -1,7 +1,6 @@
-package main;
+package Main;
 
 import model.CauThu;
-import model.Doibong;
 
 public class Main {
     public static void main(String[] args) {
