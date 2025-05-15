@@ -1,6 +1,3 @@
-import model.CauThu;
-import model.Doibong;
-
 public class Main {
     public static void main(String[] args) {
         CauThu ct1 = new CauThu("CT01", "Nguyễn Văn A", 24, "Tiền đạo", 9, "Việt Nam");
