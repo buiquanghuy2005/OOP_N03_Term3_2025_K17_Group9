@@ -1,12 +1,10 @@
-package model;
 
 public class CauThu {
-    private String maCauThu;
-    private String hoTen;
-    private int tuoi;
-    private String viTri;
-    private int soAo;
-    private String quocTich;
+     String maCauThu;
+     String hoTen;
+     int tuoi;
+     String viTri;
+     int s String quocTich;
 
     public CauThu(String ma, String ten, int tuoi, String viTri, int soAo, String qt) {
         this.maCauThu = ma;
@@ -17,9 +15,4 @@ public class CauThu {
         this.quocTich = qt;
     }
 
-    public String getHoTen() { return hoTen; }
-    public void setHoTen(String hoTen) { this.hoTen = hoTen; }
-    public String toString() {
-        return maCauThu + " - " + hoTen + " - " + tuoi + " tuổi - " + viTri;
-    }
 }
