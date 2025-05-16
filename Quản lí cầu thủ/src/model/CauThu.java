@@ -7,6 +7,8 @@ public class CauThu {
     private String viTri;
     private int soAo;
     private String quocTich;
+    public CauThu(){
+    }
 
     public CauThu(String ma, String ten, int tuoi, String viTri, int soAo, String qt) {
         this.maCauThu = ma;
@@ -15,6 +17,18 @@ public class CauThu {
         this.viTri = viTri;
         this.soAo = soAo;
         this.quocTich = qt;
+    }
+    public String getMaCauThu(){
+        return maCauThu;
+    }
+    public void setMaCauThu(String maCauthu){
+        this.maCauThu = maCauThu;
+    }
+    public String getHoten(){
+        return hoTen;
+    }
+    public void setHoTen(String maCauthu){
+        this.hoTen = hoTen;
     }
 
     public void hienThiThongTin() {
