@@ -64,5 +64,5 @@ https://online.visual-paradigm.com/share.jsp?id=343038303132362d31
 <img src="img/Quanlidoibong.jpg">
 Sequence diagram :
 https://online.visual-paradigm.com/share.jsp?id=343038303132362d32
-
+<img src="img/Quanlidoibong2.jpg">
 
