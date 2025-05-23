@@ -32,8 +32,9 @@ Lưu dữ liệu xuống file nhị phân (ObjectOutputStream, ObjectInputStream
 Đọc dữ liệu khi ứng dụng khởi chạy
 Sử dụng ArrayList<CauThu> và Map<CLB, List<CauThu>> để quản lý trong bộ nhớ.
 
+
+Diagram 1:
 https://online.visual-paradigm.com/share.jsp?id=343038303132362d31
-https://online.visual-paradigm.com/share.jsp?id=343038303132362d32
 
 
 
