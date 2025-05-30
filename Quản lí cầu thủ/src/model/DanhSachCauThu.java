@@ -1,3 +1,4 @@
+package model;
 import java.util.ArrayList;
 
 public class DanhSachCauThu {
@@ -9,17 +10,6 @@ public class DanhSachCauThu {
         System.out.println(" Đã thêm cầu thủ: " + ct.hoTen);
     }
 
-    public void suaCauThu(String hoTenMoi, int soAoMoi, int maCauThu) {
-        for (CauThu ct : danhSach) {
-            if (ct.maCauThu == maCauThu) {
-                ct.hoTen = hoTenMoi;
-                ct.soAo = soAoMoi;
-                System.out.println(" Đã cập nhật thông tin cầu thủ có mã " + maCauThu);
-                return;
-            }
-        }
-        System.out.println("Không tìm thấy cầu thủ có mã " + maCauThu);
-    }
 
     public void xoaCauThu(int maCauThu) {
         for (int i = 0; i < danhSach.size(); i++) {

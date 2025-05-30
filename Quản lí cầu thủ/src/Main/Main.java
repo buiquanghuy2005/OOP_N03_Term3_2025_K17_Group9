@@ -74,7 +74,7 @@ public class Main {
 
     private static void themCauThu() {
         System.out.print("Mã cầu thủ: ");
-        String ma = scanner.nextLine();
+        int ma = Integer.parseInt(scanner.nextLine());
         System.out.print("Họ tên: ");
         String ten = scanner.nextLine();
         System.out.print("Tuổi: ");
@@ -87,7 +87,7 @@ public class Main {
         String qt = scanner.nextLine();
 
         CauThu ct = new CauThu(ma, ten, tuoi, vitri, soAo, qt);
-        danhSachCauThu.add(ct);
+        danhSachCauThu.add(ct); 
         System.out.println("Thêm cầu thủ thành công!");
     }
 
@@ -108,12 +108,13 @@ public class Main {
             return;
         }
 
-        List<Integer> soAos = new ArrayList<>();
-        for (CauThu ct : danhSachCauThu) {
-            soAos.add(ct.getSoAo());
-        }
+        // List<Integer> soAos = new ArrayList<>();
+        // for (CauThu ct : danhSachCauThu) {
+        //     soAos.add(ct.getsoAo());
+        // }
 
-        int tong = Recursion.tongSoAo(soAos, 0);
-        System.out.println("Tổng số áo của cầu thủ: " + tong);
-    }
+//         int tong = Recursion.tongSoAo(soAos, 0);
+//         System.out.println("Tổng số áo của cầu thủ: " + tong);
+//     }
+}
 }
