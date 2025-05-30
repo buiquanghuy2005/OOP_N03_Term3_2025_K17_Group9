@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+
 public class Main {
     private static final Scanner scanner = new Scanner(System.in);
     private static final UserManager userManager = new UserManager();
@@ -120,51 +121,34 @@ public class Main {
         int tong = Recursion.tongSoAo(soAos, 0);
         System.out.println("Tổng số áo của cầu thủ: " + tong);
     }
+private static void timKiemCauThu() {
+    System.out.print("Nhập tên cầu thủ (có thể để trống): ");
+    String ten = scanner.nextLine().trim();
+    ten = ten.isEmpty() ? null : ten;
 
-    // 🔍 Phương thức tìm kiếm cầu thủ
-    private static void timKiemCauThu() {
-        if (danhSachCauThu.isEmpty()) {
-            System.out.println("Chưa có cầu thủ nào để tìm kiếm.");
-            return;
-        }
+    System.out.print("Nhập vị trí (có thể để trống): ");
+    String viTri = scanner.nextLine().trim();
+    viTri = viTri.isEmpty() ? null : viTri;
 
-        System.out.print("Nhập tên (Enter để bỏ qua): ");
-        String ten = scanner.nextLine().trim();
-        ten = ten.isEmpty() ? null : ten;
+    System.out.print("Nhập tuổi tối thiểu (có thể để trống): ");
+    String minTuoiStr = scanner.nextLine().trim();
+    Integer minTuoi = minTuoiStr.isEmpty() ? null : Integer.parseInt(minTuoiStr);
 
-        System.out.print("Nhập vị trí (Enter để bỏ qua): ");
-        String viTri = scanner.nextLine().trim();
-        viTri = viTri.isEmpty() ? null : viTri;
+    System.out.print("Nhập tuổi tối đa (có thể để trống): ");
+    String maxTuoiStr = scanner.nextLine().trim();
+    Integer maxTuoi = maxTuoiStr.isEmpty() ? null : Integer.parseInt(maxTuoiStr);
 
-        System.out.print("Nhập tuổi tối thiểu (nhập -1 nếu bỏ qua): ");
-        int minTuoiInput = Integer.parseInt(scanner.nextLine());
-        Integer minTuoi = (minTuoiInput >= 0) ? minTuoiInput : null;
+    List<CauThu> ketQua = CauThuService.timKiem(danhSachCauThu, ten, viTri, minTuoi, maxTuoi);
 
-        System.out.print("Nhập tuổi tối đa (nhập -1 nếu bỏ qua): ");
-        int maxTuoiInput = Integer.parseInt(scanner.nextLine());
-        Integer maxTuoi = (maxTuoiInput >= 0) ? maxTuoiInput : null;
-
-        List<CauThu> ketQua = new ArrayList<>();
-
-        for (CauThu ct : danhSachCauThu) {
-            boolean thoaMan = true;
-
-            if (ten != null && !ct.getTen().toLowerCase().contains(ten.toLowerCase())) thoaMan = false;
-            if (viTri != null && !ct.getViTri().equalsIgnoreCase(viTri)) thoaMan = false;
-            if (minTuoi != null && ct.getTuoi() < minTuoi) thoaMan = false;
-            if (maxTuoi != null && ct.getTuoi() > maxTuoi) thoaMan = false;
-
-            if (thoaMan) ketQua.add(ct);
-        }
-
-        if (ketQua.isEmpty()) {
-            System.out.println("Không tìm thấy cầu thủ phù hợp.");
-        } else {
-            System.out.println("\nKết quả tìm kiếm:");
-            for (CauThu ct : ketQua) {
-                ct.hienThiThongTin();
-                System.out.println("--------------");
-            }
+    if (ketQua.isEmpty()) {
+        System.out.println("Không tìm thấy cầu thủ phù hợp.");
+    } else {
+        System.out.println("Kết quả tìm kiếm:");
+        for (CauThu ct : ketQua) {
+            ct.hienThiThongTin();
+            System.out.println("--------------");
         }
     }
+}
+
 }
