@@ -28,4 +28,8 @@ public class DanhSachCauThu {
             System.out.println(" Mã: " + ct.maCauThu + " | Họ tên: " + ct.hoTen + " | Số áo: " + ct.soAo);
         }
     }
+    public ArrayList<CauThu> getDanhSach() {
+    return danhSach;
+}
+
 }
