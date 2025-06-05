@@ -1,7 +1,7 @@
-package Main;
+package main;
 
 
-import Test.TestSequence;
+import test.TestSequence;
 
 public class App {
     public static void main(String[] args) {

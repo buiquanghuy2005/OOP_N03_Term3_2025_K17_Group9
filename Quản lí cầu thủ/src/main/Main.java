@@ -1,4 +1,4 @@
-package Main;
+package main;
 
 import model.*;
 
@@ -21,7 +21,6 @@ public class Main {
             System.out.println("2. Đăng nhập");
             System.out.println("3. Thêm cầu thủ (sau khi đăng nhập)");
             System.out.println("4. Hiển thị cầu thủ");
-            System.out.println("5. Tính tổng số áo (đệ quy)");
             System.out.println("6. Tìm kiếm cầu thủ");
             System.out.println("7. Thoát");
             System.out.print("Chọn: ");
@@ -112,15 +111,9 @@ public class Main {
             System.out.println("Không có dữ liệu cầu thủ.");
             return;
         }
-
-        List<Integer> soAos = new ArrayList<>();
-        for (CauThu ct : danhSachCauThu) {
-            soAos.add(ct.getSoAo());
-        }
-
-        int tong = Recursion.tongSoAo(soAos, 0);
-        System.out.println("Tổng số áo của cầu thủ: " + tong);
     }
+
+
 private static void timKiemCauThu() {
     System.out.print("Nhập tên cầu thủ (có thể để trống): ");
     String ten = scanner.nextLine().trim();

@@ -1,4 +1,4 @@
-package Test;
+package test;
 public class Time {
     private int hour;
     private int minute;
