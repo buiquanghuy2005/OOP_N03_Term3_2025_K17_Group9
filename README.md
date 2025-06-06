@@ -66,3 +66,5 @@ Sequence diagram :
 https://online.visual-paradigm.com/share.jsp?id=343038303132362d32
 <img src="img/Quanlidoibong2.jpg">
 
+Lưu đồ bài toán:
+<img src="img/Lưu đồ bài toán.jpg.jpg">
