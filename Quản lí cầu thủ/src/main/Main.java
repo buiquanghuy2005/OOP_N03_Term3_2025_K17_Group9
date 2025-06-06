@@ -89,8 +89,11 @@ public class Main {
         int soAo = Integer.parseInt(scanner.nextLine());
         System.out.print("Quốc tịch: ");
         String qt = scanner.nextLine();
-
-        CauThu ct = new CauThu(ma, ten, tuoi, vitri, soAo, qt);
+        System.out.print("Chiều cao : ");
+        String chieuCao = scanner.nextLine();
+        System.out.print("Cân nặng: ");
+        String canNang = scanner.nextLine();
+        CauThu ct = new CauThu(ma, ten, tuoi, vitri, soAo, qt,chieuCao,canNang);
         danhSachCauThu.add(ct);
         System.out.println("Thêm cầu thủ thành công!");
     }
