@@ -27,9 +27,46 @@ public class CauThuService {
 
             if (thoaMan) {
                 ketQua.add(ct);
+        }
+ public static List<CauThu> timTheoChieuCao(List<CauThu> danhSach, Double minChieuCao, Double maxChieuCao) {
+        List<CauThu> ketQua = new ArrayList<>();
+
+        for (CauThu ct : danhSach) {
+            boolean thoaMan = true;
+
+            if (minChieuCao != null && ct.getChieuCao() < minChieuCao) {
+                thoaMan = false;
+            }
+            if (maxChieuCao != null && ct.getChieuCao() > maxChieuCao) {
+                thoaMan = false;
+            }
+
+            if (thoaMan) {
+                ketQua.add(ct);
             }
         }
 
+        return ketQua;
+    }
+
+
+    public static List<CauThu> timTheoCanNang(List<CauThu> danhSach, Double minCanNang, Double maxCanNang) {
+        List<CauThu> ketQua = new ArrayList<>();
+
+        for (CauThu ct : danhSach) {
+            boolean thoaMan = true;
+
+            if (minCanNang != null && ct.getCanNang() < minCanNang) {
+                thoaMan = false;
+            }
+            if (maxCanNang != null && ct.getCanNang() > maxCanNang) {
+                thoaMan = false;
+            }
+
+            if (thoaMan) {
+                ketQua.add(ct);
+            }
+        }
         return ketQua;
     }
 }
