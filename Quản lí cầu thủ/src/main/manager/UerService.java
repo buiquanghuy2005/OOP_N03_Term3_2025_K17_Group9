@@ -4,7 +4,7 @@ import model.User;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserManager {
+public class UserService {
     private final List<User> danhSachNguoiDung = new ArrayList<>();
 
     public void register(String username, String role, String password) {
