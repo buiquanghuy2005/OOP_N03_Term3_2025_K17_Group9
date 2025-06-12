@@ -1,10 +1,10 @@
 package test;
 
-import model.User;
+import manager.UserManager;
 
 public class TestUser {
     public static void main(String[] args) {
-        User user = new User("hongnguyen", "Admin", "123456");
+        UserManager user = new UserManager("hongnguyen", "Admin", "123456");
 
         // Test getter
         System.out.println("Username: " + user.getUsername());

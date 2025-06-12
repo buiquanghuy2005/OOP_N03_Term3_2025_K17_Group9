@@ -1,0 +1,2 @@
+nhung,admin,1
+khach,coach,1

@@ -1,32 +1,25 @@
 package model;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import controller.CauThuService;
-
+import java.util.Scanner;
+import manager.CauThuService;
 public class DanhSachCauThu {
-
     private ArrayList<CauThu> danhSach = new ArrayList<>();
-
     public void themCauThu(CauThu ct) {
         danhSach.add(ct);
         System.out.println("Đã thêm cầu thủ: " + ct.getHoTen());
     }
-
-    public void suaCauThu(String hoTenMoi, int soAoMoi, String maCauThu) {
+    public void suaCauThu(String maCauThu, String hoTenMoi, int soAoMoi) {
         for (CauThu ct : danhSach) {
             if (ct.getMa().equals(maCauThu)) {
-                // giả sử bạn có thêm setter trong CauThu thì nên gọi setter
-                ct = new CauThu(maCauThu, hoTenMoi, ct.getTuoi(), ct.getViTri(), soAoMoi,
-                                ct.getQuocTich(), ct.getChieuCao(), ct.getCanNang());
+                ct.setHoTen(hoTenMoi);
+                ct.setSoAo(soAoMoi);
                 System.out.println("Đã cập nhật thông tin cầu thủ có mã " + maCauThu);
                 return;
             }
         }
         System.out.println("Không tìm thấy cầu thủ có mã " + maCauThu);
     }
-
     public void xoaCauThu(String maCauThu) {
         for (int i = 0; i < danhSach.size(); i++) {
             if (danhSach.get(i).getMa().equals(maCauThu)) {
@@ -37,26 +30,67 @@ public class DanhSachCauThu {
         }
         System.out.println("Không tìm thấy cầu thủ có mã " + maCauThu);
     }
-
-    public void inDanhSachCauThu() {
-        System.out.println("Danh sách cầu thủ:");
-        for (CauThu ct : danhSach) {
-            System.out.println("Mã: " + ct.getMa() + " | Họ tên: " + ct.getHoTen() + " | Số áo: " + ct.getSoAo());
-        }
-    }
     public void hienThiDanhSachCauThu() {
-        if (danhSachCauThu.isEmpty()) {
+        if (danhSach.isEmpty()) {
             System.out.println("Đội bóng chưa có cầu thủ nào.");
         } else {
-            System.out.println("Danh sách cầu thủ của đội " + tenDoi + ":");
-            for (CauThu ct : danhSachCauThu) {
-                ct.hienThiThongTin();  // Gọi hàm hiển thị trong lớp CauThu
+            System.out.println("Danh sách cầu thủ:");
+            for (CauThu ct : danhSach) {
+                ct.hienThiThongTin();
                 System.out.println("------");
-              }
+            }
         }
     }
-
-    public List<CauThu> timKiem(String ten, String viTri, Integer minTuoi, Integer maxTuoi) {
-        return CauThuService.timKiem(danhSach, ten, viTri, minTuoi, maxTuoi);
+    public void timKiemBangNhapTay() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Nhập tiêu chí cần tìm (Enter để bỏ qua):");
+        System.out.print("Mã cầu thủ: ");
+        String ma = sc.nextLine();
+        ma = ma.isEmpty() ? null : ma;
+        System.out.print("Tên cầu thủ: ");
+        String ten = sc.nextLine();
+        ten = ten.isEmpty() ? null : ten;
+        System.out.print("Vị trí: ");
+        String viTri = sc.nextLine();
+        viTri = viTri.isEmpty() ? null : viTri;
+        System.out.print("Số áo: ");
+        String soAoStr = sc.nextLine();
+        Integer soAo = soAoStr.isEmpty() ? null : Integer.parseInt(soAoStr);
+        System.out.print("Quốc tịch: ");
+        String quocTich = sc.nextLine();
+        quocTich = quocTich.isEmpty() ? null : quocTich;
+        System.out.print("Chiều cao: ");
+        String chieuCao = sc.nextLine();
+        chieuCao = chieuCao.isEmpty() ? null : chieuCao;
+        System.out.print("Cân nặng: ");
+        String canNang = sc.nextLine();
+        canNang = canNang.isEmpty() ? null : canNang;
+        System.out.print("Số bàn thắng: ");
+        String sbtStr = sc.nextLine();
+        Integer soBanThang = sbtStr.isEmpty() ? null : Integer.parseInt(sbtStr);
+        System.out.print("Thẻ vàng: ");
+        String tvStr = sc.nextLine();
+        Integer theVang = tvStr.isEmpty() ? null : Integer.parseInt(tvStr);
+        System.out.print("Thẻ đỏ: ");
+        String tdStr = sc.nextLine();
+        Integer theDo = tdStr.isEmpty() ? null : Integer.parseInt(tdStr);
+        List<CauThu> ketQua = CauThuService.timKiem(
+            danhSach,
+            ma, ten, viTri, soAo, quocTich, chieuCao, canNang,
+            soBanThang, theVang, theDo
+        );
+        if (ketQua.isEmpty()) {
+            System.out.println("Không tìm thấy cầu thủ nào.");
+        } else {
+            System.out.println("Kết quả tìm kiếm:");
+            for (CauThu ct : ketQua) {
+                ct.hienThiThongTin();
+                System.out.println("-----------");
+        }
+    }
+    sc.close(); 
+}
+    public List<CauThu> getDanhSach() {
+        return danhSach;
     }
 }
