@@ -55,12 +55,16 @@ public class Menu {
             }
 
             switch (choice) {
-                case 1 -> dangKy();
-                case 2 -> currentUser = dangNhap();
-                case 3 -> {
+                case 1:
+                    dangKy();
+                    break;
+                case 2:
+                    currentUser = dangNhap();
+                    break;
+                case 3:
                     if (isLoggedIn(currentUser)) cauThuService.themCauThu(danhSachCauThu);
-                }
-                case 4 -> {
+                    break;
+                case 4:
                     if (isLoggedIn(currentUser)) {
                         System.out.print("Nhập mã cầu thủ cần sửa: ");
                         String ma = scanner.nextLine();
@@ -68,71 +72,59 @@ public class Menu {
                         String tenMoi = scanner.nextLine();
                         System.out.print("Nhập tuổi mới: ");
                         int tuoiMoi = Integer.parseInt(scanner.nextLine());
-
                         CauThuService.suaCauThu(danhSachCauThu, ma, tenMoi, tuoiMoi);
                     }
-                }
-                case 5 -> {
+                    break;
+                case 5:
                     if (isLoggedIn(currentUser)) {
                         System.out.print("Nhập mã cầu thủ cần xoá: ");
                         String ma = scanner.nextLine();
                         CauThuService.xoaCauThu(danhSachCauThu, ma);
                     }
-                }
-
-                case 6 -> {
+                    break;
+                case 6:
                     if (isLoggedIn(currentUser)) {
                         System.out.println("Nhập thông tin tìm kiếm (để trống nếu không lọc theo tiêu chí đó):");
-
                         System.out.print("Mã: ");
                         String ma = scanner.nextLine();
-
                         System.out.print("Tên: ");
                         String ten = scanner.nextLine();
-
                         System.out.print("Vị trí: ");
                         String viTri = scanner.nextLine();
-
                         System.out.print("Tuổi: ");
                         String tuoiStr = scanner.nextLine();
                         Integer tuoi = tuoiStr.isEmpty() ? null : Integer.parseInt(tuoiStr);
-
                         System.out.print("Quốc tịch: ");
                         String quocTich = scanner.nextLine();
-
                         System.out.print("Câu lạc bộ: ");
                         String clb = scanner.nextLine();
-
                         System.out.print("Số áo: ");
                         String soAo = scanner.nextLine();
-
                         System.out.print("Số bàn thắng: ");
                         String banThangStr = scanner.nextLine();
                         Integer banThang = banThangStr.isEmpty() ? null : Integer.parseInt(banThangStr);
-
                         System.out.print("Số thẻ vàng: ");
                         String theVangStr = scanner.nextLine();
                         Integer theVang = theVangStr.isEmpty() ? null : Integer.parseInt(theVangStr);
-
                         System.out.print("Số thẻ đỏ: ");
                         String theDoStr = scanner.nextLine();
                         Integer theDo = theDoStr.isEmpty() ? null : Integer.parseInt(theDoStr);
-
                         CauThuService.timKiem(danhSachCauThu, ma, ten, viTri, tuoi, quocTich, clb, soAo, banThang, theVang, theDo);
                     }
-                }
-
-                case 7 -> cauThuService.hienThiDanhSach(danhSachCauThu);
-                case 8 -> {
+                    break;
+                case 7:
+                    cauThuService.hienThiDanhSach(danhSachCauThu);
+                    break;
+                case 8:
                     System.out.println("Tạm biệt!");
                     running = false;
-                }
-                default -> System.out.println("Lựa chọn không hợp lệ.");
+                    break;
+                default:
+                    System.out.println("Lựa chọn không hợp lệ.");
+                    break;
             }
         }
-
-        scanner.close();
-    }
+}
 
     private static void dangKy() {
         System.out.print("Tên đăng ký: ");
