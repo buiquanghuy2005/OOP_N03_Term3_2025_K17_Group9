@@ -5,42 +5,71 @@ import java.util.Scanner;
 import manager.CauThuService;
 public class DanhSachCauThu {
     private ArrayList<CauThu> danhSach = new ArrayList<>();
+
     public void themCauThu(CauThu ct) {
-        danhSach.add(ct);
-        System.out.println("Đã thêm cầu thủ: " + ct.getHoTen());
+        try {
+            danhSach.add(ct);
+            System.out.println("Đã thêm cầu thủ: " + ct.getHoTen());
+        } catch (Exception e) {
+            System.out.println("Lỗi khi thêm cầu thủ: " + e.getMessage());
+        } finally {
+            System.out.println("Hoàn tất thao tác thêm cầu thủ.");
+        }
     }
+
     public void suaCauThu(String maCauThu, String hoTenMoi, int soAoMoi) {
-        for (CauThu ct : danhSach) {
-            if (ct.getMa().equals(maCauThu)) {
-                ct.setHoTen(hoTenMoi);
-                ct.setSoAo(soAoMoi);
-                System.out.println("Đã cập nhật thông tin cầu thủ có mã " + maCauThu);
-                return;
-            }
-        }
-        System.out.println("Không tìm thấy cầu thủ có mã " + maCauThu);
-    }
-    public void xoaCauThu(String maCauThu) {
-        for (int i = 0; i < danhSach.size(); i++) {
-            if (danhSach.get(i).getMa().equals(maCauThu)) {
-                System.out.println("Đã xóa cầu thủ: " + danhSach.get(i).getHoTen());
-                danhSach.remove(i);
-                return;
-            }
-        }
-        System.out.println("Không tìm thấy cầu thủ có mã " + maCauThu);
-    }
-    public void hienThiDanhSachCauThu() {
-        if (danhSach.isEmpty()) {
-            System.out.println("Đội bóng chưa có cầu thủ nào.");
-        } else {
-            System.out.println("Danh sách cầu thủ:");
+        try {
             for (CauThu ct : danhSach) {
-                ct.hienThiThongTin();
-                System.out.println("------");
+                if (ct.getMa().equals(maCauThu)) {
+                    ct.setHoTen(hoTenMoi);
+                    ct.setSoAo(soAoMoi);
+                    System.out.println("Đã cập nhật thông tin cầu thủ có mã " + maCauThu);
+                    return;
+                }
             }
+            System.out.println("Không tìm thấy cầu thủ có mã " + maCauThu);
+        } catch (Exception e) {
+            System.out.println("Lỗi khi sửa cầu thủ: " + e.getMessage());
+        } finally {
+            System.out.println("Hoàn tất thao tác sửa cầu thủ.");
         }
     }
+
+    public void xoaCauThu(String maCauThu) {
+        try {
+            for (int i = 0; i < danhSach.size(); i++) {
+                if (danhSach.get(i).getMa().equals(maCauThu)) {
+                    System.out.println("Đã xóa cầu thủ: " + danhSach.get(i).getHoTen());
+                    danhSach.remove(i);
+                    return;
+                }
+            }
+            System.out.println("Không tìm thấy cầu thủ có mã " + maCauThu);
+        } catch (Exception e) {
+            System.out.println("Lỗi khi xóa cầu thủ: " + e.getMessage());
+        } finally {
+            System.out.println("Hoàn tất thao tác xóa cầu thủ.");
+        }
+    }
+
+    public void hienThiDanhSachCauThu() {
+        try {
+            if (danhSach.isEmpty()) {
+                System.out.println("Đội bóng chưa có cầu thủ nào.");
+            } else {
+                System.out.println("Danh sách cầu thủ:");
+                for (CauThu ct : danhSach) {
+                    ct.hienThiThongTin();
+                    System.out.println("------");
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Lỗi khi hiển thị danh sách: " + e.getMessage());
+        } finally {
+            System.out.println("Hoàn tất thao tác hiển thị danh sách.");
+        }
+    }
+}
     public void timKiemBangNhapTay() {
         Scanner sc = new Scanner(System.in);
         try {
