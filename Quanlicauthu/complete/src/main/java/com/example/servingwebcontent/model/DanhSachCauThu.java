@@ -43,42 +43,83 @@ public class DanhSachCauThu {
     }
     public void timKiemBangNhapTay() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Nhập tiêu chí cần tìm (Enter để bỏ qua):");
-        System.out.print("Mã cầu thủ: ");
-        String ma = sc.nextLine();
-        ma = ma.isEmpty() ? null : ma;
-        System.out.print("Tên cầu thủ: ");
-        String ten = sc.nextLine();
-        ten = ten.isEmpty() ? null : ten;
-        System.out.print("Vị trí: ");
-        String viTri = sc.nextLine();
-        viTri = viTri.isEmpty() ? null : viTri;
-        System.out.print("Số áo: ");
-        String soAoStr = sc.nextLine();
-        Integer soAo = soAoStr.isEmpty() ? null : Integer.parseInt(soAoStr);
-        System.out.print("Quốc tịch: ");
-        String quocTich = sc.nextLine();
-        quocTich = quocTich.isEmpty() ? null : quocTich;
-        System.out.print("Chiều cao: ");
-        String chieuCao = sc.nextLine();
-        chieuCao = chieuCao.isEmpty() ? null : chieuCao;
-        System.out.print("Cân nặng: ");
-        String canNang = sc.nextLine();
-        canNang = canNang.isEmpty() ? null : canNang;
-        System.out.print("Số bàn thắng: ");
-        String sbtStr = sc.nextLine();
-        Integer soBanThang = sbtStr.isEmpty() ? null : Integer.parseInt(sbtStr);
-        System.out.print("Thẻ vàng: ");
-        String tvStr = sc.nextLine();
-        Integer theVang = tvStr.isEmpty() ? null : Integer.parseInt(tvStr);
-        System.out.print("Thẻ đỏ: ");
-        String tdStr = sc.nextLine();
-        Integer theDo = tdStr.isEmpty() ? null : Integer.parseInt(tdStr);
+        try {
+            System.out.println("Nhập tiêu chí cần tìm (Enter để bỏ qua):");
+
+            System.out.print("Mã cầu thủ: ");
+            String ma = sc.nextLine();
+            ma = ma.isEmpty() ? null : ma;
+
+            System.out.print("Tên cầu thủ: ");
+            String ten = sc.nextLine();
+            ten = ten.isEmpty() ? null : ten;
+
+            System.out.print("Vị trí: ");
+            String viTri = sc.nextLine();
+            viTri = viTri.isEmpty() ? null : viTri;
+
+            System.out.print("Số áo: ");
+            String soAoStr = sc.nextLine();
+            Integer soAo = null;
+            if (!soAoStr.isEmpty()) {
+                try {
+                    soAo = Integer.parseInt(soAoStr);
+                } catch (NumberFormatException e) {
+                    System.out.println("Lỗi: Số áo không hợp lệ.");
+                }
+            }
+
+            System.out.print("Quốc tịch: ");
+            String quocTich = sc.nextLine();
+            quocTich = quocTich.isEmpty() ? null : quocTich;
+
+            System.out.print("Chiều cao: ");
+            String chieuCao = sc.nextLine();
+            chieuCao = chieuCao.isEmpty() ? null : chieuCao;
+
+            System.out.print("Cân nặng: ");
+            String canNang = sc.nextLine();
+            canNang = canNang.isEmpty() ? null : canNang;
+
+            System.out.print("Số bàn thắng: ");
+            String sbtStr = sc.nextLine();
+            Integer soBanThang = null;
+            if (!sbtStr.isEmpty()) {
+                try {
+                    soBanThang = Integer.parseInt(sbtStr);
+                } catch (NumberFormatException e) {
+                    System.out.println("Lỗi: Số bàn thắng không hợp lệ.");
+                }
+            }
+
+            System.out.print("Thẻ vàng: ");
+            String tvStr = sc.nextLine();
+            Integer theVang = null;
+            if (!tvStr.isEmpty()) {
+                try {
+                    theVang = Integer.parseInt(tvStr);
+                } catch (NumberFormatException e) {
+                    System.out.println("Lỗi: Số thẻ vàng không hợp lệ.");
+                }
+            }
+
+            System.out.print("Thẻ đỏ: ");
+            String tdStr = sc.nextLine();
+            Integer theDo = null;
+            if (!tdStr.isEmpty()) {
+                try {
+                    theDo = Integer.parseInt(tdStr);
+                } catch (NumberFormatException e) {
+                    System.out.println("Lỗi: Số thẻ đỏ không hợp lệ.");
+                }
+            }
+
         List<CauThu> ketQua = CauThuService.timKiem(
             danhSach,
             ma, ten, viTri, soAo, quocTich, chieuCao, canNang,
             soBanThang, theVang, theDo
         );
+
         if (ketQua.isEmpty()) {
             System.out.println("Không tìm thấy cầu thủ nào.");
         } else {
@@ -86,10 +127,16 @@ public class DanhSachCauThu {
             for (CauThu ct : ketQua) {
                 ct.hienThiThongTin();
                 System.out.println("-----------");
+            }
         }
+
+    } catch (Exception e) {
+        System.out.println("Đã xảy ra lỗi khi tìm kiếm cầu thủ: " + e.getMessage());
+    } finally {
+        sc.close();
     }
-    sc.close(); 
 }
+
     public List<CauThu> getDanhSach() {
         return danhSach;
     }
