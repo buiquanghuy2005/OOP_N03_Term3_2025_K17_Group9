@@ -1,0 +1,30 @@
+<!-- src/main/resources/templates/ketqua.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Kết quả tìm kiếm</title>
+</head>
+<body>
+    <h2>Kết quả tìm kiếm</h2>
+    <table border="1">
+        <tr>
+            <th>Mã</th><th>Tên</th><th>Vị trí</th><th>Số áo</th>
+            <th>Quốc tịch</th><th>Chiều cao</th><th>Cân nặng</th>
+            <th>SBT</th><th>TV</th><th>TD</th>
+        </tr>
+        <tr th:each="ct : ${ketQua}">
+            <td th:text="${ct.ma}"></td>
+            <td th:text="${ct.hoTen}"></td>
+            <td th:text="${ct.viTri}"></td>
+            <td th:text="${ct.soAo}"></td>
+            <td th:text="${ct.quocTich}"></td>
+            <td th:text="${ct.chieuCao}"></td>
+            <td th:text="${ct.canNang}"></td>
+            <td th:text="${ct.soBanThang}"></td>
+            <td th:text="${ct.theVang}"></td>
+            <td th:text="${ct.theDo}"></td>
+        </tr>
+    </table>
+    <a href="/">Quay lại tìm kiếm</a>
+</body>
+</html>

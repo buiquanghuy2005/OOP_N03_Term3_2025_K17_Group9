@@ -1,6 +1,7 @@
-package manager;
+package com.example.servingwebcontent.manager;
 
-import model.User;
+
+import com.example.servingwebcontent.model.User;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.*;

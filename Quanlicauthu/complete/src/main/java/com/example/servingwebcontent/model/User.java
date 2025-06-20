@@ -1,4 +1,4 @@
-package model;
+package com.example.servingwebcontent.model;
 public class User {
     private String username;
     private String role;

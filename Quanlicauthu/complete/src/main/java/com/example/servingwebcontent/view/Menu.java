@@ -1,9 +1,9 @@
-package view;
+package com.example.servingwebcontent.view;
 
-import model.CauThu;
-import model.User;
-import manager.CauThuService;
-import manager.UserService;
+import com.example.servingwebcontent.model.CauThu;
+import com.example.servingwebcontent.model.User;
+import com.example.servingwebcontent.manager.CauThuService;
+import com.example.servingwebcontent.manager.UserService;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package model;
+package com.example.servingwebcontent.model;
 public class HuanLuyenVien {
     private String ma;
     private String hoTen;

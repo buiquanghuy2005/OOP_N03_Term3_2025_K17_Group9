@@ -1,10 +1,10 @@
-package manager;
+package com.example.servingwebcontent.manager;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
-import model.CauThu;
+import com.example.servingwebcontent.model.CauThu;
 public class CauThuService {
     private static final Scanner scanner = new Scanner(System.in);
     public void themCauThu(List<CauThu> danhSach) {

@@ -1,8 +1,8 @@
-package model;
+package com.example.servingwebcontent.model;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
-import manager.CauThuService;
+
 public class DanhSachCauThu {
     private ArrayList<CauThu> danhSach = new ArrayList<>();
 
@@ -69,102 +69,27 @@ public class DanhSachCauThu {
             System.out.println("Hoàn tất thao tác hiển thị danh sách.");
         }
     }
-}
-    public void timKiemBangNhapTay() {
-        Scanner sc = new Scanner(System.in);
-        try {
-            System.out.println("Nhập tiêu chí cần tìm (Enter để bỏ qua):");
 
-            System.out.print("Mã cầu thủ: ");
-            String ma = sc.nextLine();
-            ma = ma.isEmpty() ? null : ma;
-
-            System.out.print("Tên cầu thủ: ");
-            String ten = sc.nextLine();
-            ten = ten.isEmpty() ? null : ten;
-
-            System.out.print("Vị trí: ");
-            String viTri = sc.nextLine();
-            viTri = viTri.isEmpty() ? null : viTri;
-
-            System.out.print("Số áo: ");
-            String soAoStr = sc.nextLine();
-            Integer soAo = null;
-            if (!soAoStr.isEmpty()) {
-                try {
-                    soAo = Integer.parseInt(soAoStr);
-                } catch (NumberFormatException e) {
-                    System.out.println("Lỗi: Số áo không hợp lệ.");
-                }
-            }
-
-            System.out.print("Quốc tịch: ");
-            String quocTich = sc.nextLine();
-            quocTich = quocTich.isEmpty() ? null : quocTich;
-
-            System.out.print("Chiều cao: ");
-            String chieuCao = sc.nextLine();
-            chieuCao = chieuCao.isEmpty() ? null : chieuCao;
-
-            System.out.print("Cân nặng: ");
-            String canNang = sc.nextLine();
-            canNang = canNang.isEmpty() ? null : canNang;
-
-            System.out.print("Số bàn thắng: ");
-            String sbtStr = sc.nextLine();
-            Integer soBanThang = null;
-            if (!sbtStr.isEmpty()) {
-                try {
-                    soBanThang = Integer.parseInt(sbtStr);
-                } catch (NumberFormatException e) {
-                    System.out.println("Lỗi: Số bàn thắng không hợp lệ.");
-                }
-            }
-
-            System.out.print("Thẻ vàng: ");
-            String tvStr = sc.nextLine();
-            Integer theVang = null;
-            if (!tvStr.isEmpty()) {
-                try {
-                    theVang = Integer.parseInt(tvStr);
-                } catch (NumberFormatException e) {
-                    System.out.println("Lỗi: Số thẻ vàng không hợp lệ.");
-                }
-            }
-
-            System.out.print("Thẻ đỏ: ");
-            String tdStr = sc.nextLine();
-            Integer theDo = null;
-            if (!tdStr.isEmpty()) {
-                try {
-                    theDo = Integer.parseInt(tdStr);
-                } catch (NumberFormatException e) {
-                    System.out.println("Lỗi: Số thẻ đỏ không hợp lệ.");
-                }
-            }
-
-        List<CauThu> ketQua = CauThuService.timKiem(
-            danhSach,
-            ma, ten, viTri, soAo, quocTich, chieuCao, canNang,
-            soBanThang, theVang, theDo
-        );
-
-        if (ketQua.isEmpty()) {
-            System.out.println("Không tìm thấy cầu thủ nào.");
-        } else {
-            System.out.println("Kết quả tìm kiếm:");
-            for (CauThu ct : ketQua) {
-                ct.hienThiThongTin();
-                System.out.println("-----------");
+    public List<CauThu> timKiemTheoTieuChi(String ma, String ten, String viTri, Integer soAo,
+                                           String quocTich, String chieuCao, String canNang,
+                                           Integer soBanThang, Integer theVang, Integer theDo) {
+        List<CauThu> ketQua = new ArrayList<>();
+        for (CauThu ct : danhSach) {
+            if ((ma == null || ct.getMa().equalsIgnoreCase(ma)) &&
+                (ten == null || ct.getHoTen().equalsIgnoreCase(ten)) &&
+                (viTri == null || ct.getViTri().equalsIgnoreCase(viTri)) &&
+                (soAo == null || ct.getSoAo() == soAo) &&
+                (quocTich == null || ct.getQuocTich().equalsIgnoreCase(quocTich)) &&
+                (chieuCao == null || ct.getChieuCao().equalsIgnoreCase(chieuCao)) &&
+                (canNang == null || ct.getCanNang().equalsIgnoreCase(canNang)) &&
+                (soBanThang == null || ct.getSoBanThang() == soBanThang) &&
+                (theVang == null || ct.getTheVang() == theVang) &&
+                (theDo == null || ct.getTheDo() == theDo)) {
+                ketQua.add(ct);
             }
         }
-
-    } catch (Exception e) {
-        System.out.println("Đã xảy ra lỗi khi tìm kiếm cầu thủ: " + e.getMessage());
-    } finally {
-        sc.close();
+        return ketQua;
     }
-}
 
     public List<CauThu> getDanhSach() {
         return danhSach;
