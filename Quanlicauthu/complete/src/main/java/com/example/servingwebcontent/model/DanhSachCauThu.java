@@ -1,11 +1,18 @@
 package com.example.servingwebcontent.model;
 
+import org.springframework.stereotype.Component;
+
+import jakarta.annotation.PostConstruct;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class DanhSachCauThu {
     private ArrayList<CauThu> danhSach = new ArrayList<>();
-
+    private static final DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     public void themCauThu(CauThu ct) {
         try {
             danhSach.add(ct);
@@ -93,5 +100,28 @@ public class DanhSachCauThu {
 
     public List<CauThu> getDanhSach() {
         return danhSach;
+    }
+    @PostConstruct
+    public void khoiTaoDuLieuMau() {
+        try {
+            CauThu cauThuMau = new CauThu(
+                "CT001",
+                "Nguyễn Văn A",
+                "Tiền đạo",
+                9,
+                "Việt Nam",
+                "1m75",
+                "70kg",
+                10,
+                1,
+                0,
+                LocalDate.parse("01/01/1995", df),
+                LocalDate.parse("31/12/2025", df)
+            );
+            themCauThu(cauThuMau);
+            System.out.println("Đã thêm cầu thủ mẫu khi khởi động ứng dụng.");
+        } catch (Exception e) {
+            System.out.println("Lỗi khi tạo cầu thủ mẫu: " + e.getMessage());
+        }
     }
 }
