@@ -3,52 +3,143 @@
 <head>
     <meta charset="UTF-8">
     <title th:text="${cauthu.ma} != null ? 'Cập nhật cầu thủ' : 'Thêm cầu thủ mới'">Cầu thủ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+            background-color: #f9f9f9;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 26px;
+            margin-bottom: 20px;
+        }
+
+        form {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #ccc;
+            max-width: 700px;
+        }
+
+        .form-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        label {
+            width: 180px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="date"] {
+            flex: 1;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #2ecc71;
+            color: white;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #27ae60;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #3498db;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
 
 <h1 th:text="${cauthu.ma} != null ? 'Cập nhật cầu thủ' : 'Thêm cầu thủ mới'">Form cầu thủ</h1>
 
 <form th:action="@{/luu}" method="post" th:object="${cauthu}">
-    <label>Mã:</label>
-    <input type="text" th:field="*{ma}" th:readonly="${cauthu.ma} != null"/><br/>
 
-    <label>Họ tên:</label>
-    <input type="text" th:field="*{hoTen}" /><br/>
+    <div class="form-row">
+        <label>Mã:</label>
+        <input type="text" th:field="*{ma}" th:readonly="${cauthu.ma} != null"/>
+    </div>
 
-    <label>Vị trí:</label>
-    <input type="text" th:field="*{viTri}" /><br/>
+    <div class="form-row">
+        <label>Họ tên:</label>
+        <input type="text" th:field="*{hoTen}" />
+    </div>
 
-    <label>Số áo:</label>
-    <input type="number" th:field="*{soAo}" /><br/>
+    <div class="form-row">
+        <label>Vị trí:</label>
+        <input type="text" th:field="*{viTri}" />
+    </div>
 
-    <label>Quốc tịch:</label>
-    <input type="text" th:field="*{quocTich}" /><br/>
+    <div class="form-row">
+        <label>Số áo:</label>
+        <input type="number" th:field="*{soAo}" />
+    </div>
 
-    <label>Chiều cao:</label>
-    <input type="text" th:field="*{chieuCao}" /><br/>
+    <div class="form-row">
+        <label>Quốc tịch:</label>
+        <input type="text" th:field="*{quocTich}" />
+    </div>
 
-    <label>Cân nặng:</label>
-    <input type="text" th:field="*{canNang}" /><br/>
+    <div class="form-row">
+        <label>Chiều cao:</label>
+        <input type="text" th:field="*{chieuCao}" />
+    </div>
 
-    <label>Số bàn thắng:</label>
-    <input type="number" th:field="*{soBanThang}" /><br/>
+    <div class="form-row">
+        <label>Cân nặng:</label>
+        <input type="text" th:field="*{canNang}" />
+    </div>
 
-    <label>Thẻ vàng:</label>
-    <input type="number" th:field="*{theVang}" /><br/>
+    <div class="form-row">
+        <label>Số bàn thắng:</label>
+        <input type="number" th:field="*{soBanThang}" />
+    </div>
 
-    <label>Thẻ đỏ:</label>
-    <input type="number" th:field="*{theDo}" /><br/>
+    <div class="form-row">
+        <label>Thẻ vàng:</label>
+        <input type="number" th:field="*{theVang}" />
+    </div>
 
-    <label>Ngày sinh:</label>
-    <input type="date" th:field="*{ngaySinh}" /><br/>
+    <div class="form-row">
+        <label>Thẻ đỏ:</label>
+        <input type="number" th:field="*{theDo}" />
+    </div>
 
-    <label>Ngày hết hạn HĐ:</label>
-    <input type="date" th:field="*{ngayHetHanHopDong}" /><br/>
+    <div class="form-row">
+        <label>Ngày sinh:</label>
+        <input type="date" th:field="*{ngaySinh}" />
+    </div>
 
-    <button type="submit">💾 Lưu</button>
+    <div class="form-row">
+        <label>Ngày hết hạn HĐ:</label>
+        <input type="date" th:field="*{ngayHetHanHopDong}" />
+    </div>
+
+    <button type="submit">💾 Lưu cầu thủ</button>
 </form>
 
-<br/>
 <a href="/">← Quay lại danh sách</a>
 
 </body>
