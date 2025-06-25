@@ -3,26 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <title>Quản lý cầu thủ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f9f9f9;
+        }
+
+        h1 {
+            color: #2c3e50;
+        }
+
+        a {
+            text-decoration: none;
+            color: #2980b9;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        form input {
+            margin: 5px 10px;
+            padding: 5px;
+        }
+
+        button {
+            padding: 6px 12px;
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #219150;
+        }
+
+        hr {
+            margin: 20px 0;
+        }
+    </style>
 </head>
 <body>
-<h1>Danh sách cầu thủ</h1>
 
-<a href="/them">➕ Thêm cầu thủ mới</a>
+<h1>📋 Danh sách cầu thủ</h1>
+
+<p><a href="/them">➕ Thêm cầu thủ mới</a></p>
 
 <hr>
 
-<h3>Tìm kiếm cầu thủ</h3>
+<h3>🔍 Tìm kiếm cầu thủ</h3>
 <form action="/timkiem" method="get">
     Mã: <input type="text" name="ma">
     Tên: <input type="text" name="hoTen">
     Vị trí: <input type="text" name="viTri">
     Quốc tịch: <input type="text" name="quocTich">
-    <button type="submit">🔍 Tìm kiếm</button>
+    <button type="submit">Tìm kiếm</button>
 </form>
 
 <hr>
 
-<table border="1" cellpadding="5">
+<table>
     <thead>
     <tr>
         <th>Mã</th>
@@ -37,6 +101,9 @@
     </tr>
     </thead>
     <tbody>
+    <tr th:if="${#lists.isEmpty(danhSach)}">
+        <td colspan="9">Không có cầu thủ nào.</td>
+    </tr>
     <tr th:each="ct : ${danhSach}">
         <td th:text="${ct.ma}"></td>
         <td th:text="${ct.hoTen}"></td>

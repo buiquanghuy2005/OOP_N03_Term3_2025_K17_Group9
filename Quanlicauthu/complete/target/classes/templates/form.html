@@ -1,74 +1,55 @@
-package com.example.servingwebcontent;
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${cauthu.ma} != null ? 'Cập nhật cầu thủ' : 'Thêm cầu thủ mới'">Cầu thủ</title>
+</head>
+<body>
 
-import static org.hamcrest.Matchers.containsString;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+<h1 th:text="${cauthu.ma} != null ? 'Cập nhật cầu thủ' : 'Thêm cầu thủ mới'">Form cầu thủ</h1>
 
-import com.example.servingwebcontent.controller.CauThuController;
-import com.example.servingwebcontent.model.CauThu;
-import com.example.servingwebcontent.manager.CauThuService;
+<form th:action="@{/luu}" method="post" th:object="${cauthu}">
+    <label>Mã:</label>
+    <input type="text" th:field="*{ma}" th:readonly="${cauthu.ma} != null"/><br/>
 
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.web.servlet.MockMvc;
+    <label>Họ tên:</label>
+    <input type="text" th:field="*{hoTen}" /><br/>
 
-import java.time.LocalDate;
-import java.util.List;
+    <label>Vị trí:</label>
+    <input type="text" th:field="*{viTri}" /><br/>
 
-import static org.mockito.Mockito.when;
+    <label>Số áo:</label>
+    <input type="number" th:field="*{soAo}" /><br/>
 
-@SpringBootTest
-@AutoConfigureMockMvc
-public class ServingWebContentApplicationTest {
+    <label>Quốc tịch:</label>
+    <input type="text" th:field="*{quocTich}" /><br/>
 
-    @Autowired
-    private MockMvc mockMvc;
+    <label>Chiều cao:</label>
+    <input type="text" th:field="*{chieuCao}" /><br/>
 
-    @MockBean
-    private CauThuService cauThuService;
+    <label>Cân nặng:</label>
+    <input type="text" th:field="*{canNang}" /><br/>
 
-    @Test
-    public void homePage() throws Exception {
-        mockMvc.perform(get("/"))
-                .andExpect(status().isOk())
-                .andExpect(content().string(containsString("Tìm kiếm cầu thủ")));
-    }
+    <label>Số bàn thắng:</label>
+    <input type="number" th:field="*{soBanThang}" /><br/>
 
-    @Test
-    public void hienThiFormThem() throws Exception {
-        mockMvc.perform(get("/them"))
-                .andExpect(status().isOk())
-                .andExpect(content().string(containsString("Thêm cầu thủ mới")));
-    }
+    <label>Thẻ vàng:</label>
+    <input type="number" th:field="*{theVang}" /><br/>
 
-    @Test
-    public void hienThiFormSua() throws Exception {
-        // Tạo đối tượng CauThu
-        CauThu ct = new CauThu(
-                "CT01",
-                "Nguyễn Văn A",
-                "Tiền đạo",
-                10,
-                "Việt Nam",
-                "1.75",
-                "65",
-                5,
-                1,
-                0,
-                LocalDate.of(2000, 1, 1),
-                LocalDate.of(2030, 1, 1)
-        );
+    <label>Thẻ đỏ:</label>
+    <input type="number" th:field="*{theDo}" /><br/>
 
-        // Giả lập service trả về danh sách có cầu thủ CT01
-        when(cauThuService.getDanhSach()).thenReturn(List.of(ct));
+    <label>Ngày sinh:</label>
+    <input type="date" th:field="*{ngaySinh}" /><br/>
 
-        mockMvc.perform(get("/sua/CT01"))
-                .andExpect(status().isOk())
-                .andExpect(content().string(containsString("Cập nhật cầu thủ")))
-                .andExpect(content().string(containsString("Nguyễn Văn A")));
-    }
-}
+    <label>Ngày hết hạn HĐ:</label>
+    <input type="date" th:field="*{ngayHetHanHopDong}" /><br/>
+
+    <button type="submit">💾 Lưu</button>
+</form>
+
+<br/>
+<a href="/">← Quay lại danh sách</a>
+
+</body>
+</html>
