@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Kết quả tìm kiếm</title>
+</head>
+<body>
+<h1>Kết quả tìm kiếm</h1>
+
+<a href="/">⬅ Quay lại</a>
+<table border="1" cellpadding="5">
+    <tr>
+        <th>Mã</th><th>Tên</th><th>Vị trí</th><th>Số áo</th><th>Quốc tịch</th><th>Hành động</th>
+    </tr>
+    <tr th:each="ct : ${ketQua}">
+        <td th:text="${ct.ma}"></td>
+        <td th:text="${ct.hoTen}"></td>
+        <td th:text="${ct.viTri}"></td>
+        <td th:text="${ct.soAo}"></td>
+        <td th:text="${ct.quocTich}"></td>
+        <td>
+            <a th:href="@{'/sua/' + ${ct.ma}}">✏️</a> |
+            <a th:href="@{'/xoa/' + ${ct.ma}}">❌</a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

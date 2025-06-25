@@ -1,7 +1,7 @@
 package com.example.servingwebcontent.controller;
 
 import com.example.servingwebcontent.model.CauThu;
-import com.example.servingwebcontent.model.DanhSachCauThu;
+import com.example.servingwebcontent.manager.CauThuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +13,7 @@ import java.util.List;
 public class CauThuController {
 
     @Autowired
-    private DanhSachCauThu danhSach;
+    private CauThuService danhSach;
 
     // Hiển thị trang chính: danh sách cầu thủ + form tìm kiếm
     @GetMapping("/")
