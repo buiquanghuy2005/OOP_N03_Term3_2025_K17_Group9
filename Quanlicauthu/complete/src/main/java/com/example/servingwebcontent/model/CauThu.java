@@ -34,13 +34,13 @@ public class CauThu {
     private String canNang;
 
     @Column(name = "so_ban_thang")
-    private int soBanThang;
+    private Integer soBanThang;
 
     @Column(name = "the_vang")
-    private int theVang;
+    private Integer theVang;
 
     @Column(name = "the_do")
-    private int theDo;
+    private Integer theDo;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "ngay_sinh")
@@ -95,13 +95,13 @@ public class CauThu {
     public String getCanNang() { return canNang; }
     public void setCanNang(String canNang) { this.canNang = canNang; }
 
-    public int getSoBanThang() { return soBanThang; }
+    public Integer getSoBanThang() { return soBanThang; }
     public void setSoBanThang(int soBanThang) { this.soBanThang = soBanThang; }
 
-    public int getTheVang() { return theVang; }
-    public void setTheVang(int theVang) { this.theVang = theVang; }
+    public Integer getTheVang() { return theVang; }
+public void setTheVang(int theVang) { this.theVang = theVang; }
 
-    public int getTheDo() { return theDo; }
+    public Integer getTheDo() { return theDo; }
     public void setTheDo(int theDo) { this.theDo = theDo; }
 
     public LocalDate getNgaySinh() { return ngaySinh; }
