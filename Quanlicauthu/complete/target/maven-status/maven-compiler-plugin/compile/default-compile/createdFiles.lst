@@ -1,6 +1,8 @@
+com/example/servingwebcontent/controller/controller.class
 com/example/servingwebcontent/manager/CauThuService.class
 com/example/servingwebcontent/GreetingController.class
 com/example/servingwebcontent/model/ThongKe.class
+com/example/servingwebcontent/controller/controller$TestController.class
 com/example/servingwebcontent/model/Time.class
 com/example/servingwebcontent/manager/UserService.class
 com/example/servingwebcontent/model/HuanLuyenVien.class
