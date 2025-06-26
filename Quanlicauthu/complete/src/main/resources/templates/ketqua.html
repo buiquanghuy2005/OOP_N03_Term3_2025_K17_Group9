@@ -1,14 +1,12 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Kết quả tìm kiếm</title>
-</head>
 <body>
 <h1>Kết quả tìm kiếm</h1>
-
 <a href="/">⬅ Quay lại</a>
-<table border="1" cellpadding="5">
+
+<div th:if="${#lists.isEmpty(ketQua)}">
+    <p style="color: red;">Không tìm thấy cầu thủ nào phù hợp với tiêu chí.</p>
+</div>
+
+<table border="1" cellpadding="5" th:if="${!#lists.isEmpty(ketQua)}">
     <tr>
         <th>Mã</th><th>Tên</th><th>Vị trí</th><th>Số áo</th><th>Quốc tịch</th><th>Hành động</th>
     </tr>
@@ -25,4 +23,3 @@
     </tr>
 </table>
 </body>
-</html>

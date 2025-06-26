@@ -85,22 +85,30 @@ public class CauThuService {
     }
 
     public List<CauThu> timKiemTheoTieuChi(String ma, String ten, String viTri, Integer soAo,
-                                           String quocTich, String chieuCao, String canNang,
-                                           Integer soBanThang, Integer theVang, Integer theDo) {
+                                            String quocTich, String chieuCao, String canNang,
+                                            Integer soBanThang, Integer theVang, Integer theDo) {
         List<CauThu> ketQua = cauThuRepository.findAll();
+
         return ketQua.stream().filter(ct ->
-            (ma == null || ct.getMa().equalsIgnoreCase(ma)) &&
-            (ten == null || ct.getHoTen().equalsIgnoreCase(ten)) &&
-            (viTri == null || ct.getViTri().equalsIgnoreCase(viTri)) &&
+            stringMatch(ma, ct.getMa()) &&
+            stringMatch(ten, ct.getHoTen()) &&
+            stringMatch(viTri, ct.getViTri()) &&
+            stringMatch(quocTich, ct.getQuocTich()) &&
+            stringMatch(chieuCao, ct.getChieuCao()) &&
+            stringMatch(canNang, ct.getCanNang()) &&
             (soAo == null || ct.getSoAo() == soAo) &&
-            (quocTich == null || ct.getQuocTich().equalsIgnoreCase(quocTich)) &&
-            (chieuCao == null || ct.getChieuCao().equalsIgnoreCase(chieuCao)) &&
-            (canNang == null || ct.getCanNang().equalsIgnoreCase(canNang)) &&
             (soBanThang == null || ct.getSoBanThang() == soBanThang) &&
             (theVang == null || ct.getTheVang() == theVang) &&
             (theDo == null || ct.getTheDo() == theDo)
         ).toList();
     }
+
+    // Hàm hỗ trợ: so sánh chứa gần đúng, không phân biệt hoa thường, bỏ khoảng trắng
+    private boolean stringMatch(String keyword, String actual) {
+        return keyword == null || keyword.isBlank()
+                || (actual != null && actual.toLowerCase().contains(keyword.trim().toLowerCase()));
+    }
+    
 
     public List<CauThu> getDanhSach() {
         return cauThuRepository.findAll();
