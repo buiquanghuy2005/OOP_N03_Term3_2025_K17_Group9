@@ -22,7 +22,7 @@ public class CauThu {
     private String viTri;
 
     @Column(name = "so_ao")
-    private int soAo;
+    private Integer soAo;
 
     @Column(name = "quoc_tich")
     private String quocTich;
@@ -56,8 +56,8 @@ public class CauThu {
 
     public CauThu() {}
 
-    public CauThu(String ma, String hoTen, String viTri, int soAo, String quocTich, String chieuCao,
-                  String canNang, int soBanThang, int theVang, int theDo,
+    public CauThu(String ma, String hoTen, String viTri, Integer soAo, String quocTich, String chieuCao,
+                  String canNang, Integer soBanThang, Integer theVang, Integer theDo,
                   LocalDate ngaySinh, LocalDate ngayHetHanHopDong) {
         this.ma = ma;
         this.hoTen = hoTen;
@@ -73,7 +73,6 @@ public class CauThu {
         this.ngayHetHanHopDong = ngayHetHanHopDong;
     }
 
-    // Getters & Setters
     public String getMa() { return ma; }
     public void setMa(String ma) { this.ma = ma; }
 
@@ -83,8 +82,8 @@ public class CauThu {
     public String getViTri() { return viTri; }
     public void setViTri(String viTri) { this.viTri = viTri; }
 
-    public int getSoAo() { return soAo; }
-    public void setSoAo(int soAo) { this.soAo = soAo; }
+    public Integer getSoAo() { return soAo; }
+    public void setSoAo(Integer soAo) { this.soAo = soAo; }
 
     public String getQuocTich() { return quocTich; }
     public void setQuocTich(String quocTich) { this.quocTich = quocTich; }
@@ -96,13 +95,13 @@ public class CauThu {
     public void setCanNang(String canNang) { this.canNang = canNang; }
 
     public Integer getSoBanThang() { return soBanThang; }
-    public void setSoBanThang(int soBanThang) { this.soBanThang = soBanThang; }
+    public void setSoBanThang(Integer soBanThang) { this.soBanThang = soBanThang; }
 
     public Integer getTheVang() { return theVang; }
-public void setTheVang(int theVang) { this.theVang = theVang; }
+public void setTheVang(Integer theVang) { this.theVang = theVang; }
 
     public Integer getTheDo() { return theDo; }
-    public void setTheDo(int theDo) { this.theDo = theDo; }
+    public void setTheDo(Integer theDo) { this.theDo = theDo; }
 
     public LocalDate getNgaySinh() { return ngaySinh; }
     public void setNgaySinh(LocalDate ngaySinh) { this.ngaySinh = ngaySinh; }
@@ -110,13 +109,11 @@ public void setTheVang(int theVang) { this.theVang = theVang; }
     public LocalDate getNgayHetHanHopDong() { return ngayHetHanHopDong; }
     public void setNgayHetHanHopDong(LocalDate ngayHetHanHopDong) { this.ngayHetHanHopDong = ngayHetHanHopDong; }
 
-    // Tính tuổi từ ngày sinh
-    public int getTuoi() {
+    public Integer getTuoi() {
         return ngaySinh != null ? Period.between(ngaySinh, LocalDate.now()).getYears() : 0;
     }
 
-    // Tính số năm còn lại của hợp đồng
-    public int getSoNamConLaiHopDong() {
+    public Integer getSoNamConLaiHopDong() {
         return ngayHetHanHopDong != null ? Period.between(LocalDate.now(), ngayHetHanHopDong).getYears() : 0;
     }
 

@@ -30,24 +30,37 @@ public class CauThuService {
         }
     }
 
-    public void suaCauThu(String maCauThu, String hoTenMoi, int soAoMoi) {
-        try {
-            Optional<CauThu> optional = cauThuRepository.findById(maCauThu);
-            if (optional.isPresent()) {
-                CauThu ct = optional.get();
-                ct.setHoTen(hoTenMoi);
-                ct.setSoAo(soAoMoi);
-                cauThuRepository.save(ct);
-                System.out.println("Đã cập nhật thông tin cầu thủ có mã " + maCauThu);
-            } else {
-                System.out.println("Không tìm thấy cầu thủ có mã " + maCauThu);
-            }
-        } catch (Exception e) {
-            System.out.println("Lỗi khi sửa cầu thủ: " + e.getMessage());
-        } finally {
-            System.out.println("Hoàn tất thao tác sửa cầu thủ.");
+    public void suaCauThu(CauThu cauThuMoi) {
+    try {
+        Optional<CauThu> optional = cauThuRepository.findById(cauThuMoi.getMa());
+        if (optional.isPresent()) {
+            CauThu ct = optional.get();
+
+            ct.setHoTen(cauThuMoi.getHoTen());
+            ct.setViTri(cauThuMoi.getViTri());
+            ct.setSoAo(cauThuMoi.getSoAo());
+            ct.setQuocTich(cauThuMoi.getQuocTich());
+            ct.setChieuCao(cauThuMoi.getChieuCao());
+            ct.setCanNang(cauThuMoi.getCanNang());
+            ct.setSoBanThang(cauThuMoi.getSoBanThang());
+            ct.setTheVang(cauThuMoi.getTheVang());
+            ct.setTheDo(cauThuMoi.getTheDo());
+            ct.setNgaySinh(cauThuMoi.getNgaySinh());
+            ct.setNgayHetHanHopDong(cauThuMoi.getNgayHetHanHopDong());
+
+            cauThuRepository.save(ct); // lưu vào DB
+
+            System.out.println("✅ Đã cập nhật thông tin đầy đủ cho cầu thủ mã: " + ct.getMa());
+        } else {
+            System.out.println("❌ Không tìm thấy cầu thủ có mã: " + cauThuMoi.getMa());
         }
-    }
+        } catch (Exception e) {
+            System.out.println("⚠️ Lỗi khi sửa cầu thủ: " + e.getMessage());
+        } finally {
+            System.out.println("✔️ Hoàn tất thao tác sửa cầu thủ.");
+        }
+            }
+
 
     public void xoaCauThu(String maCauThu) {
         try {

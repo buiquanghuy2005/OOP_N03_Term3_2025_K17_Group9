@@ -114,8 +114,11 @@
         <td th:text="${ct.theVang}"></td>
         <td th:text="${ct.theDo}"></td>
         <td>
-            <a th:href="@{'/sua/' + ${ct.ma}}">✏️ Sửa</a> |
-            <a th:href="@{'/xoa/' + ${ct.ma}}" onclick="return confirm('Bạn chắc chắn muốn xoá?')">❌ Xoá</a>
+            <span th:if="${ct.ma != null}">
+                <a th:href="@{'/sua/' + ${ct.ma}}">✏️ Sửa</a> |
+                <a th:href="@{'/xoa/' + ${ct.ma}}" onclick="return confirm('Bạn chắc chắn muốn xoá?')">❌ Xoá</a>
+            </span>
+            <span th:if="${ct.ma == null}" style="color:gray;">Không thể sửa/xoá</span>
         </td>
     </tr>
     </tbody>
