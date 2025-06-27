@@ -2,73 +2,80 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title th:text="${trandau.id} != null ? '⚽ Cập nhật trận đấu' : '➕ Thêm trận đấu mới'">Trận đấu</title>
+    <title th:text="${trandau != null and trandau.id != null ? '⚽ Cập nhật trận đấu' : '➕ Thêm trận đấu mới'}">Trận đấu</title>
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(to right, #f0f2f5, #e3f2fd);
-            padding: 40px;
+            font-family: 'Comic Sans MS', 'Segoe UI', cursive;
+            background: linear-gradient(to right, #fdfbfb, #ebedee);
+            padding: 50px 15px;
             display: flex;
             justify-content: center;
         }
 
         .form-container {
-            background-color: white;
-            padding: 30px 40px;
-            border-radius: 12px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+            background-color: #fff0f6;
+            padding: 35px 30px;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
             width: 100%;
-            max-width: 700px;
+            max-width: 680px;
+            border: 3px dashed #ffb3c1;
         }
 
         h1 {
             text-align: center;
-            color: #2c3e50;
+            font-size: 26px;
+            color: #d6336c;
             margin-bottom: 30px;
         }
 
         .form-group {
             display: flex;
+            flex-direction: column;
             margin-bottom: 18px;
-            align-items: center;
         }
 
         .form-group label {
-            width: 160px;
+            margin-bottom: 6px;
             font-weight: bold;
-            color: #34495e;
+            color: #6f42c1;
         }
 
         .form-group input {
-            flex: 1;
-            padding: 10px 12px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
+            padding: 10px;
+            border: 2px solid #f3c4fb;
+            border-radius: 12px;
             font-size: 15px;
+            background-color: #fff;
+        }
+
+        .form-group input:focus {
+            border-color: #ff6f91;
+            outline: none;
         }
 
         button {
-            width: 100%;
-            padding: 12px;
-            background-color: #3498db;
+            background-color: #ff85a1;
             color: white;
-            font-size: 16px;
             border: none;
-            border-radius: 6px;
+            padding: 12px;
+            width: 100%;
+            font-size: 16px;
+            border-radius: 14px;
             font-weight: bold;
-            margin-top: 15px;
             cursor: pointer;
+            transition: background-color 0.3s ease;
         }
 
         button:hover {
-            background-color: #2980b9;
+            background-color: #f76c8f;
         }
 
         .back-link {
             display: block;
             text-align: center;
             margin-top: 20px;
-            color: #2980b9;
+            color: #6c757d;
             text-decoration: none;
         }
 
@@ -77,18 +84,12 @@
         }
 
         @media (max-width: 600px) {
-            .form-group {
-                flex-direction: column;
-                align-items: flex-start;
+            .form-container {
+                padding: 25px;
             }
 
-            .form-group label {
-                width: 100%;
-                margin-bottom: 6px;
-            }
-
-            button {
-                font-size: 15px;
+            h1 {
+                font-size: 22px;
             }
         }
     </style>
@@ -96,10 +97,10 @@
 <body>
 
 <div class="form-container">
-    <h1 th:text="${trandau.id} != null ? '⚽ Cập nhật trận đấu' : '➕ Thêm trận đấu mới'">Form Trận Đấu</h1>
+    <h1 th:text="${trandau != null and trandau.id != null ? '⚽ Cập nhật trận đấu' : '➕ Thêm trận đấu mới'}">Form Trận Đấu</h1>
 
     <form th:action="@{/trandau/luu}" th:object="${trandau}" method="post">
-        <input type="hidden" th:field="*{id}"/>
+        <input type="hidden" th:field="*{id}" />
 
         <div class="form-group">
             <label>Đội Nhà:</label>

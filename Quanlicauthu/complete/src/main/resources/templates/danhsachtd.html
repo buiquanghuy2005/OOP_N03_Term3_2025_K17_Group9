@@ -2,171 +2,151 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title th:text="${trandau.id} != null ? '⚽ Cập nhật trận đấu' : '➕ Thêm trận đấu mới'">Trận đấu</title>
+    <title>Danh sách trận đấu</title>
     <style>
-        * {
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: 'Segoe UI', sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            font-family: 'Comic Sans MS', 'Segoe UI', cursive;
+            background: linear-gradient(to right, #fceff9, #e0f7fa);
+            padding: 30px;
         }
 
-        .form-container {
-            backdrop-filter: blur(15px);
-            background-color: rgba(255, 255, 255, 0.15);
-            padding: 40px 50px;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-            color: #fff;
-            width: 90%;
-            max-width: 700px;
-        }
-
-        h1 {
+        h2 {
+            color: #d6336c;
             text-align: center;
-            margin-bottom: 30px;
-            font-size: 28px;
-            color: #fff;
+            margin-bottom: 20px;
         }
 
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            margin-bottom: 18px;
-        }
-
-        .form-group label {
-            margin-bottom: 6px;
-            font-weight: 600;
-        }
-
-        .form-group input {
-            padding: 10px 12px;
-            border: none;
-            border-radius: 8px;
-            background-color: rgba(255, 255, 255, 0.9);
-            font-size: 15px;
-            color: #2c3e50;
-        }
-
-        .form-group input:focus {
-            outline: none;
-            box-shadow: 0 0 5px #fff;
-        }
-
-        button {
-            width: 100%;
-            padding: 12px;
-            border: none;
-            border-radius: 8px;
-            background: linear-gradient(90deg, #00c9ff, #92fe9d);
-            color: #2c3e50;
+        .add-btn {
+            display: inline-block;
+            margin-bottom: 20px;
+            background-color: #ff85a1;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 30px;
+            text-decoration: none;
             font-weight: bold;
-            font-size: 16px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: background-color 0.3s;
+        }
+
+        .add-btn:hover {
+            background-color: #ff6f91;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: #fffdfd;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        th {
+            background-color: #ffd6e0;
+            color: #4a148c;
+            padding: 12px;
+            font-size: 15px;
+        }
+
+        td {
+            padding: 10px 12px;
+            text-align: center;
+            font-size: 14px;
+            color: #5c5c5c;
+        }
+
+        tr:nth-child(even) {
+            background-color: #fff0f6;
+        }
+
+        tr:hover {
+            background-color: #ffe3ec;
+        }
+
+        .btn {
+            padding: 6px 14px;
+            font-size: 13px;
+            font-weight: bold;
+            border: none;
+            border-radius: 20px;
             cursor: pointer;
-            transition: transform 0.2s ease-in-out;
+            transition: all 0.3s ease;
         }
 
-        button:hover {
-            transform: scale(1.05);
+        .btn-edit {
+            background-color: #ffd93d;
+            color: #5d4037;
         }
 
-        .back-link {
+        .btn-edit:hover {
+            background-color: #ffca28;
+        }
+
+        .btn-delete {
+            background-color: #f67280;
+            color: white;
+        }
+
+        .btn-delete:hover {
+            background-color: #e55060;
+        }
+
+        .home-link {
             display: block;
             text-align: center;
-            margin-top: 20px;
-            color: #ffffff;
+            margin-top: 25px;
             text-decoration: none;
-            opacity: 0.8;
-            font-weight: 500;
+            color: #6c757d;
+            font-weight: bold;
         }
 
-        .back-link:hover {
-            opacity: 1;
+        .home-link:hover {
             text-decoration: underline;
-        }
-
-        @media (max-width: 600px) {
-            .form-container {
-                padding: 25px;
-            }
-
-            h1 {
-                font-size: 22px;
-            }
-
-            button {
-                font-size: 14px;
-            }
         }
     </style>
 </head>
 <body>
 
-<div class="form-container">
-    <h1 th:text="${trandau.id} != null ? '⚽ Cập nhật trận đấu' : '➕ Thêm trận đấu mới'">Form Trận Đấu</h1>
+<h2>📒 Danh sách trận đấu</h2>
 
-    <form th:action="@{/trandau/luu}" th:object="${trandau}" method="post">
-        <input type="hidden" th:field="*{id}"/>
+<a href="/trandau/them" class="add-btn">➕ Thêm trận đấu</a>
 
-        <div class="form-group">
-            <label>Đội Nhà:</label>
-            <input type="text" th:field="*{doiNha}" required />
-        </div>
+<table>
+    <thead>
+        <tr>
+            <th> Đội Nhà</th>
+            <th> Bàn Thắng Nhà</th>
+            <th> Đội Khách</th>
+            <th> Bàn Thắng Khách</th>
+            <th> Ngày Thi Đấu</th>
+            <th> Sân Vận Động</th>
+            <th> Vòng Đấu</th>
+            <th> Giải Đấu</th>
+            <th> Ghi Chú</th>
+            <th> Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="trandau : ${dsTranDau}">
+            <td th:text="${trandau.doiNha}"></td>
+            <td th:text="${trandau.banThangNha}"></td>
+            <td th:text="${trandau.doiKhach}"></td>
+            <td th:text="${trandau.banThangKhach}"></td>
+            <td th:text="${trandau.ngayThiDau}"></td>
+            <td th:text="${trandau.sanVanDong}"></td>
+            <td th:text="${trandau.vongDau}"></td>
+            <td th:text="${trandau.giaiDau}"></td>
+            <td th:text="${trandau.ghiChu}"></td>
+            <td>
+                <a th:href="@{'/trandau/sua/' + ${trandau.id}}" class="btn btn-edit">✏️ Sửa</a>
+                <a th:href="@{'/trandau/xoa/' + ${trandau.id}}" class="btn btn-delete" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">🗑️ Xóa</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
 
-        <div class="form-group">
-            <label>Bàn Thắng Nhà:</label>
-            <input type="number" th:field="*{banThangNha}" min="0" />
-        </div>
-
-        <div class="form-group">
-            <label>Đội Khách:</label>
-            <input type="text" th:field="*{doiKhach}" required />
-        </div>
-
-        <div class="form-group">
-            <label>Bàn Thắng Khách:</label>
-            <input type="number" th:field="*{banThangKhach}" min="0" />
-        </div>
-
-        <div class="form-group">
-            <label>Ngày Thi Đấu:</label>
-            <input type="date" th:field="*{ngayThiDau}" required />
-        </div>
-
-        <div class="form-group">
-            <label>Sân Vận Động:</label>
-            <input type="text" th:field="*{sanVanDong}" />
-        </div>
-
-        <div class="form-group">
-            <label>Vòng Đấu:</label>
-            <input type="text" th:field="*{vongDau}" />
-        </div>
-
-        <div class="form-group">
-            <label>Giải Đấu:</label>
-            <input type="text" th:field="*{giaiDau}" />
-        </div>
-
-        <div class="form-group">
-            <label>Ghi Chú:</label>
-            <input type="text" th:field="*{ghiChu}" />
-        </div>
-
-        <button type="submit">💾 Lưu Trận Đấu</button>
-    </form>
-
-    <a href="/trandau" class="back-link">← Quay lại danh sách</a>
-</div>
-
+<a href="/" class="home-link">🏠 Về trang chủ</a>
 </body>
 </html>

@@ -153,12 +153,13 @@
 
 <h1>📋 Danh sách cầu thủ</h1>
 
-<p><a href="/them">➕ Thêm cầu thủ mới</a></p>
+<a href="/cauthu/them" class="btn-main">➕ Thêm cầu thủ mới</a>
+
 
 <hr>
 
 <h3>🔍 Tìm kiếm cầu thủ</h3>
-<form action="/timkiem" method="get">
+<form action="/cauthu/timkiem" method="get">
     Mã: <input type="text" name="ma">
     Tên: <input type="text" name="hoTen">
     Vị trí: <input type="text" name="viTri">
@@ -233,19 +234,20 @@
         return inputMa !== "" ? inputMa : selectMa;
     }
 
+
     function editPlayer() {
         const ma = getMaCauThu();
         if (ma) {
-            window.location.href = '/sua/' + ma;
+            window.location.href = '/cauthu/sua/' + ma;  
         } else {
             alert("Vui lòng nhập hoặc chọn mã cầu thủ để sửa.");
         }
-    }
+    }    
 
     function deletePlayer() {
         const ma = getMaCauThu();
         if (ma && confirm("Bạn có chắc chắn muốn xoá cầu thủ mã " + ma + "?")) {
-            window.location.href = '/xoa/' + ma;
+            window.location.href = '/cauthu/xoa/' + ma;  // ✅ đúng route
         } else if (!ma) {
             alert("Vui lòng nhập hoặc chọn mã cầu thủ để xoá.");
         }

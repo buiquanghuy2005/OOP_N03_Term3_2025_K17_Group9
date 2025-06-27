@@ -15,10 +15,10 @@ public class CauThuController {
     @Autowired
     private CauThuService danhSach;
 
-    @GetMapping("/cauthu") // ✅ Chuyển từ "/" thành "/cauthu"
+    @GetMapping("/cauthu")
     public String hienThiDanhSach(Model model) {
         model.addAttribute("danhSach", danhSach.getDanhSach());
-        model.addAttribute("timKiem", new CauThu(null, null, null, 0, null, null, null, 0, 0, 0, null, null));
+        model.addAttribute("timKiem", new CauThu());
         return "danhsach";
     }
 
@@ -48,7 +48,7 @@ public class CauThuController {
 
     @GetMapping("/cauthu/them")
     public String formThem(Model model) {
-        model.addAttribute("cauthu", new CauThu(null, null, null, 0, null, null, null, 0, 0, 0, null, null));
+        model.addAttribute("cauthu", new CauThu());
         return "form";
     }
 
@@ -63,7 +63,7 @@ public class CauThuController {
             danhSach.getDanhSach().remove(daCo);
         }
         danhSach.themCauThu(ct);
-        return "redirect:/cauthu"; // ✅ đổi lại đường dẫn redirect
+        return "redirect:/cauthu";
     }
 
     @GetMapping("/cauthu/sua/{ma}")
@@ -72,6 +72,13 @@ public class CauThuController {
                 .filter(c -> c.getMa().equals(ma))
                 .findFirst()
                 .orElse(null);
+
+        if (ct == null) {
+            model.addAttribute("danhSach", danhSach.getDanhSach());
+            model.addAttribute("loi", "Không tìm thấy cầu thủ có mã: " + ma);
+            return "danhsach"; // quay về danh sách kèm lỗi
+        }
+
         model.addAttribute("cauthu", ct);
         return "form";
     }
@@ -79,6 +86,14 @@ public class CauThuController {
     @GetMapping("/cauthu/xoa/{ma}")
     public String xoa(@PathVariable String ma) {
         danhSach.xoaCauThu(ma);
-        return "redirect:/cauthu"; // ✅ đổi lại đường dẫn redirect
+        return "redirect:/cauthu";
+    }
+
+    // ✅ Bắt lỗi chung và chuyển hướng về danh sách
+    @ExceptionHandler(Exception.class)
+    public String xuLyLoi(Exception e, Model model) {
+        model.addAttribute("danhSach", danhSach.getDanhSach());
+        model.addAttribute("loi", "Đã xảy ra lỗi: " + e.getMessage());
+        return "danhsach";
     }
 }
