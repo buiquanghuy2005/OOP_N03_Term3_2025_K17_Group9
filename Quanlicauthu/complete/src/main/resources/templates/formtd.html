@@ -2,23 +2,155 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Thêm / Sửa Trận đấu</title>
+    <title th:text="${trandau.id} != null ? '⚽ Cập nhật trận đấu' : '➕ Thêm trận đấu mới'">Trận đấu</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #f0f2f5, #e3f2fd);
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .form-container {
+            background-color: white;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 700px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            display: flex;
+            margin-bottom: 18px;
+            align-items: center;
+        }
+
+        .form-group label {
+            width: 160px;
+            font-weight: bold;
+            color: #34495e;
+        }
+
+        .form-group input {
+            flex: 1;
+            padding: 10px 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #3498db;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            margin-top: 15px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #2980b9;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            .form-group {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .form-group label {
+                width: 100%;
+                margin-bottom: 6px;
+            }
+
+            button {
+                font-size: 15px;
+            }
+        }
+    </style>
 </head>
 <body>
-<h1 th:text="${trandau.id == null} ? 'Thêm trận đấu' : 'Sửa trận đấu'"></h1>
 
-<form action="#" th:action="@{/trandau/luu}" th:object="${trandau}" method="post">
-    <input type="hidden" th:field="*{id}"/>
+<div class="form-container">
+    <h1 th:text="${trandau.id} != null ? '⚽ Cập nhật trận đấu' : '➕ Thêm trận đấu mới'">Form Trận Đấu</h1>
 
-    Đội A: <input type="text" th:field="*{doiA}" required/><br><br>
-    Đội B: <input type="text" th:field="*{doiB}" required/><br><br>
-    Ngày thi đấu: <input type="date" th:field="*{ngayThiDau}" required/><br><br>
-    Địa điểm: <input type="text" th:field="*{diaDiem}"/><br><br>
-    Tỉ số: <input type="text" th:field="*{tiSo}"/><br><br>
+    <form th:action="@{/trandau/luu}" th:object="${trandau}" method="post">
+        <input type="hidden" th:field="*{id}"/>
 
-    <button type="submit">💾 Lưu</button>
-</form>
+        <div class="form-group">
+            <label>Đội Nhà:</label>
+            <input type="text" th:field="*{doiNha}" required />
+        </div>
 
-<a href="/trandau">⬅️ Quay lại danh sách</a>
+        <div class="form-group">
+            <label>Bàn Thắng Nhà:</label>
+            <input type="number" th:field="*{banThangNha}" min="0" />
+        </div>
+
+        <div class="form-group">
+            <label>Đội Khách:</label>
+            <input type="text" th:field="*{doiKhach}" required />
+        </div>
+
+        <div class="form-group">
+            <label>Bàn Thắng Khách:</label>
+            <input type="number" th:field="*{banThangKhach}" min="0" />
+        </div>
+
+        <div class="form-group">
+            <label>Ngày Thi Đấu:</label>
+            <input type="date" th:field="*{ngayThiDau}" required />
+        </div>
+
+        <div class="form-group">
+            <label>Sân Vận Động:</label>
+            <input type="text" th:field="*{sanVanDong}" />
+        </div>
+
+        <div class="form-group">
+            <label>Vòng Đấu:</label>
+            <input type="text" th:field="*{vongDau}" />
+        </div>
+
+        <div class="form-group">
+            <label>Giải Đấu:</label>
+            <input type="text" th:field="*{giaiDau}" />
+        </div>
+
+        <div class="form-group">
+            <label>Ghi Chú:</label>
+            <input type="text" th:field="*{ghiChu}" />
+        </div>
+
+        <button type="submit">💾 Lưu Trận Đấu</button>
+    </form>
+
+    <a href="/trandau" class="back-link">← Quay lại danh sách</a>
+</div>
+
 </body>
 </html>

@@ -6,5 +6,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TranDauRepository extends JpaRepository<TranDau, Long> {
-    // có thể thêm các phương thức tìm kiếm custom ở đây nếu cần
 }

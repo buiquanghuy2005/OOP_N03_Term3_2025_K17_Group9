@@ -2,37 +2,157 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Danh sách trận đấu</title>
+    <title>📅 Danh sách trận đấu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f4f8fb;
+            font-size: 16px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .add-btn {
+            display: inline-block;
+            margin-bottom: 20px;
+            background-color: #2980b9;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+
+        .add-btn:hover {
+            background-color: #1f6697;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            min-width: 1100px;
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+            font-size: 15px;
+            white-space: nowrap;
+        }
+
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #eef7ff;
+        }
+
+        .action-btn {
+            padding: 6px 12px;
+            border-radius: 4px;
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .edit-btn {
+            background-color: #27ae60;
+        }
+
+        .edit-btn:hover {
+            background-color: #219150;
+        }
+
+        .delete-btn {
+            background-color: #e74c3c;
+        }
+
+        .delete-btn:hover {
+            background-color: #c0392b;
+        }
+
+        td:last-child {
+            white-space: nowrap;
+            text-align: center;
+        }
+
+        .empty-row {
+            text-align: center;
+            font-style: italic;
+            color: #888;
+        }
+
+        @media (max-width: 768px) {
+            table {
+                font-size: 13px;
+            }
+
+            th, td {
+                padding: 10px 5px;
+            }
+        }
+    </style>
 </head>
 <body>
-<h1>📋 Danh sách trận đấu</h1>
 
-<a href="/trandau/them">➕ Thêm trận mới</a>
-<hr>
+<h1>📋 Danh sách Trận Đấu</h1>
 
-<table border="1">
-    <tr>
-        <th>ID</th>
-        <th>Đội A</th>
-        <th>Đội B</th>
-        <th>Ngày thi đấu</th>
-        <th>Địa điểm</th>
-        <th>Tỉ số</th>
-        <th>Hành động</th>
-    </tr>
-    <tr th:each="td : ${dsTranDau}">
-        <td th:text="${td.id}"></td>
-        <td th:text="${td.doiA}"></td>
-        <td th:text="${td.doiB}"></td>
-        <td th:text="${td.ngayThiDau}"></td>
-        <td th:text="${td.diaDiem}"></td>
-        <td th:text="${td.tiSo}"></td>
-        <td>
-            <a th:href="@{/trandau/sua/{id}(id=${td.id})}">✏️ Sửa</a> |
-            <a th:href="@{/trandau/xoa/{id}(id=${td.id})}" onclick="return confirm('Xóa trận này?')">🗑️ Xóa</a>
-        </td>
-    </tr>
-</table>
+<a href="/trandau/them" class="add-btn">➕ Thêm trận mới</a>
+
+<div class="table-wrapper">
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Đội Nhà</th>
+            <th>Bàn Thắng Nhà</th>
+            <th>Đội Khách</th>
+            <th>Bàn Thắng Khách</th>
+            <th>Ngày Thi Đấu</th>
+            <th>Sân Vận Động</th>
+            <th>Vòng Đấu</th>
+            <th>Giải Đấu</th>
+            <th>Ghi Chú</th>
+            <th>Hành Động</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${#lists.isEmpty(dsTranDau)}">
+            <td class="empty-row" colspan="11">Không có trận đấu nào được ghi nhận.</td>
+        </tr>
+        <tr th:each="td : ${dsTranDau}">
+            <td th:text="${td.id}"></td>
+            <td th:text="${td.doiNha}"></td>
+            <td th:text="${td.banThangNha}"></td>
+            <td th:text="${td.doiKhach}"></td>
+            <td th:text="${td.banThangKhach}"></td>
+            <td th:text="${#temporals.format(td.ngayThiDau, 'dd/MM/yyyy')}"></td>
+            <td th:text="${td.sanVanDong}"></td>
+            <td th:text="${td.vongDau}"></td>
+            <td th:text="${td.giaiDau}"></td>
+            <td th:text="${td.ghiChu}"></td>
+            <td>
+                <a th:href="@{/trandau/sua/{id}(id=${td.id})}" class="action-btn edit-btn">✏️ Sửa</a>
+                <a th:href="@{/trandau/xoa/{id}(id=${td.id})}" class="action-btn delete-btn"
+                   onclick="return confirm('Bạn có chắc chắn muốn xoá trận đấu này?')">🗑️ Xoá</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 
 </body>
 </html>

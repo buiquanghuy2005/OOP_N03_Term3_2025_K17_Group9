@@ -39,6 +39,12 @@ public class TranDauController {
         }
     }
 
+    @GetMapping("/them")
+    public String hienThiFormThem(Model model) {
+        model.addAttribute("trandau", new TranDau()); 
+        return "formtd";
+    }
+
     @GetMapping("/xoa/{id}")
     public String xoaTranDau(@PathVariable Long id) {
         tranDauService.deleteTranDauById(id);
