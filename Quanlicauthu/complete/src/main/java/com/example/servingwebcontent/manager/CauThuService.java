@@ -161,4 +161,8 @@ public class CauThuService {
     public Object findById(String string) {
         throw new UnsupportedOperationException("Unimplemented method 'findById'");
     }
+
+    public void suaCauThu(String ma, String tenMoi, int soAoMoi) {
+        throw new UnsupportedOperationException("Unimplemented method 'suaCauThu'");
+    }
 }

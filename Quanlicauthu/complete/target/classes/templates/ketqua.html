@@ -1,25 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Kết quả tìm kiếm</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #2c3e50;
+        }
+
+        a {
+            text-decoration: none;
+            color: #2980b9;
+            font-weight: bold;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-top: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #eaf2f8;
+        }
+
+        .actions a {
+            margin-right: 8px;
+            font-size: 18px;
+        }
+
+        .error-message {
+            color: red;
+            font-weight: bold;
+            background: #ffe5e5;
+            padding: 10px;
+            border: 1px solid red;
+            border-radius: 5px;
+            width: fit-content;
+            margin-top: 20px;
+        }
+    </style>
+</head>
 <body>
-<h1>Kết quả tìm kiếm</h1>
-<a href="/">⬅ Quay lại</a>
 
-<div th:if="${#lists.isEmpty(ketQua)}">
-    <p style="color: red;">Không tìm thấy cầu thủ nào phù hợp với tiêu chí.</p>
-</div>
+    <h1>Kết quả tìm kiếm</h1>
+    <a href="/">⬅ Quay lại trang chủ</a>
 
-<table border="1" cellpadding="5" th:if="${!#lists.isEmpty(ketQua)}">
-    <tr>
-        <th>Mã</th><th>Tên</th><th>Vị trí</th><th>Số áo</th><th>Quốc tịch</th><th>Hành động</th>
-    </tr>
-    <tr th:each="ct : ${ketQua}">
-        <td th:text="${ct.ma}"></td>
-        <td th:text="${ct.hoTen}"></td>
-        <td th:text="${ct.viTri}"></td>
-        <td th:text="${ct.soAo}"></td>
-        <td th:text="${ct.quocTich}"></td>
-        <td>
-            <a th:href="@{'/sua/' + ${ct.ma}}">✏️</a> |
-            <a th:href="@{'/xoa/' + ${ct.ma}}">❌</a>
-        </td>
-    </tr>
-</table>
+    <div th:if="${#lists.isEmpty(ketQua)}" class="error-message">
+        Không tìm thấy cầu thủ nào phù hợp với tiêu chí.
+    </div>
+
+    <table th:if="${!#lists.isEmpty(ketQua)}">
+        <thead>
+            <tr>
+                <th>Mã</th>
+                <th>Họ tên</th>
+                <th>Vị trí</th>
+                <th>Số áo</th>
+                <th>Quốc tịch</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="ct : ${ketQua}">
+                <td th:text="${ct.ma}"></td>
+                <td th:text="${ct.hoTen}"></td>
+                <td th:text="${ct.viTri}"></td>
+                <td th:text="${ct.soAo}"></td>
+                <td th:text="${ct.quocTich}"></td>
+                <td class="actions">
+                    <a th:href="@{'/sua/' + ${ct.ma}}" title="Chỉnh sửa">✏️</a>
+                    <a th:href="@{'/xoa/' + ${ct.ma}}" title="Xóa" onclick="return confirm('Bạn có chắc chắn muốn xóa cầu thủ này không?')">❌</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
 </body>
+</html>
