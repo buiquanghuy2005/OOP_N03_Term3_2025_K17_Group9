@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sách trận đấu</title>
+</head>
+<body>
+<h1>📋 Danh sách trận đấu</h1>
+
+<a href="/trandau/them">➕ Thêm trận mới</a>
+<hr>
+
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Đội A</th>
+        <th>Đội B</th>
+        <th>Ngày thi đấu</th>
+        <th>Địa điểm</th>
+        <th>Tỉ số</th>
+        <th>Hành động</th>
+    </tr>
+    <tr th:each="td : ${dsTranDau}">
+        <td th:text="${td.id}"></td>
+        <td th:text="${td.doiA}"></td>
+        <td th:text="${td.doiB}"></td>
+        <td th:text="${td.ngayThiDau}"></td>
+        <td th:text="${td.diaDiem}"></td>
+        <td th:text="${td.tiSo}"></td>
+        <td>
+            <a th:href="@{/trandau/sua/{id}(id=${td.id})}">✏️ Sửa</a> |
+            <a th:href="@{/trandau/xoa/{id}(id=${td.id})}" onclick="return confirm('Xóa trận này?')">🗑️ Xóa</a>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>

@@ -15,13 +15,14 @@ public class CauThuController {
     @Autowired
     private CauThuService danhSach;
 
-    @GetMapping("/")
-    public String hienThiTrangChinh(Model model) {
+    @GetMapping("/cauthu") // ✅ Chuyển từ "/" thành "/cauthu"
+    public String hienThiDanhSach(Model model) {
         model.addAttribute("danhSach", danhSach.getDanhSach());
         model.addAttribute("timKiem", new CauThu(null, null, null, 0, null, null, null, 0, 0, 0, null, null));
-        return "danhsach"; 
+        return "danhsach";
     }
-    @GetMapping("/timkiem")
+
+    @GetMapping("/cauthu/timkiem")
     public String timKiemCauThu(
             @RequestParam(required = false) String ma,
             @RequestParam(required = false) String hoTen,
@@ -42,16 +43,16 @@ public class CauThuController {
         );
 
         model.addAttribute("ketQua", ketQua);
-        return "ketqua"; 
+        return "ketqua";
     }
 
-    @GetMapping("/them")
+    @GetMapping("/cauthu/them")
     public String formThem(Model model) {
         model.addAttribute("cauthu", new CauThu(null, null, null, 0, null, null, null, 0, 0, 0, null, null));
         return "form";
     }
 
-    @PostMapping("/luu")
+    @PostMapping("/cauthu/luu")
     public String luuCauThu(@ModelAttribute CauThu ct) {
         CauThu daCo = danhSach.getDanhSach().stream()
                 .filter(c -> c.getMa().equals(ct.getMa()))
@@ -61,12 +62,11 @@ public class CauThuController {
         if (daCo != null) {
             danhSach.getDanhSach().remove(daCo);
         }
-            danhSach.themCauThu(ct);
-
-        return "redirect:/";
+        danhSach.themCauThu(ct);
+        return "redirect:/cauthu"; // ✅ đổi lại đường dẫn redirect
     }
 
-    @GetMapping("/sua/{ma}")
+    @GetMapping("/cauthu/sua/{ma}")
     public String formSua(@PathVariable String ma, Model model) {
         CauThu ct = danhSach.getDanhSach().stream()
                 .filter(c -> c.getMa().equals(ma))
@@ -76,9 +76,9 @@ public class CauThuController {
         return "form";
     }
 
-    @GetMapping("/xoa/{ma}")
+    @GetMapping("/cauthu/xoa/{ma}")
     public String xoa(@PathVariable String ma) {
         danhSach.xoaCauThu(ma);
-        return "redirect:/";
+        return "redirect:/cauthu"; // ✅ đổi lại đường dẫn redirect
     }
 }

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thêm / Sửa Trận đấu</title>
+</head>
+<body>
+<h1 th:text="${trandau.id == null} ? 'Thêm trận đấu' : 'Sửa trận đấu'"></h1>
+
+<form action="#" th:action="@{/trandau/luu}" th:object="${trandau}" method="post">
+    <input type="hidden" th:field="*{id}"/>
+
+    Đội A: <input type="text" th:field="*{doiA}" required/><br><br>
+    Đội B: <input type="text" th:field="*{doiB}" required/><br><br>
+    Ngày thi đấu: <input type="date" th:field="*{ngayThiDau}" required/><br><br>
+    Địa điểm: <input type="text" th:field="*{diaDiem}"/><br><br>
+    Tỉ số: <input type="text" th:field="*{tiSo}"/><br><br>
+
+    <button type="submit">💾 Lưu</button>
+</form>
+
+<a href="/trandau">⬅️ Quay lại danh sách</a>
+</body>
+</html>
