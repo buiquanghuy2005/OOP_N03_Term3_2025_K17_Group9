@@ -1,7 +1,7 @@
 package com.example.servingwebcontent.controller;
 
 import com.example.servingwebcontent.model.TranDau;
-import com.example.servingwebcontent.repository.TranDauRepository;
+import com.example.servingwebcontent.manager.TranDauService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,29 +14,23 @@ import java.util.Optional;
 public class TranDauController {
 
     @Autowired
-    private TranDauRepository tranDauRepository;
+    private TranDauService tranDauService;
 
     @GetMapping
     public String danhSachTranDau(Model model) {
-        model.addAttribute("dsTranDau", tranDauRepository.findAll());
+        model.addAttribute("dsTranDau", tranDauService.getAllTranDau());
         return "danhsachtd";
-    }
-
-    @GetMapping("/them")
-    public String hienFormThem(Model model) {
-        model.addAttribute("trandau", new TranDau());
-        return "formtd";
     }
 
     @PostMapping("/luu")
     public String luuTranDau(@ModelAttribute("trandau") TranDau tranDau) {
-        tranDauRepository.save(tranDau);
+        tranDauService.saveTranDau(tranDau);
         return "redirect:/trandau";
     }
 
     @GetMapping("/sua/{id}")
     public String suaTranDau(@PathVariable Long id, Model model) {
-        Optional<TranDau> td = tranDauRepository.findById(id);
+        Optional<TranDau> td = tranDauService.getTranDauById(id);
         if (td.isPresent()) {
             model.addAttribute("trandau", td.get());
             return "formtd";
@@ -47,7 +41,7 @@ public class TranDauController {
 
     @GetMapping("/xoa/{id}")
     public String xoaTranDau(@PathVariable Long id) {
-        tranDauRepository.deleteById(id);
+        tranDauService.deleteTranDauById(id);
         return "redirect:/trandau";
     }
 }
