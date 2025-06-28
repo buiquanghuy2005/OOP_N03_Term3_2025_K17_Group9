@@ -2,90 +2,142 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Kết quả tìm kiếm</title>
+    <title>Kết quả tìm kiếm cầu thủ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Segoe UI', sans-serif;
-            background: #f5f5f5;
+            font-family: 'Poppins', sans-serif;
+            background: #fffafc;
+            color: #333;
             margin: 0;
-            padding: 20px;
+            padding: 30px;
         }
 
         h1 {
-            color: #2c3e50;
+            color: #ff6f91;
+            margin-bottom: 20px;
         }
 
         a {
             text-decoration: none;
-            color: #2980b9;
-            font-weight: bold;
-            margin-bottom: 20px;
+            font-weight: 600;
             display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .btn-back {
+            background-color: #a29bfe;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-back:hover {
+            background-color: #6c5ce7;
+        }
+
+        .error-message {
+            color: #c0392b;
+            background: #ffe5e5;
+            padding: 12px 18px;
+            border: 2px dashed #e74c3c;
+            border-radius: 12px;
+            width: fit-content;
+            font-weight: 600;
+            margin-top: 30px;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
             background: white;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            margin-top: 20px;
-            border-radius: 8px;
+            margin-top: 25px;
+            border-radius: 16px;
             overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
 
         th, td {
-            padding: 12px 15px;
+            padding: 14px 16px;
             text-align: left;
+            font-size: 15px;
         }
 
         th {
-            background-color: #3498db;
+            background-color: #fcbad3;
             color: white;
         }
 
         tr:nth-child(even) {
-            background-color: #f2f2f2;
+            background-color: #fef6f9;
         }
 
         tr:hover {
-            background-color: #eaf2f8;
+            background-color: #ffeef4;
         }
 
         .actions a {
-            margin-right: 8px;
+            margin-right: 10px;
             font-size: 18px;
+            padding: 6px 10px;
+            border-radius: 12px;
+            transition: background-color 0.2s ease;
         }
 
-        .error-message {
-            color: red;
-            font-weight: bold;
-            background: #ffe5e5;
-            padding: 10px;
-            border: 1px solid red;
-            border-radius: 5px;
-            width: fit-content;
-            margin-top: 20px;
+        .actions a[title="Chỉnh sửa"] {
+            background-color: #81ecec;
+            color: #2d3436;
+        }
+
+        .actions a[title="Chỉnh sửa"]:hover {
+            background-color: #00cec9;
+            color: white;
+        }
+
+        .actions a[title="Xóa"] {
+            background-color: #fab1a0;
+            color: #2d3436;
+        }
+
+        .actions a[title="Xóa"]:hover {
+            background-color: #ff7675;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            table {
+                font-size: 13px;
+            }
+
+            th, td {
+                padding: 10px 8px;
+            }
+
+            .actions a {
+                font-size: 16px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <h1>Kết quả tìm kiếm</h1>
-    <a href="/">⬅ Quay lại trang chủ</a>
+    <h1>🔍 Kết quả tìm kiếm cầu thủ</h1>
+    <a href="/" class="btn-back">⬅ Quay lại trang chủ</a>
 
     <div th:if="${#lists.isEmpty(ketQua)}" class="error-message">
-        Không tìm thấy cầu thủ nào phù hợp với tiêu chí.
+        😢 Không tìm thấy cầu thủ nào phù hợp với tiêu chí!
     </div>
 
     <table th:if="${!#lists.isEmpty(ketQua)}">
         <thead>
             <tr>
-                <th>Mã</th>
-                <th>Họ tên</th>
-                <th>Vị trí</th>
-                <th>Số áo</th>
-                <th>Quốc tịch</th>
-                <th>Hành động</th>
+                <th>🆔 Mã</th>
+                <th>🧒 Họ tên</th>
+                <th>📍 Vị trí</th>
+                <th>🔢 Số áo</th>
+                <th>🌍 Quốc tịch</th>
+                <th>⚙️ Hành động</th>
             </tr>
         </thead>
         <tbody>
@@ -97,7 +149,7 @@
                 <td th:text="${ct.quocTich}"></td>
                 <td class="actions">
                     <a th:href="@{'/sua/' + ${ct.ma}}" title="Chỉnh sửa">✏️</a>
-                    <a th:href="@{'/xoa/' + ${ct.ma}}" title="Xóa" onclick="return confirm('Bạn có chắc chắn muốn xóa cầu thủ này không?')">❌</a>
+                    <a th:href="@{'/xoa/' + ${ct.ma}}" title="Xóa" onclick="return confirm('Bạn có chắc chắn muốn xoá cầu thủ này không?')">❌</a>
                 </td>
             </tr>
         </tbody>

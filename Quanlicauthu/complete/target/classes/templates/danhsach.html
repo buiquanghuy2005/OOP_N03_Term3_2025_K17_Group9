@@ -3,134 +3,148 @@
 <head>
     <meta charset="UTF-8">
     <title>Quản lý cầu thủ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
+            background-color: #fffafc;
+            color: #333;
             margin: 40px;
-            background-color: #f9f9f9;
             font-size: 16px;
         }
 
-        h1 {
-            color: #2c3e50;
-            margin-bottom: 20px;
+        h1, h3 {
+            color: #ff6f91;
+        }
+
+        h1::before {
+            content: "⚽ ";
         }
 
         a {
             text-decoration: none;
-            color: #2980b9;
-            font-weight: bold;
+            color: #ff6f91;
+            font-weight: 600;
         }
 
         a:hover {
             text-decoration: underline;
         }
 
+        .btn-main {
+            display: inline-block;
+            background-color: #ff6f91;
+            color: white;
+            padding: 10px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+            margin-bottom: 10px;
+        }
+
+        .btn-main:hover {
+            background-color: #ff4e74;
+        }
+
+        form input {
+            margin: 6px 8px;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+
+        button {
+            background-color: #88d8b0;
+            border: none;
+            padding: 8px 14px;
+            color: white;
+            font-size: 14px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #6fc2a5;
+        }
+
         .table-wrapper {
             overflow-x: auto;
+            margin-top: 20px;
         }
 
         table {
             min-width: 1200px;
-            width: 100%;
             border-collapse: collapse;
+            width: 100%;
             background-color: white;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border-radius: 12px;
+            overflow: hidden;
         }
 
         th, td {
-            padding: 12px 10px;
+            padding: 14px 12px;
             text-align: left;
-            border-bottom: 1px solid #ddd;
-            vertical-align: middle;
-            font-size: 15px;
-            line-height: 1.5;
+            border-bottom: 1px solid #f1f1f1;
             white-space: nowrap;
+            font-size: 15px;
         }
 
         th {
-            background-color: #3498db;
-            color: white;
+            background-color: #fcbad3;
+            color: #fff;
         }
 
         tr:hover {
-            background-color: #f0f8ff;
+            background-color: #fff0f5;
         }
 
-        /* Điều chỉnh độ rộng cho cột số bàn thắng */
-        td:nth-child(8), th:nth-child(8) {
-            max-width: 80px;
-            text-align: center;
-        }
-
-        /* Đảm bảo cột tuổi không bị cắt */
+        td:nth-child(8), th:nth-child(8),
         td:last-child, th:last-child {
-            white-space: normal;
-            width: 60px;
             text-align: center;
         }
 
-        form input {
-            margin: 5px 10px;
-            padding: 8px;
-            font-size: 14px;
+        .global-actions {
+            margin-top: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
         }
 
-        button {
-            padding: 8px 14px;
-            background-color: #27ae60;
+        .global-actions input, .global-actions select {
+            padding: 10px 12px;
+            border-radius: 12px;
+            border: 1px solid #ccc;
+        }
+
+        .global-actions a {
+            padding: 10px 16px;
+            border-radius: 20px;
+            font-size: 14px;
             color: white;
-            border: none;
-            font-size: 14px;
-            cursor: pointer;
-            border-radius: 4px;
+            text-align: center;
         }
 
-        button:hover {
-            background-color: #219150;
+        .btn-edit {
+            background-color: #6c5ce7;
+        }
+
+        .btn-edit:hover {
+            background-color: #5a4ccf;
+        }
+
+        .btn-delete {
+            background-color: #ff7675;
+        }
+
+        .btn-delete:hover {
+            background-color: #e55050;
         }
 
         hr {
             margin: 25px 0;
-        }
-
-        .global-actions {
-            margin-top: 25px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            font-size: 16px;
-        }
-
-        .global-actions select, .global-actions input {
-            padding: 8px;
-            font-size: 14px;
-            border-radius: 4px;
-            border: 1px solid #ccc;
-            min-width: 180px;
-        }
-
-        .global-actions a {
-            padding: 8px 12px;
-            border-radius: 4px;
-            font-size: 14px;
-            color: white;
-        }
-
-        .btn-edit {
-            background-color: #3498db;
-        }
-
-        .btn-edit:hover {
-            background-color: #2980b9;
-        }
-
-        .btn-delete {
-            background-color: #e74c3c;
-        }
-
-        .btn-delete:hover {
-            background-color: #c0392b;
+            border-top: 1px dashed #ff6f91;
         }
 
         @media (max-width: 768px) {
@@ -155,16 +169,15 @@
 
 <a href="/cauthu/them" class="btn-main">➕ Thêm cầu thủ mới</a>
 
-
 <hr>
 
 <h3>🔍 Tìm kiếm cầu thủ</h3>
 <form action="/cauthu/timkiem" method="get">
-    Mã: <input type="text" name="ma">
-    Tên: <input type="text" name="hoTen">
-    Vị trí: <input type="text" name="viTri">
-    Quốc tịch: <input type="text" name="quocTich">
-    <button type="submit">Tìm kiếm</button>
+    🆔 Mã: <input type="text" name="ma">
+    🧒 Tên: <input type="text" name="hoTen">
+    📍 Vị trí: <input type="text" name="viTri">
+    🌍 Quốc tịch: <input type="text" name="quocTich">
+    <button type="submit">🔎 Tìm kiếm</button>
 </form>
 
 <hr>
@@ -182,16 +195,16 @@
             <th>Chiều cao</th>
             <th>Cân nặng</th>
             <th>Số bàn thắng</th>
-            <th>Thẻ vàng</th>
-            <th>Thẻ đỏ</th>
+            <th>Số thẻ vàng</th>
+            <th>Số thẻ đỏ</th>
             <th>Ngày sinh</th>
-            <th>Hết hạn HĐ</th>
+            <th>Ngày hết hạn HĐ</th>
             <th>Tuổi</th>
         </tr>
         </thead>
         <tbody>
         <tr th:if="${#lists.isEmpty(danhSach)}">
-            <td colspan="13">Không có cầu thủ nào.</td>
+            <td colspan="13">🚫 Không có cầu thủ nào.</td>
         </tr>
         <tr th:each="ct : ${danhSach}">
             <td th:text="${ct.ma}"></td>
@@ -217,7 +230,7 @@
     <label for="inputMa"><strong>🔢 Nhập mã cầu thủ:</strong></label>
     <input type="text" id="inputMa" placeholder="VD: CT001">
 
-    <span><strong>hoặc chọn:</strong></span>
+    <span><strong>✨ hoặc chọn:</strong></span>
     <select id="playerSelect">
         <option disabled selected>-- Chọn mã cầu thủ --</option>
         <option th:each="ct : ${danhSach}" th:value="${ct.ma}" th:text="${ct.ma}"></option>
@@ -234,25 +247,24 @@
         return inputMa !== "" ? inputMa : selectMa;
     }
 
-
     function editPlayer() {
         const ma = getMaCauThu();
         if (ma) {
-            window.location.href = '/cauthu/sua/' + ma;  
+            window.location.href = '/cauthu/sua/' + ma;
         } else {
             alert("Vui lòng nhập hoặc chọn mã cầu thủ để sửa.");
         }
-    }    
+    }
 
     function deletePlayer() {
         const ma = getMaCauThu();
-        if (ma && confirm("Bạn có chắc chắn muốn xoá cầu thủ mã " + ma + "?")) {
-            window.location.href = '/cauthu/xoa/' + ma;  // ✅ đúng route
+        if (ma && confirm("⚠️ Bạn có chắc chắn muốn xoá cầu thủ mã " + ma + "?")) {
+            window.location.href = '/cauthu/xoa/' + ma;
         } else if (!ma) {
             alert("Vui lòng nhập hoặc chọn mã cầu thủ để xoá.");
         }
     }
 </script>
-
+<a href="/" class="home-link">🏠 Về trang chủ</a>
 </body>
 </html>
