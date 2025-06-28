@@ -63,7 +63,8 @@ public class CauThuController {
             danhSach.getDanhSach().remove(daCo);
         }
         danhSach.themCauThu(ct);
-        return "redirect:/cauthu";
+        return "redirect:https://expert-space-invention-97r7pxwrjvqcxg55-8080.app.github.dev/cauthu";
+
     }
 
     @GetMapping("/cauthu/sua/{ma}")
@@ -86,10 +87,9 @@ public class CauThuController {
     @GetMapping("/cauthu/xoa/{ma}")
     public String xoa(@PathVariable String ma) {
         danhSach.xoaCauThu(ma);
-        return "redirect:/cauthu";
+        return "redirect:https://expert-space-invention-97r7pxwrjvqcxg55-8080.app.github.dev/cauthu";
     }
 
-    // ✅ Bắt lỗi chung và chuyển hướng về danh sách
     @ExceptionHandler(Exception.class)
     public String xuLyLoi(Exception e, Model model) {
         model.addAttribute("danhSach", danhSach.getDanhSach());

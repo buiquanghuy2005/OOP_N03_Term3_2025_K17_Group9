@@ -5,6 +5,7 @@
     <title>🌸 Quản lý cầu thủ</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        /* giữ nguyên toàn bộ CSS của bạn */
         body {
             font-family: 'Nunito', sans-serif;
             margin: 30px;
@@ -82,15 +83,6 @@
             background-color: #ff9f80;
         }
 
-        .btn-delete {
-            background-color: #ff6b81;
-            color: white;
-        }
-
-        .btn-delete:hover {
-            background-color: #e55060;
-        }
-
         .home-link {
             display: block;
             text-align: center;
@@ -102,21 +94,23 @@
         .home-link:hover {
             text-decoration: underline;
         }
-
-        h2 {
-            color: #c56cf0;
-            text-align: center;
-        }
     </style>
 </head>
 <body>
 
-<h1>📋 Thêm cầu thủ mới</h1>
+<!-- ✅ Tiêu đề tự động thay đổi -->
+<h1 th:text="${cauthu.ma == null} ? '📋 Thêm cầu thủ mới' : '📝 Sửa thông tin cầu thủ'"></h1>
 
 <div class="form-section">
     <form th:action="@{/cauthu/luu}" th:method="post" th:object="${cauthu}">
         <table>
-            <tr><td><label>Mã:</label></td><td><input type="text" th:field="*{ma}" required></td></tr>
+            <tr>
+                <td><label>Mã:</label></td>
+                <td>
+                    <input type="text" th:field="*{ma}" required
+                           th:readonly="${cauthu.ma != null}" />
+                </td>
+            </tr>
             <tr><td><label>Họ tên:</label></td><td><input type="text" th:field="*{hoTen}" required></td></tr>
             <tr><td><label>Vị trí:</label></td><td><input type="text" th:field="*{viTri}" required></td></tr>
             <tr><td><label>Số áo:</label></td><td><input type="number" th:field="*{soAo}" required></td></tr>
@@ -130,7 +124,10 @@
             <tr><td><label>Hết hạn HĐ:</label></td><td><input type="date" th:field="*{ngayHetHanHopDong}" required></td></tr>
             <tr>
                 <td colspan="2" style="text-align: center;">
-                    <button type="submit" class="btn-add">🌸 Thêm cầu thủ</button>
+                    <button type="submit"
+                            th:class="${cauthu.ma == null} ? 'btn-add' : 'btn-edit'"
+                            th:text="${cauthu.ma == null} ? '🌸 Thêm cầu thủ' : '📝 Cập nhật'">
+                    </button>
                 </td>
             </tr>
         </table>
@@ -139,40 +136,6 @@
 
 <a href="/" class="home-link">🏠 Về trang chủ</a>
 <a href="/cauthu" class="home-link">📋 Quay lại danh sách cầu thủ</a>
-
-<script>
-    function getSelectedMa() {
-        return document.getElementById("chonMa").value;
-    }
-
-    function suaCauThu() {
-        const ma = getSelectedMa();
-        if (ma) {
-            window.location.href = "/cauthu/sua/" + ma;
-        } else {
-            alert("📛 Vui lòng chọn mã cầu thủ để sửa.");
-        }
-    }
-
-    function xoaCauThu() {
-        const ma = getSelectedMa();
-        if (ma && confirm("❗ Bạn có chắc chắn muốn xoá cầu thủ mã " + ma + "?")) {
-            window.location.href = "/cauthu/xoa/" + ma;
-        } else if (!ma) {
-            alert("📛 Vui lòng chọn mã cầu thủ để xoá.");
-        }
-    }
-
-    function kiemTraMaTruocKhiSubmit() {
-        const ma = getSelectedMa();
-        if (!ma) {
-            alert("📛 Bạn phải chọn mã cầu thủ để cập nhật.");
-            return false; 
-        }
-        return true;
-    }
-</script>
-
 
 </body>
 </html>

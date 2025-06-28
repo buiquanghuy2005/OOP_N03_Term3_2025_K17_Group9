@@ -137,7 +137,14 @@
                 <th>📍 Vị trí</th>
                 <th>🔢 Số áo</th>
                 <th>🌍 Quốc tịch</th>
-                <th>⚙️ Hành động</th>
+                <th>Chiều cao</th>
+                <th>Cân nặng</th>
+                <th>Số bàn thắng</th>
+                <th>Số thẻ vàng</th>
+                <th>Số thẻ đỏ</th>
+                <th>Ngày sinh</th>
+                <th>Ngày hết hạn HĐ</th>
+                <th>Tuổi</th>
             </tr>
         </thead>
         <tbody>
@@ -147,10 +154,14 @@
                 <td th:text="${ct.viTri}"></td>
                 <td th:text="${ct.soAo}"></td>
                 <td th:text="${ct.quocTich}"></td>
-                <td class="actions">
-                    <a th:href="@{'/sua/' + ${ct.ma}}" title="Chỉnh sửa">✏️</a>
-                    <a th:href="@{'/xoa/' + ${ct.ma}}" title="Xóa" onclick="return confirm('Bạn có chắc chắn muốn xoá cầu thủ này không?')">❌</a>
-                </td>
+                <td th:text="${ct.chieuCao}"></td>
+                <td th:text="${ct.canNang}"></td>
+                <td th:text="${ct.soBanThang}"></td>
+                <td th:text="${ct.theVang}"></td>
+                <td th:text="${ct.theDo}"></td>
+                <td th:text="${#temporals.format(ct.ngaySinh, 'dd/MM/yyyy')}"></td>
+                <td th:text="${#temporals.format(ct.ngayHetHanHopDong, 'dd/MM/yyyy')}"></td>
+                <td th:text="${ct.tuoi}"></td>
             </tr>
         </tbody>
     </table>
