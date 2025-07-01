@@ -1,45 +1,58 @@
 package com.example.servingwebcontent.model;
-import java.util.ArrayList;
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "doibong")  // 👈 Quan trọng: map chính xác tên bảng trong MySQL
 public class DoiBong {
-    private String maDoi;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String tenDoi;
     private String sanNha;
-    private HuanLuyenVien huanLuyenVien;
-    private ArrayList<CauThu> danhSachCauThu;
-    public DoiBong(String maDoi, String tenDoi, String sanNha, HuanLuyenVien hlv) {
-        this.maDoi = maDoi;
-        this.tenDoi = tenDoi;
-        this.sanNha = sanNha;
-        this.huanLuyenVien = hlv;
-        this.danhSachCauThu = new ArrayList<>();
+    private String hlvTruong;
+    private int namThanhLap;
+
+    // Getters and Setters
+    public Long getId() {
+        return id;
     }
-    public String getMaDoi() {
-        return maDoi;
+
+    public void setId(Long id) {
+        this.id = id;
     }
+
     public String getTenDoi() {
         return tenDoi;
     }
+
+    public void setTenDoi(String tenDoi) {
+        this.tenDoi = tenDoi;
+    }
+
     public String getSanNha() {
         return sanNha;
     }
-    public HuanLuyenVien getHuanLuyenVien() {
-        return huanLuyenVien;
+
+    public void setSanNha(String sanNha) {
+        this.sanNha = sanNha;
     }
-    public ArrayList<CauThu> getDanhSachCauThu() {
-        return danhSachCauThu;
+
+    public String getHlvTruong() {
+        return hlvTruong;
     }
-    public void themCauThu(CauThu ct) {
-        danhSachCauThu.add(ct);
-        System.out.println("Đã thêm cầu thủ " + ct.getHoTen() + " vào đội " + tenDoi);
+
+    public void setHlvTruong(String hlvTruong) {
+        this.hlvTruong = hlvTruong;
     }
-    public void hienThiThongTinDoiBong() {
-        System.out.println("Mã đội: " + maDoi);
-        System.out.println("Tên đội: " + tenDoi);
-        System.out.println("Sân nhà: " + sanNha);
-        System.out.println("Huấn luyện viên: " + huanLuyenVien.getHoTen());
-        System.out.println("Danh sách cầu thủ:");
-        for (CauThu ct : danhSachCauThu) {
-            System.out.println("- " + ct.getHoTen() + " | Số áo: " + ct.getSoAo() + " | Vị trí: " + ct.getViTri());
-        }
+
+    public int getNamThanhLap() {
+        return namThanhLap;
+    }
+
+    public void setNamThanhLap(int namThanhLap) {
+        this.namThanhLap = namThanhLap;
     }
 }

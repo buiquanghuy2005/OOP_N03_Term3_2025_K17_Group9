@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>🌸 Giới Thiệu Đội Bóng</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap');
+
+        body {
+            background: linear-gradient(to right, #ffe6f0, #fff0f5);
+            font-family: 'Quicksand', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background: #ffffff;
+            padding: 40px 30px;
+            border-radius: 24px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 90%;
+            max-width: 500px;
+        }
+
+        h2 {
+            color: #d63384;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 18px;
+            color: #444;
+            margin: 10px 0;
+        }
+
+        .label {
+            font-weight: bold;
+            color: #cc0066;
+        }
+
+        .error {
+            font-size: 18px;
+            color: #ff4d4d;
+            margin-top: 20px;
+        }
+
+        .icon {
+            font-size: 30px;
+            display: block;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div th:if="${doiBong != null}" class="container">
+    <h2 th:text="${doiBong.tenDoi}">Tên đội</h2>
+    <p><span class="label">🏟️ Sân nhà:</span> <span th:text="${doiBong.sanNha}">Sân</span></p>
+    <p><span class="label">🧑‍🏫 HLV trưởng:</span> <span th:text="${doiBong.hlvTruong}">HLV</span></p>
+    <p><span class="label">📅 Năm thành lập:</span> <span th:text="${doiBong.namThanhLap}">2025</span></p>
+</div>
+
+<div th:if="${doiBong == null}" class="container error">
+    <span class="icon">⚠️</span>
+    <p>Chưa có thông tin đội bóng trong hệ thống!</p>
+</div>
+
+</body>
+</html>
