@@ -16,9 +16,15 @@
             margin-bottom: 20px;
         }
 
-        .add-btn {
-            display: inline-block;
+        .toolbar {
+            display: flex;
+            align-items: center;
+            gap: 15px;
             margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .add-btn {
             background-color: #ff85a1;
             color: white;
             padding: 10px 18px;
@@ -31,6 +37,12 @@
 
         .add-btn:hover {
             background-color: #ff6f91;
+        }
+
+        select {
+            padding: 8px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
         }
 
         table {
@@ -108,24 +120,47 @@
     </style>
 </head>
 <body>
-
 <h2>📒 Danh sách trận đấu</h2>
+<div class="toolbar">
+    <a href="/trandau/them" class="add-btn">➕ Thêm trận đấu</a>
 
-<a href="/trandau/them" class="add-btn">➕ Thêm trận đấu</a>
+    <form th:action="@{/trandau/sua}" method="get">
+        <select name="id" required>
+            <option disabled selected>-- Chọn trận cần sửa --</option>
+            <option th:each="t : ${dsTranDau}" 
+                    th:value="${t.id}" 
+                    th:text="${t.doiNha + ' vs ' + t.doiKhach + ' - ' + t.ngayThiDau}">
+            </option>
+        </select>
+        <button type="submit" class="btn btn-edit">Sửa</button>
+    </form>
 
+    <form th:action="@{/trandau/xoa}" method="post" 
+          onsubmit="return confirm('Bạn có chắc chắn muốn xoá trận đấu này không?');">
+        <select name="id" required>
+            <option disabled selected>-- Chọn trận cần xóa --</option>
+            <option th:each="t : ${dsTranDau}" 
+                    th:value="${t.id}" 
+                    th:text="${t.doiNha + ' vs ' + t.doiKhach + ' - ' + t.ngayThiDau}">
+            </option>
+        </select>
+        <button type="submit" class="btn btn-delete">Xóa</button>
+    </form>
+    <a href="/" class="btn btn-home">🏠 Về trang chủ</a>
+
+</div>
 <table>
     <thead>
         <tr>
-            <th> Đội Nhà</th>
-            <th> Bàn Thắng Nhà</th>
-            <th> Đội Khách</th>
-            <th> Bàn Thắng Khách</th>
-            <th> Ngày Thi Đấu</th>
-            <th> Sân Vận Động</th>
-            <th> Vòng Đấu</th>
-            <th> Giải Đấu</th>
-            <th> Ghi Chú</th>
-            <th> Hành động</th>
+            <th>Đội Nhà</th>
+            <th>Bàn Thắng Nhà</th>
+            <th>Đội Khách</th>
+            <th>Bàn Thắng Khách</th>
+            <th>Ngày Thi Đấu</th>
+            <th>Sân Vận Động</th>
+            <th>Vòng Đấu</th>
+            <th>Giải Đấu</th>
+            <th>Ghi Chú</th>
         </tr>
     </thead>
     <tbody>
@@ -139,14 +174,9 @@
             <td th:text="${trandau.vongDau}"></td>
             <td th:text="${trandau.giaiDau}"></td>
             <td th:text="${trandau.ghiChu}"></td>
-            <td>
-                <a th:href="@{'/trandau/sua/' + ${trandau.id}}" class="btn btn-edit">✏️ Sửa</a>
-                <a th:href="@{'/trandau/xoa/' + ${trandau.id}}" class="btn btn-delete" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">🗑️ Xóa</a>
-            </td>
         </tr>
     </tbody>
 </table>
 
-<a href="/" class="home-link">🏠 Về trang chủ</a>
 </body>
 </html>

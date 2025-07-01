@@ -63,7 +63,7 @@ public class CauThuController {
             danhSach.getDanhSach().remove(daCo);
         }
         danhSach.themCauThu(ct);
-        return "redirect:https://expert-space-invention-97r7pxwrjvqcxg55-8080.app.github.dev/cauthu";
+        return "redirect:/cauthu";
 
     }
 
@@ -87,7 +87,7 @@ public class CauThuController {
     @GetMapping("/cauthu/xoa/{ma}")
     public String xoa(@PathVariable String ma) {
         danhSach.xoaCauThu(ma);
-        return "redirect:https://expert-space-invention-97r7pxwrjvqcxg55-8080.app.github.dev/cauthu";
+        return "redirect:/cauthu";
     }
 
     @ExceptionHandler(Exception.class)

@@ -24,9 +24,11 @@ public class TranDauController {
 
     @PostMapping("/luu")
     public String luuTranDau(@ModelAttribute("trandau") TranDau tranDau) {
+        tranDau.setDoiNha("FC Mặc Định"); // Đảm bảo luôn đúng tên đội nhà
         tranDauService.saveTranDau(tranDau);
         return "redirect:/trandau";
     }
+
 
     @GetMapping("/sua/{id}")
     public String suaTranDau(@PathVariable Long id, Model model) {
@@ -41,9 +43,12 @@ public class TranDauController {
 
     @GetMapping("/them")
     public String hienThiFormThem(Model model) {
-        model.addAttribute("trandau", new TranDau()); 
+        TranDau tranDau = new TranDau();
+        tranDau.setDoiNha("FC Mặc Định"); // Đặt tên mặc định
+        model.addAttribute("trandau", tranDau);
         return "formtd";
     }
+
 
     @GetMapping("/xoa/{id}")
     public String xoaTranDau(@PathVariable Long id) {

@@ -105,14 +105,15 @@
         }
 
         .global-actions {
-            margin-top: 30px;
+            margin-top: 15px;
             display: flex;
             flex-wrap: wrap;
             gap: 12px;
             align-items: center;
         }
 
-        .global-actions input, .global-actions select {
+        .global-actions input,
+        .global-actions select {
             padding: 10px 12px;
             border-radius: 12px;
             border: 1px solid #ccc;
@@ -140,6 +141,19 @@
 
         .btn-delete:hover {
             background-color: #e55050;
+        }
+
+        .home-link {
+            display: block;
+            text-align: center;
+            margin-top: 30px;
+            text-decoration: none;
+            color: #6c757d;
+            font-weight: bold;
+        }
+
+        .home-link:hover {
+            text-decoration: underline;
         }
 
         hr {
@@ -180,8 +194,24 @@
     <button type="submit">🔎 Tìm kiếm</button>
 </form>
 
+<!-- Các nút thao tác sửa/xoá -->
+<div class="global-actions">
+    <label for="inputMa"><strong>🔢 Nhập mã cầu thủ:</strong></label>
+    <input type="text" id="inputMa" placeholder="VD: CT001">
+
+    <span><strong>✨ hoặc chọn:</strong></span>
+    <select id="playerSelect">
+        <option disabled selected>-- Chọn mã cầu thủ --</option>
+        <option th:each="ct : ${danhSach}" th:value="${ct.ma}" th:text="${ct.ma}"></option>
+    </select>
+
+    <a href="#" class="btn-edit" onclick="editPlayer()">✏️ Sửa</a>
+    <a href="#" class="btn-delete" onclick="deletePlayer()">❌ Xoá</a>
+</div>
+
 <hr>
 
+<a href="/" class="home-link">🏠 Về trang chủ</a>
 <!-- Table hiển thị danh sách cầu thủ -->
 <div class="table-wrapper">
     <table>
@@ -225,21 +255,6 @@
     </table>
 </div>
 
-<!-- Hành động sửa / xoá: nhập hoặc chọn mã cầu thủ -->
-<div class="global-actions">
-    <label for="inputMa"><strong>🔢 Nhập mã cầu thủ:</strong></label>
-    <input type="text" id="inputMa" placeholder="VD: CT001">
-
-    <span><strong>✨ hoặc chọn:</strong></span>
-    <select id="playerSelect">
-        <option disabled selected>-- Chọn mã cầu thủ --</option>
-        <option th:each="ct : ${danhSach}" th:value="${ct.ma}" th:text="${ct.ma}"></option>
-    </select>
-
-    <a href="#" class="btn-edit" onclick="editPlayer()">✏️ Sửa</a>
-    <a href="#" class="btn-delete" onclick="deletePlayer()">❌ Xoá</a>
-</div>
-
 <script>
     function getMaCauThu() {
         const inputMa = document.getElementById("inputMa").value.trim();
@@ -265,6 +280,6 @@
         }
     }
 </script>
-<a href="/" class="home-link">🏠 Về trang chủ</a>
+
 </body>
 </html>
