@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thống kê đội bóng</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f0f9ff;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 0 10px #ccc;
+        }
+
+        h2, h3 {
+            text-align: center;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        ul li {
+            padding: 5px 0;
+        }
+
+        .chart {
+            margin-top: 30px;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .chart-box {
+            flex: 1;
+            min-width: 300px;
+            padding: 20px;
+        }
+
+        .small-chart-box {
+            width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Thống kê đội bóng</h2>
+
+    <h3>Số liệu tổng quan</h3>
+    <ul>
+        <li><strong>Số cầu thủ:</strong> <span th:text="${thongKe.tongSoCauThu}">0</span></li>
+        <li><strong>Tuổi trung bình:</strong> <span th:text="${thongKe.tuoiTrungBinh}">0</span></li>
+        <li><strong>Tổng số bàn thắng:</strong> <span th:text="${thongKe.tongSoBanThang}">0</span></li>
+        <li><strong>Tổng thẻ vàng:</strong> <span th:text="${thongKe.tongTheVang}">0</span></li>
+        <li><strong>Tổng thẻ đỏ:</strong> <span th:text="${thongKe.tongTheDo}">0</span></li>
+        <li><strong>Tỷ lệ thắng:</strong> <span th:text="${thongKe.tiLeThang}">0</span>%</li>
+        <li><strong>Cầu thủ ghi bàn nhiều nhất:</strong> <span th:text="${thongKe.cauThuGhiBanNhieuNhat.hoTen}">N/A</span></li>
+        <li><strong>Cầu thủ lớn tuổi nhất:</strong> <span th:text="${thongKe.cauThuLonTuoiNhat.hoTen}">N/A</span></li>
+        <li><strong>Cầu thủ cao nhất:</strong> <span th:text="${thongKe.cauThuCaoNhat.hoTen}">N/A</span></li>
+    </ul>
+
+    <div class="row chart">
+        <div class="chart-box">
+            <h3>Biểu đồ số cầu thủ theo vị trí</h3>
+            <canvas id="barChartViTri"></canvas>
+        </div>
+
+        <div class="chart-box">
+            <h3>Biểu đồ số cầu thủ theo quốc tịch</h3>
+            <canvas id="pieChartQuocTich"></canvas>
+        </div>
+    </div>
+
+    <div class="small-chart-box">
+        <h3>Tỷ lệ Thắng – Hòa – Thua</h3>
+        <canvas id="chartKetQua"></canvas>
+    </div>
+</div>
+
+<script th:inline="javascript">
+    let viTriLabels = /*[[${viTriData.keySet()}]]*/ [];
+    let viTriCounts = /*[[${viTriData.values()}]]*/ [];
+
+    let quocTichLabels = /*[[${quocTichData.keySet()}]]*/ [];
+    let quocTichCounts = /*[[${quocTichData.values()}]]*/ [];
+
+    let ketQuaLabels = /*[[${ketQuaData.keySet()}]]*/ [];
+    let ketQuaValues = /*[[${ketQuaData.values()}]]*/ [];
+
+    new Chart(document.getElementById('barChartViTri'), {
+        type: 'bar',
+        data: {
+            labels: viTriLabels,
+            datasets: [{
+                label: 'Số cầu thủ',
+                data: viTriCounts,
+                backgroundColor: 'rgba(54, 162, 235, 0.7)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: false },
+                title: { display: true, text: 'Vị trí cầu thủ' }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: { stepSize: 1 }
+                }
+            }
+        }
+    });
+
+    new Chart(document.getElementById('pieChartQuocTich'), {
+        type: 'pie',
+        data: {
+            labels: quocTichLabels,
+            datasets: [{
+                label: 'Số cầu thủ',
+                data: quocTichCounts,
+                backgroundColor: [
+                    '#f44336', '#2196f3', '#4caf50', '#ff9800',
+                    '#9c27b0', '#3f51b5', '#00bcd4', '#e91e63'
+                ]
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                title: { display: true, text: 'Tỷ lệ cầu thủ theo quốc tịch' }
+            }
+        }
+    });
+
+    new Chart(document.getElementById('chartKetQua'), {
+        type: 'doughnut',
+        data: {
+            labels: ketQuaLabels,
+            datasets: [{
+                data: ketQuaValues,
+                backgroundColor: ['#4caf50', '#ffeb3b', '#f44336'],
+                borderColor: '#fff',
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Tỷ lệ kết quả trận đấu (Thắng – Hòa – Thua)'
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function (context) {
+                            return context.label + ': ' + context.parsed + ' trận';
+                        }
+                    }
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>

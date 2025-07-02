@@ -64,7 +64,6 @@ public class CauThuController {
         }
         danhSach.themCauThu(ct);
         return "redirect:/cauthu";
-
     }
 
     @GetMapping("/cauthu/sua/{ma}")
@@ -77,7 +76,7 @@ public class CauThuController {
         if (ct == null) {
             model.addAttribute("danhSach", danhSach.getDanhSach());
             model.addAttribute("loi", "Không tìm thấy cầu thủ có mã: " + ma);
-            return "danhsach"; // quay về danh sách kèm lỗi
+            return "danhsach";
         }
 
         model.addAttribute("cauthu", ct);

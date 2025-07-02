@@ -17,20 +17,6 @@
             color: #ff6f91;
         }
 
-        h1::before {
-            content: "⚽ ";
-        }
-
-        a {
-            text-decoration: none;
-            color: #ff6f91;
-            font-weight: 600;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
         .btn-main {
             display: inline-block;
             background-color: #ff6f91;
@@ -63,47 +49,6 @@
             cursor: pointer;
         }
 
-        button:hover {
-            background-color: #6fc2a5;
-        }
-
-        .table-wrapper {
-            overflow-x: auto;
-            margin-top: 20px;
-        }
-
-        table {
-            min-width: 1200px;
-            border-collapse: collapse;
-            width: 100%;
-            background-color: white;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            border-radius: 12px;
-            overflow: hidden;
-        }
-
-        th, td {
-            padding: 14px 12px;
-            text-align: left;
-            border-bottom: 1px solid #f1f1f1;
-            white-space: nowrap;
-            font-size: 15px;
-        }
-
-        th {
-            background-color: #fcbad3;
-            color: #fff;
-        }
-
-        tr:hover {
-            background-color: #fff0f5;
-        }
-
-        td:nth-child(8), th:nth-child(8),
-        td:last-child, th:last-child {
-            text-align: center;
-        }
-
         .global-actions {
             margin-top: 15px;
             display: flex;
@@ -112,68 +57,83 @@
             align-items: center;
         }
 
-        .global-actions input,
-        .global-actions select {
-            padding: 10px 12px;
-            border-radius: 12px;
-            border: 1px solid #ccc;
-        }
-
-        .global-actions a {
-            padding: 10px 16px;
-            border-radius: 20px;
-            font-size: 14px;
-            color: white;
-            text-align: center;
-        }
-
         .btn-edit {
             background-color: #6c5ce7;
-        }
-
-        .btn-edit:hover {
-            background-color: #5a4ccf;
+            color: white;
+            padding: 10px 16px;
+            border-radius: 20px;
         }
 
         .btn-delete {
             background-color: #ff7675;
+            color: white;
+            padding: 10px 16px;
+            border-radius: 20px;
         }
 
-        .btn-delete:hover {
-            background-color: #e55050;
+        .table-wrapper {
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border-radius: 12px;
+            overflow: hidden;
+            background: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        th, td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #eee;
+            white-space: nowrap;
+            font-size: 15px;
+        }
+
+        th {
+            background-color: #fcbad3;
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #fff0f5;
+        }
+
+        /* POPUP */
+        #popupXoa {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.4);
+            z-index: 999;
+        }
+
+        #popupXoa .popup-inner {
+            background: white;
+            width: 400px;
+            margin: 12% auto;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        #popupXoa button {
+            margin: 10px;
+            padding: 8px 20px;
+        }
+
+        .btn-cancel {
+            background-color: #ccc;
         }
 
         .home-link {
             display: block;
-            text-align: center;
             margin-top: 30px;
-            text-decoration: none;
-            color: #6c757d;
-            font-weight: bold;
-        }
-
-        .home-link:hover {
-            text-decoration: underline;
-        }
-
-        hr {
-            margin: 25px 0;
-            border-top: 1px dashed #ff6f91;
-        }
-
-        @media (max-width: 768px) {
-            table {
-                font-size: 13px;
-            }
-
-            th, td {
-                padding: 10px 5px;
-            }
-
-            .global-actions {
-                flex-direction: column;
-                align-items: flex-start;
-            }
+            text-align: center;
         }
     </style>
 </head>
@@ -194,25 +154,17 @@
     <button type="submit">🔎 Tìm kiếm</button>
 </form>
 
-<!-- Các nút thao tác sửa/xoá -->
 <div class="global-actions">
-    <label for="inputMa"><strong>🔢 Nhập mã cầu thủ:</strong></label>
+    <label><strong>🔢 Mã cầu thủ:</strong></label>
     <input type="text" id="inputMa" placeholder="VD: CT001">
-
-    <span><strong>✨ hoặc chọn:</strong></span>
     <select id="playerSelect">
         <option disabled selected>-- Chọn mã cầu thủ --</option>
         <option th:each="ct : ${danhSach}" th:value="${ct.ma}" th:text="${ct.ma}"></option>
     </select>
-
     <a href="#" class="btn-edit" onclick="editPlayer()">✏️ Sửa</a>
     <a href="#" class="btn-delete" onclick="deletePlayer()">❌ Xoá</a>
 </div>
 
-<hr>
-
-<a href="/" class="home-link">🏠 Về trang chủ</a>
-<!-- Table hiển thị danh sách cầu thủ -->
 <div class="table-wrapper">
     <table>
         <thead>
@@ -224,11 +176,11 @@
             <th>Quốc tịch</th>
             <th>Chiều cao</th>
             <th>Cân nặng</th>
-            <th>Số bàn thắng</th>
-            <th>Số thẻ vàng</th>
-            <th>Số thẻ đỏ</th>
+            <th>Số bàn</th>
+            <th>Thẻ vàng</th>
+            <th>Thẻ đỏ</th>
             <th>Ngày sinh</th>
-            <th>Ngày hết hạn HĐ</th>
+            <th>Hết HĐ</th>
             <th>Tuổi</th>
         </tr>
         </thead>
@@ -255,11 +207,24 @@
     </table>
 </div>
 
+<a href="/" class="home-link">🏠 Về trang chủ</a>
+
+<!-- Popup xác nhận xoá -->
+<div id="popupXoa">
+    <div class="popup-inner">
+        <p id="popupXoaMessage">Bạn có chắc chắn muốn xoá cầu thủ này?</p>
+        <form id="popupFormXoa" method="get">
+            <button type="submit" class="btn-delete">❌ Xác nhận xoá</button>
+            <button type="button" class="btn-cancel" onclick="dongPopup()">Huỷ</button>
+        </form>
+    </div>
+</div>
+
 <script>
     function getMaCauThu() {
-        const inputMa = document.getElementById("inputMa").value.trim();
-        const selectMa = document.getElementById("playerSelect").value;
-        return inputMa !== "" ? inputMa : selectMa;
+        const input = document.getElementById("inputMa").value.trim();
+        const select = document.getElementById("playerSelect").value;
+        return input !== "" ? input : select;
     }
 
     function editPlayer() {
@@ -273,11 +238,17 @@
 
     function deletePlayer() {
         const ma = getMaCauThu();
-        if (ma && confirm("⚠️ Bạn có chắc chắn muốn xoá cầu thủ mã " + ma + "?")) {
-            window.location.href = '/cauthu/xoa/' + ma;
-        } else if (!ma) {
+        if (ma) {
+            document.getElementById("popupXoa").style.display = "block";
+            document.getElementById("popupFormXoa").action = '/cauthu/xoa/' + ma;
+            document.getElementById("popupXoaMessage").innerText = "⚠️ Bạn có chắc chắn muốn xoá cầu thủ mã " + ma + "?";
+        } else {
             alert("Vui lòng nhập hoặc chọn mã cầu thủ để xoá.");
         }
+    }
+
+    function dongPopup() {
+        document.getElementById("popupXoa").style.display = "none";
     }
 </script>
 

@@ -1,104 +1,101 @@
 package com.example.servingwebcontent.model;
 
-import java.util.*;
-
 public class ThongKe {
+    private int tongSoCauThu;
+    private double tuoiTrungBinh;
+    private int tongSoBanThang;
+    private int tongTheVang;
+    private int tongTheDo;
+    private double tiLeThang; // Thêm tỷ lệ thắng
+    private CauThu cauThuGhiBanNhieuNhat;
+    private CauThu cauThuLonTuoiNhat;
+    private CauThu cauThuCaoNhat;
 
-    public static int tongSoCauThu(List<CauThu> danhSach) {
-        return danhSach.size();
+    public ThongKe() {
     }
 
-    public static double tuoiTrungBinh(List<CauThu> danhSach) {
-        if (danhSach.isEmpty()) return 0;
-        int tong = 0;
-        for (CauThu ct : danhSach) {
-            tong += ct.getTuoi();
-        }
-        return (double) tong / danhSach.size();
+    public ThongKe(int tongSoCauThu, double tuoiTrungBinh, int tongSoBanThang, int tongTheVang, int tongTheDo,
+                   double tiLeThang, CauThu cauThuGhiBanNhieuNhat, CauThu cauThuLonTuoiNhat, CauThu cauThuCaoNhat) {
+        this.tongSoCauThu = tongSoCauThu;
+        this.tuoiTrungBinh = tuoiTrungBinh;
+        this.tongSoBanThang = tongSoBanThang;
+        this.tongTheVang = tongTheVang;
+        this.tongTheDo = tongTheDo;
+        this.tiLeThang = tiLeThang;
+        this.cauThuGhiBanNhieuNhat = cauThuGhiBanNhieuNhat;
+        this.cauThuLonTuoiNhat = cauThuLonTuoiNhat;
+        this.cauThuCaoNhat = cauThuCaoNhat;
     }
 
-    public static int tongSoBanThang(List<CauThu> danhSach) {
-        int tong = 0;
-        for (CauThu ct : danhSach) {
-            tong += ct.getSoBanThang();
-        }
-        return tong;
+    public int getTongSoCauThu() {
+        return tongSoCauThu;
     }
 
-    public static int tongTheVang(List<CauThu> danhSach) {
-        int tong = 0;
-        for (CauThu ct : danhSach) {
-            tong += ct.getTheVang();
-        }
-        return tong;
+    public void setTongSoCauThu(int tongSoCauThu) {
+        this.tongSoCauThu = tongSoCauThu;
     }
 
-    public static int tongTheDo(List<CauThu> danhSach) {
-        int tong = 0;
-        for (CauThu ct : danhSach) {
-            tong += ct.getTheDo();
-        }
-        return tong;
+    public double getTuoiTrungBinh() {
+        return tuoiTrungBinh;
     }
 
-    public static CauThu cauThuGhiBanNhieuNhat(List<CauThu> danhSach) {
-        if (danhSach.isEmpty()) return null;
-
-        CauThu max = danhSach.get(0);
-        for (CauThu ct : danhSach) {
-            if (ct.getSoBanThang() > max.getSoBanThang()) {
-                max = ct;
-            }
-        }
-        return max;
+    public void setTuoiTrungBinh(double tuoiTrungBinh) {
+        this.tuoiTrungBinh = tuoiTrungBinh;
     }
 
-    public static CauThu cauThuLonTuoiNhat(List<CauThu> danhSach) {
-        if (danhSach.isEmpty()) return null;
-
-        CauThu max = danhSach.get(0);
-        for (CauThu ct : danhSach) {
-            if (ct.getTuoi() > max.getTuoi()) {
-                max = ct;
-            }
-        }
-        return max;
+    public int getTongSoBanThang() {
+        return tongSoBanThang;
     }
 
-    public static CauThu cauThuCaoNhat(List<CauThu> danhSach) {
-        CauThu caoNhat = null;
-        double maxChieuCao = -1;
-
-        for (CauThu ct : danhSach) {
-            try {
-                double chieuCao = Double.parseDouble(ct.getChieuCao());
-                if (chieuCao > maxChieuCao) {
-                    maxChieuCao = chieuCao;
-                    caoNhat = ct;
-                }
-            } catch (NumberFormatException e) {
-                // Bỏ qua nếu chiều cao không hợp lệ
-            }
-        }
-
-        return caoNhat;
+    public void setTongSoBanThang(int tongSoBanThang) {
+        this.tongSoBanThang = tongSoBanThang;
     }
 
-    public static Map<String, Integer> thongKeTheoViTri(List<CauThu> danhSach) {
-        Map<String, Integer> ketQua = new HashMap<>();
-        for (CauThu ct : danhSach) {
-            String viTri = ct.getViTri();
-            ketQua.put(viTri, ketQua.getOrDefault(viTri, 0) + 1);
-        }
-        return ketQua;
+    public int getTongTheVang() {
+        return tongTheVang;
     }
 
-    public static Map<String, Integer> thongKeTheoQuocTich(List<CauThu> danhSach) {
-        Map<String, Integer> ketQua = new HashMap<>();
-        for (CauThu ct : danhSach) {
-            String qt = ct.getQuocTich();
-            ketQua.put(qt, ketQua.getOrDefault(qt, 0) + 1);
-        }
-        return ketQua;
+    public void setTongTheVang(int tongTheVang) {
+        this.tongTheVang = tongTheVang;
+    }
+
+    public int getTongTheDo() {
+        return tongTheDo;
+    }
+
+    public void setTongTheDo(int tongTheDo) {
+        this.tongTheDo = tongTheDo;
+    }
+
+    public double getTiLeThang() {
+        return tiLeThang;
+    }
+
+    public void setTiLeThang(double tiLeThang) {
+        this.tiLeThang = tiLeThang;
+    }
+
+    public CauThu getCauThuGhiBanNhieuNhat() {
+        return cauThuGhiBanNhieuNhat;
+    }
+
+    public void setCauThuGhiBanNhieuNhat(CauThu cauThuGhiBanNhieuNhat) {
+        this.cauThuGhiBanNhieuNhat = cauThuGhiBanNhieuNhat;
+    }
+
+    public CauThu getCauThuLonTuoiNhat() {
+        return cauThuLonTuoiNhat;
+    }
+
+    public void setCauThuLonTuoiNhat(CauThu cauThuLonTuoiNhat) {
+        this.cauThuLonTuoiNhat = cauThuLonTuoiNhat;
+    }
+
+    public CauThu getCauThuCaoNhat() {
+        return cauThuCaoNhat;
+    }
+
+    public void setCauThuCaoNhat(CauThu cauThuCaoNhat) {
+        this.cauThuCaoNhat = cauThuCaoNhat;
     }
 }

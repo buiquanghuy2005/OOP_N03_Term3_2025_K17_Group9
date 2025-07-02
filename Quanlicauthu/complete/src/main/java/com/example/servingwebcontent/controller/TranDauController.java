@@ -16,19 +16,27 @@ public class TranDauController {
     @Autowired
     private TranDauService tranDauService;
 
+    // Hiển thị danh sách trận đấu
     @GetMapping
     public String danhSachTranDau(Model model) {
         model.addAttribute("dsTranDau", tranDauService.getAllTranDau());
         return "danhsachtd";
     }
 
+    @GetMapping("/them")
+    public String hienThiFormThem(Model model) {
+        TranDau tranDau = new TranDau();
+        tranDau.setDoiNha("FC Mặc Định"); 
+        model.addAttribute("trandau", tranDau);
+        return "formtd";
+    }
+
     @PostMapping("/luu")
     public String luuTranDau(@ModelAttribute("trandau") TranDau tranDau) {
-        tranDau.setDoiNha("FC Mặc Định"); // Đảm bảo luôn đúng tên đội nhà
+        tranDau.setDoiNha("FC Mặc Định"); 
         tranDauService.saveTranDau(tranDau);
         return "redirect:/trandau";
     }
-
 
     @GetMapping("/sua/{id}")
     public String suaTranDau(@PathVariable Long id, Model model) {
@@ -36,22 +44,23 @@ public class TranDauController {
         if (td.isPresent()) {
             model.addAttribute("trandau", td.get());
             return "formtd";
-        } else {
-            return "redirect:/trandau";
         }
+        return "redirect:/trandau";
     }
 
-    @GetMapping("/them")
-    public String hienThiFormThem(Model model) {
-        TranDau tranDau = new TranDau();
-        tranDau.setDoiNha("FC Mặc Định"); // Đặt tên mặc định
-        model.addAttribute("trandau", tranDau);
-        return "formtd";
+    @GetMapping("/sua")
+    public String suaTranDauTuDropdown(@RequestParam("id") Long id, Model model) {
+        return suaTranDau(id, model);
     }
-
 
     @GetMapping("/xoa/{id}")
-    public String xoaTranDau(@PathVariable Long id) {
+    public String xoaTranDauGet(@PathVariable Long id) {
+        tranDauService.deleteTranDauById(id);
+        return "redirect:/trandau";
+    }
+
+    @PostMapping("/xoa")
+    public String xoaTranDauPost(@RequestParam Long id) {
         tranDauService.deleteTranDauById(id);
         return "redirect:/trandau";
     }
