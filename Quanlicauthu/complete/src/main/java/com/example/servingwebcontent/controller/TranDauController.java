@@ -1,7 +1,8 @@
 package com.example.servingwebcontent.controller;
 
-import com.example.servingwebcontent.model.TranDau;
 import com.example.servingwebcontent.manager.TranDauService;
+import com.example.servingwebcontent.model.TranDau;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

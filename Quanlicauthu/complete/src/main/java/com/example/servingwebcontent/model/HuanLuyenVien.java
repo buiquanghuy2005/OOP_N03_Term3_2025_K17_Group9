@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 public class HuanLuyenVien {
 
     @Id
-    private int id;  // Tự gán ID thủ công
+    private int id;  
 
     @Column(name = "ten", nullable = false)
     private String ten;

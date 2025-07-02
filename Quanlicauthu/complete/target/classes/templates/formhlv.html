@@ -106,13 +106,11 @@
     <h1 th:text="${hlv.id == 0} ? '➕ Thêm Huấn Luyện Viên' : '📝 Cập nhật Huấn Luyện Viên'">Form Huấn Luyện Viên</h1>
 
     <form th:action="@{/hlv/luu}" th:object="${hlv}" method="post">
-        <!-- Thêm trường ID nếu là thêm mới -->
         <div class="form-group" th:if="${hlv.id == 0}">
             <label>Mã ID:</label>
             <input type="number" th:field="*{id}" required min="1" />
         </div>
 
-        <!-- Nếu sửa thì giữ id ẩn -->
         <input type="hidden" th:if="${hlv.id != 0}" th:field="*{id}" />
 
         <div class="form-group">

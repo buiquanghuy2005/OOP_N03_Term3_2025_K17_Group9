@@ -1,11 +1,12 @@
 package com.example.servingwebcontent.controller;
 
+import com.example.servingwebcontent.manager.ThongKeService;
 import com.example.servingwebcontent.model.CauThu;
 import com.example.servingwebcontent.model.ThongKe;
 import com.example.servingwebcontent.model.TranDau;
 import com.example.servingwebcontent.repository.CauThuRepository;
 import com.example.servingwebcontent.repository.TranDauRepository;
-import com.example.servingwebcontent.manager.ThongKeService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

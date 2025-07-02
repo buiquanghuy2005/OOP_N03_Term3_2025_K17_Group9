@@ -6,8 +6,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.example.servingwebcontent.controller.CauThuController;
-import com.example.servingwebcontent.model.CauThu;
 import com.example.servingwebcontent.manager.CauThuService;
+import com.example.servingwebcontent.model.CauThu;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
