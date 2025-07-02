@@ -1,159 +1,107 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Giới Thiệu đội bóng</title>
+    <title>Thông tin đội bóng</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap');
-
         body {
             font-family: 'Quicksand', sans-serif;
-            background: #0d1b2a;
-            color: #fff;
+            background: linear-gradient(to right, #fde7ef, #ffc0cb);
+            color: #4a001f;
             margin: 0;
             padding: 0;
         }
 
         .container {
-            width: 90%;
-            max-width: 1000px;
-            margin: auto;
-            padding: 40px 0;
-        }
-
-        h1 {
-            text-align: center;
-            color: #ffcc00;
-            font-size: 36px;
-            margin-bottom: 10px;
-        }
-
-        .slogan {
-            text-align: center;
-            font-style: italic;
-            color: #dddddd;
-            margin-bottom: 30px;
+            width: 50%;
+            margin: 0 auto;
         }
 
         .section {
-            background: #1b263b;
+            background: #ffebf4;
             border-radius: 12px;
             padding: 20px 30px;
             margin-bottom: 30px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 12px rgba(255, 105, 180, 0.3);
         }
 
-        .section h2 {
-            color: #f8d210;
-            border-bottom: 1px solid #f8d210;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
+        h1 {
+            color: #e60073;
         }
 
-        .info p {
-            margin: 10px 0;
-        }
-
-        .stars {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .star-card {
-            background: #415a77;
-            flex: 1;
-            min-width: 200px;
-            border-radius: 12px;
-            padding: 15px;
-            text-align: center;
-        }
-
-        .star-card img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 10px;
+        h2 {
+            color: #e60073;
+            border-bottom: 2px solid #e60073;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
         }
 
         .footer {
-            background: #1b263b;
-            color: #ccc;
             text-align: center;
             padding: 20px;
             font-size: 14px;
+            color: #b30059;
         }
 
         a {
-            color: #00c4ff;
+            color: #cc007a;
             text-decoration: none;
         }
 
         a:hover {
             text-decoration: underline;
         }
-
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>FC Song Châu</h1>
-    <div class="slogan">"Tỏa sáng đam mê - Khát khao chiến thắng"</div>
+    <!-- Tên đội và khẩu hiệu -->
+    <div class="section" style="text-align: center;">
+        <h1 th:text="${doiBong.tenDoi}">[Tên đội]</h1>
+        <p><em>Tỏa sáng đam mê - Khát khao chiến thắng</em></p>
+    </div>
 
+    <!-- Giới thiệu tổng quan -->
     <div class="section">
         <h2>Giới thiệu tổng quan</h2>
-        <p>FC Song Châu là một câu lạc bộ bóng đá với tinh thần chiến đấu mạnh mẽ, luôn hướng tới sự chuyên nghiệp và hiệu quả trong từng trận đấu.</p>
+        <p>
+            <span th:text="${doiBong.tenDoi}">FC [Tên đội]</span> là một câu lạc bộ bóng đá với tinh thần chiến đấu mạnh mẽ, 
+            luôn hướng tới sự chuyên nghiệp và hiệu quả trong từng trận đấu.
+        </p>
+
     </div>
 
+    <!-- Thông tin cơ bản -->
     <div class="section">
         <h2>Thông tin cơ bản</h2>
-        <div class="info">
-            <p><strong>🏟️ Sân nhà:</strong> Sân vận động ABC</p>
-            <p><strong>👨‍🏫 HLV trưởng:</strong> Nguyễn Văn A</p>
-            <p><strong>📅 Năm thành lập:</strong> 2025</p>
-            <p><strong>🎨 Màu áo truyền thống:</strong> Xanh dương - Trắng</p>
-        </div>
+        <p><strong>🏟️ Sân nhà:</strong> <span th:text="${doiBong.sanNha}">Sân ABC</span></p>
+        <p><strong>👨‍🏫 HLV trưởng:</strong> <span th:text="${doiBong.hlvTruong}">Nguyễn Văn A</span></p>
+        <p><strong>📅 Năm thành lập:</strong> <span th:text="${doiBong.namThanhLap}">2025</span></p>
+        <p><strong>🎨 Màu áo truyền thống:</strong> Hồng pastel - Trắng</p>
     </div>
 
-    <div class="section">
-        <h2>Ngôi sao của đội</h2>
-        <div class="stars">
-            <div class="star-card">
-                <img src="https://via.placeholder.com/200x180.png?text=Cau+Thu+1" alt="Cầu thủ 1">
-                <strong>Nguyễn A</strong><br>
-                Tiền đạo nhanh nhẹn, ghi bàn tốt.
-            </div>
-            <div class="star-card">
-                <img src="https://via.placeholder.com/200x180.png?text=Cau+Thu+2" alt="Cầu thủ 2">
-                <strong>Trần B</strong><br>
-                Trung vệ chắc chắn, không chiến mạnh mẽ.
-            </div>
-            <div class="star-card">
-                <img src="https://via.placeholder.com/200x180.png?text=Cau+Thu+3" alt="Cầu thủ 3">
-                <strong>Lê C</strong><br>
-                Tiền vệ tổ chức, chuyền bóng xuất sắc.
-            </div>
-        </div>
-    </div>
-
+    <!-- Mục tiêu và Triết lý -->
     <div class="section">
         <h2>Mục tiêu và Triết lý</h2>
-        <p>Đội bóng hướng đến việc xây dựng một tập thể gắn kết, giàu bản sắc, thi đấu cống hiến vì màu cờ sắc áo và khán giả.</p>
+        <p>
+            Đội bóng hướng đến việc xây dựng một tập thể gắn kết, giàu bản sắc, thi đấu cống hiến vì màu cờ sắc áo và khán giả.
+        </p>
     </div>
 
+    <!-- Kết nối với chúng tôi -->
     <div class="section">
         <h2>Kết nối với chúng tôi</h2>
-        <p>🌐 Website: <a href="#">www.fctendoi.com</a></p>
-        <p>📘 Facebook: <a href="#">facebook.com/fctendoi</a></p>
-        <p>📸 Instagram: <a href="#">instagram.com/fctendoi</a></p>
-        <p>📧 Email: <a href="mailto:info@fctendoi.com">info@fctendoi.com</a></p>
+        <p>🌐 Website: <a href="https://opulent-guacamole-q779g4p5r4gj2rj5-8080.app.github.dev/">https://opulent-guacamole-q779g4p5r4gj2rj5-8080.app.github.dev/</a></p>
+        <p>📘 Facebook: <a href="https://www.facebook.com/Huydeptraiiii2005">https://www.facebook.com/Huydeptraiiii2005</a></p>
+        <p>📸 Instagram: <a href="https://www.instagram.com/huy_2209/">https://www.instagram.com/huy_2209/</a></p>
+        <p>✉️ Email: <a href="mailto:huybuihc2292005@gmail.com">huybuihc2292005@gmail.com</a></p>
     </div>
-</div>
 
-<div class="footer">
-    © 2025 FC [Tên đội của bạn]. All rights reserved.
+    <!-- Footer -->
+    <div class="footer">
+        © 2025 FC <span th:text="${doiBong.tenDoi}">[Tên đội]</span>. All rights reserved.
+    </div>
 </div>
 
 </body>
