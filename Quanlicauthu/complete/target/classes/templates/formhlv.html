@@ -2,81 +2,141 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Form Huấn Luyện Viên</title>
+    <title th:text="${hlv.id == 0} ? '➕ Thêm Huấn Luyện Viên' : '📝 Cập nhật Huấn Luyện Viên'">Form HLV</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            padding: 40px;
-            background: #f0f0f0;
+            font-family: 'Comic Sans MS', 'Segoe UI', cursive;
+            background: linear-gradient(to right, #fdfbfb, #fde2e4);
+            padding: 50px 15px;
+            display: flex;
+            justify-content: center;
         }
-        form {
-            max-width: 500px;
-            margin: auto;
-            background: white;
-            padding: 24px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        label {
-            display: block;
-            margin-top: 12px;
-            font-weight: bold;
-        }
-        input {
+
+        .form-container {
+            background-color: #fff0f6;
+            padding: 35px 30px;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
             width: 100%;
-            padding: 8px;
-            margin-top: 4px;
-            box-sizing: border-box;
+            max-width: 600px;
+            border: 3px dashed #ffb3c1;
         }
+
+        h1 {
+            text-align: center;
+            font-size: 26px;
+            color: #d6336c;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            margin-bottom: 6px;
+            font-weight: bold;
+            color: #6f42c1;
+        }
+
+        .form-group input {
+            padding: 10px;
+            border: 2px solid #f3c4fb;
+            border-radius: 12px;
+            font-size: 15px;
+            background-color: #fff;
+        }
+
+        .form-group input:focus {
+            border-color: #ff6f91;
+            outline: none;
+        }
+
         button {
-            margin-top: 20px;
-            padding: 10px 20px;
-            background: #28a745;
-            border: none;
+            background-color: #ff85a1;
             color: white;
-            border-radius: 4px;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            font-size: 16px;
+            border-radius: 14px;
+            font-weight: bold;
             cursor: pointer;
+            transition: background-color 0.3s ease;
         }
-        a {
-            display: inline-block;
-            margin-top: 10px;
+
+        button:hover {
+            background-color: #f76c8f;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #6c757d;
             text-decoration: none;
-            color: #007bff;
         }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
         .error {
             color: red;
+            font-style: italic;
             margin-top: 10px;
+        }
+
+        @media (max-width: 600px) {
+            .form-container {
+                padding: 25px;
+            }
+
+            h1 {
+                font-size: 22px;
+            }
         }
     </style>
 </head>
 <body>
 
-<form th:action="@{/hlv/luu}" th:object="${hlv}" method="post">
-    <h2 th:text="${hlv.id == 0} ? 'Thêm Huấn Luyện Viên' : 'Cập nhật Huấn Luyện Viên'"></h2>
+<div class="form-container">
+    <h1 th:text="${hlv.id == 0} ? '➕ Thêm Huấn Luyện Viên' : '📝 Cập nhật Huấn Luyện Viên'">Form Huấn Luyện Viên</h1>
 
-    <!-- Thêm trường ID nếu là thêm mới -->
-    <div th:if="${hlv.id == 0}">
-        <label>Mã ID:</label>
-        <input type="number" th:field="*{id}" required min="1" />
-    </div>
-    <!-- Nếu sửa thì giữ id ẩn -->
-    <input type="hidden" th:if="${hlv.id != 0}" th:field="*{id}" />
+    <form th:action="@{/hlv/luu}" th:object="${hlv}" method="post">
+        <!-- Thêm trường ID nếu là thêm mới -->
+        <div class="form-group" th:if="${hlv.id == 0}">
+            <label>Mã ID:</label>
+            <input type="number" th:field="*{id}" required min="1" />
+        </div>
 
-    <label>Họ tên:</label>
-    <input type="text" th:field="*{ten}" required />
+        <!-- Nếu sửa thì giữ id ẩn -->
+        <input type="hidden" th:if="${hlv.id != 0}" th:field="*{id}" />
 
-    <label>Tuổi:</label>
-    <input type="number" th:field="*{tuoi}" required min="18" />
+        <div class="form-group">
+            <label>Họ tên:</label>
+            <input type="text" th:field="*{ten}" required />
+        </div>
 
-    <label>Chức vụ:</label>
-    <input type="text" th:field="*{chucVu}" required />
+        <div class="form-group">
+            <label>Tuổi:</label>
+            <input type="number" th:field="*{tuoi}" required min="18" />
+        </div>
 
-    <!-- Hiển thị lỗi nếu có -->
-    <div class="error" th:if="${error}" th:text="${error}"></div>
+        <div class="form-group">
+            <label>Chức vụ:</label>
+            <input type="text" th:field="*{chucVu}" required />
+        </div>
 
-    <button type="submit">Lưu</button>
-    <a href="/hlv">⬅ Quay lại danh sách</a>
-</form>
+        <div class="error" th:if="${error}" th:text="${error}"></div>
+
+        <button type="submit">💾 Lưu Huấn Luyện Viên</button>
+    </form>
+
+    <a href="/hlv" class="back-link">← Quay lại danh sách</a>
+</div>
 
 </body>
 </html>

@@ -2,140 +2,89 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>🌸 Quản lý cầu thủ</title>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <title>Form Huấn Luyện Viên</title>
     <style>
-        /* giữ nguyên toàn bộ CSS của bạn */
         body {
-            font-family: 'Nunito', sans-serif;
-            margin: 30px;
-            background: linear-gradient(to right, #fbc2eb, #a6c1ee);
-            color: #2d3436;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 40px;
+            background: #ffe6f0; /* nền hồng nhạt */
         }
-
-        h1 {
-            text-align: center;
-            color: #d63384;
-            font-size: 34px;
-            margin-bottom: 30px;
-        }
-
-        .form-section {
-            background-color: #fff0f6;
-            padding: 25px;
-            border-radius: 20px;
-            box-shadow: 0 10px 24px rgba(0,0,0,0.08);
-            max-width: 800px;
+        form {
+            max-width: 500px;
             margin: auto;
-            margin-bottom: 40px;
+            background: #fff0f5; /* form màu hồng phấn */
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 0 12px rgba(255, 105, 180, 0.3);
         }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        td {
-            padding: 10px 15px;
-            vertical-align: middle;
-        }
-
         label {
-            font-weight: 600;
-            color: #b53471;
+            display: block;
+            margin-top: 12px;
+            font-weight: bold;
+            color: #d63384; /* chữ màu hồng đậm */
         }
-
-        input, select {
+        input {
             width: 100%;
             padding: 10px;
-            font-size: 14px;
-            border-radius: 10px;
-            border: 1px solid #e599f7;
+            margin-top: 6px;
+            box-sizing: border-box;
+            border: 1px solid #f5c2e7;
+            border-radius: 6px;
             background-color: #fff;
         }
-
-        button, a.btn {
-            display: inline-block;
+        button {
+            margin-top: 20px;
             padding: 10px 20px;
-            border-radius: 25px;
+            background: #ff69b4; /* nút màu hồng đậm */
+            border: none;
+            color: white;
+            border-radius: 6px;
             font-weight: bold;
             cursor: pointer;
-            text-align: center;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #e754a1;
+        }
+        a {
+            display: inline-block;
+            margin-top: 10px;
             text-decoration: none;
+            color: #d63384;
+            font-weight: bold;
         }
-
-        .btn-add {
-            background-color: #ff99c8;
-            color: #2d3436;
-        }
-
-        .btn-add:hover {
-            background-color: #ff66a6;
-            color: white;
-        }
-
-        .btn-edit {
-            background-color: #ffc3a0;
-            color: white;
-        }
-
-        .btn-edit:hover {
-            background-color: #ff9f80;
-        }
-
-        .home-link {
-            display: block;
-            text-align: center;
-            margin-top: 30px;
-            color: #c44569;
-            font-size: 16px;
-        }
-
-        .home-link:hover {
-            text-decoration: underline;
+        .error {
+            color: red;
+            margin-top: 10px;
+            font-style: italic;
         }
     </style>
 </head>
 <body>
 
-<!-- ✅ Tiêu đề tự động thay đổi -->
-<h1 th:text="${cauthu.ma == null} ? '📋 Thêm cầu thủ mới' : '📝 Sửa thông tin cầu thủ'"></h1>
+<form th:action="@{/hlv/luu}" th:object="${hlv}" method="post">
+    <h2 th:text="${hlv.id == 0} ? 'Thêm Huấn Luyện Viên' : 'Cập nhật Huấn Luyện Viên'" style="color:#d63384;"></h2>
 
-<div class="form-section">
-    <form th:action="@{/cauthu/luu}" th:method="post" th:object="${cauthu}">
-        <table>
-            <tr>
-                <td><label>Mã:</label></td>
-                <td>
-                    <input type="text" th:field="*{ma}" required
-                           th:readonly="${cauthu.ma != null}" />
-                </td>
-            </tr>
-            <tr><td><label>Họ tên:</label></td><td><input type="text" th:field="*{hoTen}" required></td></tr>
-            <tr><td><label>Vị trí:</label></td><td><input type="text" th:field="*{viTri}" required></td></tr>
-            <tr><td><label>Số áo:</label></td><td><input type="number" th:field="*{soAo}" required></td></tr>
-            <tr><td><label>Quốc tịch:</label></td><td><input type="text" th:field="*{quocTich}" required></td></tr>
-            <tr><td><label>Chiều cao (m):</label></td><td><input type="number" step="0.01" th:field="*{chieuCao}" required></td></tr>
-            <tr><td><label>Cân nặng (kg):</label></td><td><input type="number" step="0.01" th:field="*{canNang}" required></td></tr>
-            <tr><td><label>Số bàn thắng:</label></td><td><input type="number" th:field="*{soBanThang}" required></td></tr>
-            <tr><td><label>Thẻ vàng:</label></td><td><input type="number" th:field="*{theVang}" required></td></tr>
-            <tr><td><label>Thẻ đỏ:</label></td><td><input type="number" th:field="*{theDo}" required></td></tr>
-            <tr><td><label>Ngày sinh:</label></td><td><input type="date" th:field="*{ngaySinh}" required></td></tr>
-            <tr><td><label>Hết hạn HĐ:</label></td><td><input type="date" th:field="*{ngayHetHanHopDong}" required></td></tr>
-            <tr>
-                <td colspan="2" style="text-align: center;">
-                    <button type="submit"
-                            th:class="${cauthu.ma == null} ? 'btn-add' : 'btn-edit'"
-                            th:text="${cauthu.ma == null} ? '🌸 Thêm cầu thủ' : '📝 Cập nhật'">
-                    </button>
-                </td>
-            </tr>
-        </table>
-    </form>
-</div>
+    <div th:if="${hlv.id == 0}">
+        <label>Mã ID:</label>
+        <input type="number" th:field="*{id}" required min="1" />
+    </div>
+    <input type="hidden" th:if="${hlv.id != 0}" th:field="*{id}" />
 
-<a href="/" class="home-link">🏠 Về trang chủ</a>
-<a href="/cauthu" class="home-link">📋 Quay lại danh sách cầu thủ</a>
+    <label>Họ tên:</label>
+    <input type="text" th:field="*{ten}" required />
+
+    <label>Tuổi:</label>
+    <input type="number" th:field="*{tuoi}" required min="18" />
+
+    <label>Chức vụ:</label>
+    <input type="text" th:field="*{chucVu}" required />
+
+    <div class="error" th:if="${error}" th:text="${error}"></div>
+
+    <button type="submit">💾 Lưu</button>
+    <a href="/hlv">⬅ Quay lại danh sách</a>
+</form>
 
 </body>
 </html>

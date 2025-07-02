@@ -2,37 +2,108 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Danh sách Huấn Luyện Viên</title>
+    <title>📋 Danh sách Huấn Luyện Viên</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-        }
-        table {
-            border-collapse: collapse;
-            width: 80%;
-            margin-top: 20px;
-        }
-        th, td {
-            border: 1px solid #ccc;
-            padding: 8px 12px;
+            font-family: 'Comic Sans MS', 'Segoe UI', cursive;
+            background: linear-gradient(to right, #fff0f6, #fce4ec);
+            padding: 40px;
             text-align: center;
         }
-        th {
-            background-color: #eee;
+
+        h1 {
+            color: #d6336c;
+            margin-bottom: 30px;
         }
-        a.button {
-            padding: 6px 12px;
-            background-color: #28a745;
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            background-color: #ff85a1;
             color: white;
             text-decoration: none;
-            border-radius: 4px;
+            border-radius: 12px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
         }
-        a.button:hover {
-            background-color: #218838;
+
+        .button:hover {
+            background-color: #f76c8f;
         }
+
+        table {
+            margin: 0 auto;
+            border-collapse: collapse;
+            width: 90%;
+            background-color: #fff0f6;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 14px 20px;
+            border-bottom: 1px solid #ffd3e0;
+        }
+
+        th {
+            background-color: #ffdeeb;
+            color: #6f42c1;
+            font-size: 16px;
+        }
+
+        td {
+            font-size: 15px;
+            color: #333;
+        }
+
         .action-links a {
-            margin: 0 5px;
-            color: #007bff;
+            margin: 0 6px;
+            color: #d6336c;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .action-links a:hover {
+            text-decoration: underline;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:nth-child(even) {
+            background-color: #fff6fa;
+        }
+
+        td[colspan] {
+            text-align: center;
+            font-style: italic;
+            color: #999;
+        }
+
+        /* 🔽 Link về trang chủ ở dưới cùng */
+        .footer-link {
+            margin-top: 40px;
+        }
+
+        .home-link {
+            color: purple;
+            font-size: 18px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .home-link:hover {
+            text-decoration: underline;
+        }
+
+        .home-link img {
+            vertical-align: middle;
+            width: 24px;
+            height: 24px;
+            margin-right: 8px;
         }
     </style>
 </head>
@@ -60,7 +131,8 @@
             <td th:text="${hlv.chucVu}"></td>
             <td class="action-links">
                 <a th:href="@{/hlv/sua/{id}(id=${hlv.id})}">✏ Sửa</a>
-                <a th:href="@{/hlv/xoa/{id}(id=${hlv.id})}" onclick="return confirm('Bạn có chắc muốn xoá HLV này?')">🗑 Xoá</a>
+                <a th:href="@{/hlv/xoa/{id}(id=${hlv.id})}"
+                   onclick="return confirm('Bạn có chắc muốn xoá HLV này?')">🗑 Xoá</a>
             </td>
         </tr>
         <tr th:if="${#lists.isEmpty(dsHlv)}">
@@ -68,6 +140,13 @@
         </tr>
     </tbody>
 </table>
+
+<!-- 🔽 Về trang chủ -->
+<div class="footer-link">
+    <a href="/" class="home-link">
+        🏠 Về trang chủ
+    </a>
+</div>
 
 </body>
 </html>
