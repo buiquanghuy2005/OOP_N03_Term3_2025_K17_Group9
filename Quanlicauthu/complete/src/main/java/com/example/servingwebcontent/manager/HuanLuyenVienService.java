@@ -23,7 +23,19 @@ public class HuanLuyenVienService {
     }
 
     public HuanLuyenVien save(HuanLuyenVien hlv) {
-        return repository.save(hlv);
+        // Nếu là thêm mới (id chưa tồn tại)
+        if (!repository.existsById(hlv.getId())) {
+            return repository.save(hlv);
+        }
+
+        // Nếu là cập nhật
+        Optional<HuanLuyenVien> existing = repository.findById(hlv.getId());
+        if (existing.isPresent()) {
+            return repository.save(hlv); // cho phép cập nhật
+        }
+
+        // Nếu ID đã tồn tại mà không nằm trong 2 trường hợp trên thì trả lỗi
+        throw new IllegalArgumentException("Huấn luyện viên với ID " + hlv.getId() + " đã tồn tại!");
     }
 
     public void deleteById(int id) {

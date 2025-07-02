@@ -18,29 +18,38 @@ public class HuanLuyenVienController {
     @GetMapping
     public String danhSach(Model model) {
         model.addAttribute("dsHlv", service.findAll());
-        return "danhsachhlv"; // ✅ Tên file HTML là danhsachhlv.html
+        return "danhsachhlv";
     }
 
     // Hiển thị form thêm HLV
     @GetMapping("/them")
     public String themForm(Model model) {
         model.addAttribute("hlv", new HuanLuyenVien());
-        return "formhlv"; // ✅ Tên file HTML là formhlv.html
-    }
-
-    // Lưu HLV mới hoặc đã chỉnh sửa
-    @PostMapping("/luu")
-    public String luu(@ModelAttribute HuanLuyenVien hlv) {
-        service.save(hlv);
-        return "redirect:/hlv";
+        return "formhlv";
     }
 
     // Hiển thị form chỉnh sửa HLV
     @GetMapping("/sua/{id}")
     public String sua(@PathVariable int id, Model model) {
         HuanLuyenVien hlv = service.findById(id).orElse(null);
+        if (hlv == null) {
+            return "redirect:/hlv";
+        }
         model.addAttribute("hlv", hlv);
-        return "formhlv"; // ✅ Dùng lại formhlv.html
+        return "formhlv";
+    }
+
+    // Lưu HLV mới hoặc đã chỉnh sửa
+    @PostMapping("/luu")
+    public String luu(@ModelAttribute HuanLuyenVien hlv, Model model) {
+        try {
+            service.save(hlv);
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("hlv", hlv);
+            model.addAttribute("error", e.getMessage());
+            return "formhlv"; // Quay lại form kèm thông báo lỗi
+        }
+        return "redirect:/hlv";
     }
 
     // Xóa HLV theo ID

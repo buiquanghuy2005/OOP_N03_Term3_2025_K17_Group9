@@ -7,8 +7,7 @@ import jakarta.persistence.*;
 public class HuanLuyenVien {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int id;  // Tự gán ID thủ công
 
     @Column(name = "ten", nullable = false)
     private String ten;
@@ -23,7 +22,8 @@ public class HuanLuyenVien {
     public HuanLuyenVien() {
     }
 
-    public HuanLuyenVien(String ten, int tuoi, String chucVu) {
+    public HuanLuyenVien(int id, String ten, int tuoi, String chucVu) {
+        this.id = id;
         this.ten = ten;
         this.tuoi = tuoi;
         this.chucVu = chucVu;

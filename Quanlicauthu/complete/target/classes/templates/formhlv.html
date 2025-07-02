@@ -43,6 +43,10 @@
             text-decoration: none;
             color: #007bff;
         }
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -50,7 +54,13 @@
 <form th:action="@{/hlv/luu}" th:object="${hlv}" method="post">
     <h2 th:text="${hlv.id == 0} ? 'Thêm Huấn Luyện Viên' : 'Cập nhật Huấn Luyện Viên'"></h2>
 
-    <input type="hidden" th:field="*{id}" />
+    <!-- Thêm trường ID nếu là thêm mới -->
+    <div th:if="${hlv.id == 0}">
+        <label>Mã ID:</label>
+        <input type="number" th:field="*{id}" required min="1" />
+    </div>
+    <!-- Nếu sửa thì giữ id ẩn -->
+    <input type="hidden" th:if="${hlv.id != 0}" th:field="*{id}" />
 
     <label>Họ tên:</label>
     <input type="text" th:field="*{ten}" required />
@@ -60,6 +70,9 @@
 
     <label>Chức vụ:</label>
     <input type="text" th:field="*{chucVu}" required />
+
+    <!-- Hiển thị lỗi nếu có -->
+    <div class="error" th:if="${error}" th:text="${error}"></div>
 
     <button type="submit">Lưu</button>
     <a href="/hlv">⬅ Quay lại danh sách</a>
