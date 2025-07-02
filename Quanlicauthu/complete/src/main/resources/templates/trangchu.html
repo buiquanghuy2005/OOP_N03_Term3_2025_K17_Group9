@@ -3,74 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <title>Trang chủ quản lý đội bóng</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Montserrat', sans-serif;
-            background: linear-gradient(to right, #ffe4ec, #f9c5d1);
+            background: linear-gradient(to bottom right, #ffe4ec, #ffd6e0);
             color: #333;
-            text-align: center;
-            padding-top: 100px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 20px;
         }
 
         h1 {
-            font-size: 42px;
-            margin-bottom: 40px;
+            text-align: center;
             color: #d63384;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+            font-size: 38px;
+            margin-bottom: 50px;
         }
 
-        .button {
-            display: inline-block;
-            padding: 20px 40px;
-            font-size: 20px;
-            margin: 20px;
-            cursor: pointer;
-            background: linear-gradient(135deg, #ff69b4, #ff85b3);
-            color: white;
-            text-decoration: none;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            transition: all 0.3s ease-in-out;
+        .card {
+            background-color: white;
+            border-radius: 16px;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+            padding: 24px 32px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            transition: transform 0.3s ease;
         }
 
-        .button:hover {
-            transform: scale(1.05);
-            background: linear-gradient(135deg, #ff85c1, #ff99cc);
+        .card:hover {
+            transform: translateY(-6px);
         }
 
         .icon {
-            font-size: 24px;
-            margin-right: 10px;
+            font-size: 40px;
+            margin-right: 24px;
+            color: #ff4d94;
+        }
+
+        .content {
+            flex-grow: 1;
+        }
+
+        .content h2 {
+            margin: 0;
+            font-size: 22px;
+            color: #d63384;
+        }
+
+        .content p {
+            margin: 8px 0;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .button {
+            background: linear-gradient(to right, #ff66a6, #ffb347);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+
+        .button:hover {
+            background: linear-gradient(to right, #ff3385, #ffa07a);
         }
 
         footer {
-            margin-top: 100px;
+            text-align: center;
             font-size: 14px;
-            color: #666;
+            color: #777;
+            margin-top: 60px;
+            padding: 30px 0;
         }
     </style>
 </head>
 <body>
 
+<div class="container">
     <h1>🏟️ Quản lý Đội Bóng</h1>
 
-    <a href="/cauthu" class="button">
-        <span class="icon">👥</span> Quản lý Cầu thủ
-    </a>
+    <div class="card">
+        <div class="icon">👥</div>
+        <div class="content">
+            <h2>Quản lý Cầu thủ</h2>
+        </div>
+        <a href="/cauthu" class="button">Truy cập</a>
+    </div>
 
-    <a href="/trandau" class="button">
-        <span class="icon">⚽</span> Quản lý Trận đấu
-    </a>
+    <div class="card">
+        <div class="icon">⚽</div>
+        <div class="content">
+            <h2>Quản lý Trận đấu</h2>
+        </div>
+        <a href="/trandau" class="button">Truy cập</a>
+    </div>
 
-    <a href="/doibong" class="button">
-        <span class="icon">🏆</span> Giới thiệu Đội bóng
-    </a>
+    <div class="card">
+        <div class="icon">🏆</div>
+        <div class="content">
+            <h2>Giới thiệu Đội bóng</h2>
+        </div>
+        <a href="/doibong" class="button">Truy cập</a>
+    </div>
 
-    <!-- ✅ Nút thống kê mới -->
-    <a href="/thongke" class="button">
-        <span class="icon">📊</span> Thống kê Đội bóng
-    </a>
+    <div class="card">
+        <div class="icon">📊</div>
+        <div class="content">
+            <h2>Thống kê Đội bóng</h2>
+        </div>
+        <a href="/thongke" class="button">Truy cập</a>
+    </div>
+</div>
+
+<footer>
+    &copy; 2025 Nhóm Quản Lý Đội Bóng. All rights reserved.
+</footer>
 
 </body>
 </html>
