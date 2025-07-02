@@ -25,14 +25,14 @@ public class TranDauController {
     @GetMapping("/them")
     public String hienThiFormThem(Model model) {
         TranDau tranDau = new TranDau();
-        tranDau.setDoiNha("FC Mặc Định"); 
+        tranDau.setDoiNha("FC Song Châu"); 
         model.addAttribute("trandau", tranDau);
         return "formtd";
     }
 
     @PostMapping("/luu")
     public String luuTranDau(@ModelAttribute("trandau") TranDau tranDau) {
-        tranDau.setDoiNha("FC Mặc Định"); 
+        tranDau.setDoiNha("FC Song Châu"); 
         tranDauService.saveTranDau(tranDau);
         return "redirect:/trandau";
     }

@@ -157,7 +157,6 @@
     <button type="submit" class="btn btn-edit">Sửa</button>
   </form>
 
-  <!-- Xoá: mở popup -->
   <select id="idXoa" required>
     <option disabled selected>-- Chọn trận cần xoá --</option>
     <option th:each="t : ${dsTranDau}"
@@ -199,7 +198,6 @@
 
 <a href="/" class="btn btn-home">🏠 Về trang chủ</a>
 
-<!-- Popup xác nhận -->
 <div class="modal" id="popupXoa">
   <div class="modal-content">
     <p>Bạn có chắc chắn muốn xoá trận đấu này?</p>

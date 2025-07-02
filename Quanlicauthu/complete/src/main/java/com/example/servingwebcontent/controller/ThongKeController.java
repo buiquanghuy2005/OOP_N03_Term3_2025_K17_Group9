@@ -30,7 +30,7 @@ public class ThongKeController {
     public String hienThiThongKe(Model model) {
         List<CauThu> danhSachCauThu = cauThuRepository.findAll();
         List<TranDau> tranDauList = tranDauRepository.findAll();
-        String tenDoiMacDinh = "FC Mặc Định";
+        String tenDoiMacDinh = "FC Song Châu";
         ThongKe thongKe = thongKeService.thongKe(danhSachCauThu, tranDauList, tenDoiMacDinh);
 
         Map<String, Integer> viTriData = thongKeService.thongKeTheoViTri(danhSachCauThu);
