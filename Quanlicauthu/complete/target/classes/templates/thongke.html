@@ -4,24 +4,28 @@
     <meta charset="UTF-8">
     <title>Thống kê đội bóng</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Segoe UI', sans-serif;
-            background: #f0f9ff;
+            background: #fff0f5;
             padding: 30px;
+            color: #4a4a4a;
         }
 
         .container {
             max-width: 1000px;
             margin: auto;
-            background: white;
+            background: #ffffff;
             border-radius: 15px;
             padding: 30px;
-            box-shadow: 0 0 10px #ccc;
+            box-shadow: 0 0 15px rgba(255, 182, 193, 0.3);
+            border: 1px solid #ffe4ec;
         }
 
         h2, h3 {
             text-align: center;
+            color: #d63384;
         }
 
         ul {
@@ -30,7 +34,8 @@
         }
 
         ul li {
-            padding: 5px 0;
+            padding: 6px 0;
+            font-size: 16px;
         }
 
         .chart {
@@ -54,6 +59,12 @@
             margin: 0 auto;
             padding: 20px;
         }
+
+        @media (max-width: 768px) {
+            .chart-box {
+                min-width: 100% !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -62,15 +73,15 @@
 
     <h3>Số liệu tổng quan</h3>
     <ul>
-        <li><strong>Số cầu thủ:</strong> <span th:text="${thongKe.tongSoCauThu}">0</span></li>
-        <li><strong>Tuổi trung bình:</strong> <span th:text="${thongKe.tuoiTrungBinh}">0</span></li>
-        <li><strong>Tổng số bàn thắng:</strong> <span th:text="${thongKe.tongSoBanThang}">0</span></li>
-        <li><strong>Tổng thẻ vàng:</strong> <span th:text="${thongKe.tongTheVang}">0</span></li>
-        <li><strong>Tổng thẻ đỏ:</strong> <span th:text="${thongKe.tongTheDo}">0</span></li>
-        <li><strong>Tỷ lệ thắng:</strong> <span th:text="${thongKe.tiLeThang}">0</span>%</li>
-        <li><strong>Cầu thủ ghi bàn nhiều nhất:</strong> <span th:text="${thongKe.cauThuGhiBanNhieuNhat.hoTen}">N/A</span></li>
-        <li><strong>Cầu thủ lớn tuổi nhất:</strong> <span th:text="${thongKe.cauThuLonTuoiNhat.hoTen}">N/A</span></li>
-        <li><strong>Cầu thủ cao nhất:</strong> <span th:text="${thongKe.cauThuCaoNhat.hoTen}">N/A</span></li>
+        <li><strong>⚽ Số cầu thủ:</strong> <span th:text="${thongKe.tongSoCauThu}">0</span></li>
+        <li><strong>🎯 Tuổi trung bình:</strong> <span th:text="${thongKe.tuoiTrungBinh}">0</span></li>
+        <li><strong>🥅 Tổng số bàn thắng:</strong> <span th:text="${thongKe.tongSoBanThang}">0</span></li>
+        <li><strong>🟨 Tổng thẻ vàng:</strong> <span th:text="${thongKe.tongTheVang}">0</span></li>
+        <li><strong>🟥 Tổng thẻ đỏ:</strong> <span th:text="${thongKe.tongTheDo}">0</span></li>
+        <li><strong>🏆 Tỷ lệ thắng:</strong> <span th:text="${thongKe.tiLeThang}">0</span>%</li>
+        <li><strong>⭐ Cầu thủ ghi bàn nhiều nhất:</strong> <span th:text="${thongKe.cauThuGhiBanNhieuNhat.hoTen}">N/A</span></li>
+        <li><strong>👴 Cầu thủ lớn tuổi nhất:</strong> <span th:text="${thongKe.cauThuLonTuoiNhat.hoTen}">N/A</span></li>
+        <li><strong>📏 Cầu thủ cao nhất:</strong> <span th:text="${thongKe.cauThuCaoNhat.hoTen}">N/A</span></li>
     </ul>
 
     <div class="row chart">
@@ -136,8 +147,14 @@
                 label: 'Số cầu thủ',
                 data: quocTichCounts,
                 backgroundColor: [
-                    '#f44336', '#2196f3', '#4caf50', '#ff9800',
-                    '#9c27b0', '#3f51b5', '#00bcd4', '#e91e63'
+                    '#4caf50',  // xanh lá
+                    '#ff9800',  // cam
+                    '#2196f3',  // xanh dương
+                    '#9c27b0',  // tím
+                    '#ffeb3b',  // vàng
+                    '#00bcd4',  // cyan
+                    '#f44336',  // đỏ
+                    '#607d8b'   // xám xanh
                 ]
             }]
         },
@@ -155,7 +172,7 @@
             labels: ketQuaLabels,
             datasets: [{
                 data: ketQuaValues,
-                backgroundColor: ['#4caf50', '#ffeb3b', '#f44336'],
+                backgroundColor: ['#4caf50', '#ffeb3b', '#f44336'], // xanh – vàng – đỏ
                 borderColor: '#fff',
                 borderWidth: 2
             }]

@@ -2,7 +2,7 @@
 <html lang="vi" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Thông tin đội bóng</title>
+    <title>FC Song Châu</title>
     <style>
         body {
             font-family: 'Quicksand', sans-serif;
@@ -13,8 +13,9 @@
         }
 
         .container {
-            width: 50%;
+            width: 80%;
             margin: 0 auto;
+            padding: 30px 0;
         }
 
         .section {
@@ -25,15 +26,22 @@
             box-shadow: 0 4px 12px rgba(255, 105, 180, 0.3);
         }
 
-        h1 {
+        h1, h2 {
             color: #e60073;
         }
 
         h2 {
-            color: #e60073;
             border-bottom: 2px solid #e60073;
             padding-bottom: 5px;
             margin-bottom: 15px;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 6px;
         }
 
         .footer {
@@ -51,56 +59,96 @@
         a:hover {
             text-decoration: underline;
         }
+
+        em {
+            color: #b30059;
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
+
     <!-- Tên đội và khẩu hiệu -->
     <div class="section" style="text-align: center;">
-        <h1 th:text="${doiBong.tenDoi}">[Tên đội]</h1>
-        <p><em>Tỏa sáng đam mê - Khát khao chiến thắng</em></p>
+        <h1>FC Song Châu</h1>
+        <p><em>"Tỏa sáng đam mê – Khát khao chiến thắng"</em></p>
     </div>
 
-    <!-- Giới thiệu tổng quan -->
+    <!-- Giới thiệu -->
     <div class="section">
-        <h2>Giới thiệu tổng quan</h2>
-        <p>
-            <span th:text="${doiBong.tenDoi}">FC [Tên đội]</span> là một câu lạc bộ bóng đá với tinh thần chiến đấu mạnh mẽ, 
-            luôn hướng tới sự chuyên nghiệp và hiệu quả trong từng trận đấu.
-        </p>
-
+        <h2>⚽ Giới thiệu chung</h2>
+        <p><strong>FC Song Châu</strong> là đội bóng trẻ trung, tràn đầy nhiệt huyết, được thành lập với khát vọng tạo dựng một sân chơi thể thao chuyên nghiệp, lành mạnh và gắn kết cộng đồng. Từ những buổi tập luyện đầu tiên trên mặt sân nhỏ, đến những trận cầu đầy cảm xúc, FC Song Châu luôn là biểu tượng của sự cống hiến, đam mê và đoàn kết không ngừng nghỉ.</p>
+        <p>Không đơn thuần là một câu lạc bộ bóng đá, Song Châu là nơi khơi nguồn cảm hứng và kết nối những con người yêu bóng đá, nơi từng giấc mơ sân cỏ được chắp cánh bay xa. Chúng tôi tin rằng bóng đá không chỉ là môn thể thao, mà là ngôn ngữ chung vượt qua ranh giới tuổi tác, nghề nghiệp và hoàn cảnh.</p>
+        <p>FC Song Châu đã từng bước khẳng định mình qua những giải đấu phong trào, giao lưu khu vực và những hoạt động thiện nguyện hướng đến cộng đồng. Đội bóng tự hào là mái nhà thứ hai của những trái tim yêu thể thao, nơi mà mỗi trận đấu không chỉ là sự cạnh tranh mà còn là biểu hiện của lòng tự hào, tinh thần đồng đội và khát khao vươn tới đỉnh cao.</p>
+        <p>Với tinh thần "Tỏa sáng đam mê – Khát khao chiến thắng", FC Song Châu luôn hướng về tương lai bằng ý chí mạnh mẽ, kế thừa truyền thống và không ngừng đổi mới trong tư duy thi đấu. Chúng tôi không ngại thử thách, luôn sẵn sàng vượt qua giới hạn bản thân để viết nên những trang sử vẻ vang cho câu lạc bộ.</p>
     </div>
 
-    <!-- Thông tin cơ bản -->
+    <!-- Tầm nhìn - Sứ mệnh - Giá trị -->
     <div class="section">
-        <h2>Thông tin cơ bản</h2>
-        <p><strong>🏟️ Sân nhà:</strong> <span th:text="${doiBong.sanNha}">Sân ABC</span></p>
-        <p><strong>👨‍🏫 HLV trưởng:</strong> <span th:text="${doiBong.hlvTruong}">Nguyễn Văn A</span></p>
-        <p><strong>📅 Năm thành lập:</strong> <span th:text="${doiBong.namThanhLap}">2025</span></p>
-        <p><strong>🎨 Màu áo truyền thống:</strong> Hồng pastel - Trắng</p>
+        <h2>🌱 Tầm nhìn – Sứ mệnh – Giá trị cốt lõi</h2>
+        <p><strong>🎯 Tầm nhìn:</strong> Trở thành một trong những đội bóng bán chuyên hàng đầu tại địa phương và trong khu vực, là nơi ươm mầm tài năng trẻ, đồng thời xây dựng hình ảnh một đội bóng văn minh, năng động, có bản sắc rõ ràng và gắn kết mạnh mẽ với cộng đồng.</p>
+        <p><strong>🛠️ Sứ mệnh:</strong></p>
+        <ul>
+            <li>Phát hiện, đào tạo và bồi dưỡng cầu thủ có tài năng và đạo đức tốt, tạo điều kiện để phát triển toàn diện.</li>
+            <li>Tổ chức các hoạt động bóng đá phong phú, từ huấn luyện, giao lưu đến thi đấu chuyên nghiệp.</li>
+            <li>Lan tỏa tinh thần thể thao và xây dựng một cộng đồng cổ động viên văn minh, tích cực.</li>
+        </ul>
+        <p><strong>💎 Giá trị cốt lõi:</strong></p>
+        <ul>
+            <li><strong>Đam mê & Cống hiến:</strong> Mỗi trận đấu là một lần cháy hết mình.</li>
+            <li><strong>Trung thực & Tôn trọng:</strong> Tôn vinh giá trị fair-play và sự công bằng.</li>
+            <li><strong>Gắn kết & Đồng đội:</strong> Tập thể là điểm tựa cho thành công cá nhân.</li>
+            <li><strong>Phát triển bền vững:</strong> Luôn học hỏi, cải tiến và hướng đến tương lai.</li>
+        </ul>
     </div>
 
-    <!-- Mục tiêu và Triết lý -->
+    <!-- Thông tin chi tiết -->
     <div class="section">
-        <h2>Mục tiêu và Triết lý</h2>
-        <p>
-            Đội bóng hướng đến việc xây dựng một tập thể gắn kết, giàu bản sắc, thi đấu cống hiến vì màu cờ sắc áo và khán giả.
-        </p>
+        <h2>📌 Thông tin chi tiết</h2>
+        <p><strong>🏟️ Sân nhà:</strong> Etihad Stadium – một trong những sân bóng hiện đại, nơi ghi dấu những trận đấu đầy cảm xúc của đội.</p>
+        <p><strong>👨‍🏫 HLV trưởng:</strong> Pep Guardiola – người truyền cảm hứng, kiến tạo lối chơi và dẫn dắt đội theo phong cách hiện đại, sáng tạo.</p>
+        <p><strong>📅 Năm thành lập:</strong> 2020 – khởi nguồn từ những người trẻ với khát vọng tạo nên điều khác biệt.</p>
+        <p><strong>🎨 Màu áo truyền thống:</strong> Hồng pastel – Trắng: biểu tượng của sự tinh tế, khát khao và đậm chất riêng.</p>
     </div>
 
-    <!-- Kết nối với chúng tôi -->
+    <!-- Triết lý bóng đá -->
     <div class="section">
-        <h2>Kết nối với chúng tôi</h2>
-        <p>🌐 Website: <a href="https://opulent-guacamole-q779g4p5r4gj2rj5-8080.app.github.dev/">https://opulent-guacamole-q779g4p5r4gj2rj5-8080.app.github.dev/</a></p>
-        <p>📘 Facebook: <a href="https://www.facebook.com/Huydeptraiiii2005">https://www.facebook.com/Huydeptraiiii2005</a></p>
-        <p>📸 Instagram: <a href="https://www.instagram.com/huy_2209/">https://www.instagram.com/huy_2209/</a></p>
+        <h2>🧠 Triết lý bóng đá</h2>
+        <ul>
+            <li><strong>Lối chơi hiện đại:</strong> Ưu tiên kiểm soát bóng, phối hợp ngắn, tư duy chiến thuật linh hoạt.</li>
+            <li><strong>Phát triển toàn diện cầu thủ:</strong> Không chỉ giỏi chuyên môn mà còn mạnh mẽ về tinh thần, phẩm chất.</li>
+            <li><strong>Thi đấu cống hiến – Văn minh:</strong> Luôn chiến đấu vì màu áo, vì khán giả, trong khuôn khổ tôn trọng đối thủ.</li>
+            <li><strong>Không ngừng đổi mới:</strong> Ứng dụng công nghệ, khoa học thể thao và phân tích dữ liệu vào huấn luyện.</li>
+        </ul>
+    </div>
+
+    <!-- Kết nối -->
+    <div class="section">
+        <h2>🤝 Kết nối cùng FC Song Châu</h2>
+        <p>Chúng tôi luôn mở rộng cánh cửa chào đón mọi người:</p>
+        <ul>
+            <li>Các bạn trẻ đam mê bóng đá mong muốn phát triển kỹ năng và thi đấu chuyên nghiệp.</li>
+            <li>Người hâm mộ yêu thể thao và mong muốn đồng hành cùng đội bóng trên mọi chặng đường.</li>
+            <li>Doanh nghiệp, tổ chức xã hội mong muốn hợp tác, tài trợ, phát triển phong trào bóng đá cộng đồng.</li>
+        </ul>
+        <p><strong>📌 Thông tin liên hệ:</strong></p>
+        <p>🌐 Website: <a href="https://opulent-guacamole-q779g4p5r4gj2rj5-8080.app.github.dev/">Trang chính thức</a></p>
+        <p>📘 Facebook: <a href="https://www.facebook.com/Huydeptraiiii2005">Huydeptraiiii2005</a></p>
+        <p>📸 Instagram: <a href="https://www.instagram.com/huy_2209/">@huy_2209</a></p>
         <p>✉️ Email: <a href="mailto:huybuihc2292005@gmail.com">huybuihc2292005@gmail.com</a></p>
+    </div>
+
+    <!-- Lời kết -->
+    <div class="section">
+        <h2>🔚 Lời kết</h2>
+        <p><strong>FC Song Châu</strong> không chỉ là một đội bóng, mà là một biểu tượng của niềm tin, khát vọng và hành trình vượt qua mọi giới hạn. Chúng tôi tin rằng: khi trái tim cùng đập chung một nhịp vì đam mê, mọi điều phi thường đều có thể xảy ra.</p>
+        <p><em>“Chúng tôi không đơn giản là thi đấu để chiến thắng – chúng tôi thi đấu để truyền cảm hứng, để kết nối và để khẳng định bản sắc của chính mình.”</em></p>
     </div>
 
     <!-- Footer -->
     <div class="footer">
-        © 2025 FC <span th:text="${doiBong.tenDoi}">[Tên đội]</span>. All rights reserved.
+        © 2025 FC Song Châu.
     </div>
 </div>
 

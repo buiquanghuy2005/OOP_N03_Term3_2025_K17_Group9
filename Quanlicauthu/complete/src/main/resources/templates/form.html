@@ -5,7 +5,6 @@
     <title>🌸 Quản lý cầu thủ</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* giữ nguyên toàn bộ CSS của bạn */
         body {
             font-family: 'Nunito', sans-serif;
             margin: 30px;
@@ -22,31 +21,31 @@
 
         .form-section {
             background-color: #fff0f6;
-            padding: 25px;
+            padding: 30px;
             border-radius: 20px;
-            box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
             max-width: 800px;
             margin: auto;
-            margin-bottom: 40px;
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
         }
 
-        td {
-            padding: 10px 15px;
-            vertical-align: middle;
+        .form-group {
+            display: flex;
+            flex-direction: column;
         }
 
         label {
             font-weight: 600;
             color: #b53471;
+            margin-bottom: 6px;
         }
 
         input, select {
-            width: 100%;
             padding: 10px;
             font-size: 14px;
             border-radius: 10px;
@@ -54,14 +53,16 @@
             background-color: #fff;
         }
 
-        button, a.btn {
-            display: inline-block;
-            padding: 10px 20px;
+        button {
+            padding: 12px 20px;
             border-radius: 25px;
             font-weight: bold;
+            font-size: 15px;
             cursor: pointer;
             text-align: center;
-            text-decoration: none;
+            border: none;
+            transition: all 0.3s ease;
+            margin-top: 20px;
         }
 
         .btn-add {
@@ -89,48 +90,52 @@
             margin-top: 30px;
             color: #c44569;
             font-size: 16px;
+            text-decoration: none;
         }
 
         .home-link:hover {
             text-decoration: underline;
         }
+
+        @media (max-width: 600px) {
+            body {
+                margin: 10px;
+            }
+
+            .form-section {
+                padding: 20px;
+            }
+        }
     </style>
 </head>
 <body>
 
-<!-- ✅ Tiêu đề tự động thay đổi -->
 <h1 th:text="${cauthu.ma == null} ? '📋 Thêm cầu thủ mới' : '📝 Sửa thông tin cầu thủ'"></h1>
 
 <div class="form-section">
     <form th:action="@{/cauthu/luu}" th:method="post" th:object="${cauthu}">
-        <table>
-            <tr>
-                <td><label>Mã:</label></td>
-                <td>
-                    <input type="text" th:field="*{ma}" required
-                           th:readonly="${cauthu.ma != null}" />
-                </td>
-            </tr>
-            <tr><td><label>Họ tên:</label></td><td><input type="text" th:field="*{hoTen}" required></td></tr>
-            <tr><td><label>Vị trí:</label></td><td><input type="text" th:field="*{viTri}" required></td></tr>
-            <tr><td><label>Số áo:</label></td><td><input type="number" th:field="*{soAo}" required></td></tr>
-            <tr><td><label>Quốc tịch:</label></td><td><input type="text" th:field="*{quocTich}" required></td></tr>
-            <tr><td><label>Chiều cao (m):</label></td><td><input type="number" step="0.01" th:field="*{chieuCao}" required></td></tr>
-            <tr><td><label>Cân nặng (kg):</label></td><td><input type="number" step="0.01" th:field="*{canNang}" required></td></tr>
-            <tr><td><label>Số bàn thắng:</label></td><td><input type="number" th:field="*{soBanThang}" required></td></tr>
-            <tr><td><label>Thẻ vàng:</label></td><td><input type="number" th:field="*{theVang}" required></td></tr>
-            <tr><td><label>Thẻ đỏ:</label></td><td><input type="number" th:field="*{theDo}" required></td></tr>
-            <tr><td><label>Ngày sinh:</label></td><td><input type="date" th:field="*{ngaySinh}" required></td></tr>
-            <tr><td><label>Hết hạn HĐ:</label></td><td><input type="date" th:field="*{ngayHetHanHopDong}" required></td></tr>
-            <tr>
-                <td colspan="2" style="text-align: center;">
-                    <button type="submit"
-                            th:class="${cauthu.ma == null} ? 'btn-add' : 'btn-edit'"
-                            th:text="${cauthu.ma == null} ? '🌸 Thêm cầu thủ' : '📝 Cập nhật'">
-                    </button>
-                </td>
-            </tr>
-        </table>
+
+        <div class="form-group">
+            <label>Mã:</label>
+            <input type="text" th:field="*{ma}" required th:readonly="${cauthu.ma != null}" />
+        </div>
+
+        <div class="form-group"><label>Họ tên:</label><input type="text" th:field="*{hoTen}" required></div>
+        <div class="form-group"><label>Vị trí:</label><input type="text" th:field="*{viTri}" required></div>
+        <div class="form-group"><label>Số áo:</label><input type="number" th:field="*{soAo}" required></div>
+        <div class="form-group"><label>Quốc tịch:</label><input type="text" th:field="*{quocTich}" required></div>
+        <div class="form-group"><label>Chiều cao (m):</label><input type="number" step="0.01" th:field="*{chieuCao}" required></div>
+        <div class="form-group"><label>Cân nặng (kg):</label><input type="number" step="0.01" th:field="*{canNang}" required></div>
+        <div class="form-group"><label>Số bàn thắng:</label><input type="number" th:field="*{soBanThang}" required></div>
+        <div class="form-group"><label>Thẻ vàng:</label><input type="number" th:field="*{theVang}" required></div>
+        <div class="form-group"><label>Thẻ đỏ:</label><input type="number" th:field="*{theDo}" required></div>
+        <div class="form-group"><label>Ngày sinh:</label><input type="date" th:field="*{ngaySinh}" required></div>
+        <div class="form-group"><label>Hết hạn HĐ:</label><input type="date" th:field="*{ngayHetHanHopDong}" required></div>
+
+        <button type="submit"
+                th:class="${cauthu.ma == null} ? 'btn-add' : 'btn-edit'"
+                th:text="${cauthu.ma == null} ? '🌸 Thêm cầu thủ' : '📝 Cập nhật'">
+        </button>
     </form>
 </div>
 

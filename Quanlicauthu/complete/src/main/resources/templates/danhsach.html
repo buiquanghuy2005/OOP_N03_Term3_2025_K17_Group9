@@ -5,100 +5,85 @@
     <title>Quản lý cầu thủ</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        #inputMa,
-        #playerSelect {
-            height: 38px;
-            padding: 6px 12px;
-            font-size: 14px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            box-sizing: border-box;
-        }
-
         body {
             font-family: 'Poppins', sans-serif;
             background-color: #fffafc;
             color: #333;
-            margin: 40px;
+            margin: 0;
+            padding: 30px;
             font-size: 16px;
         }
 
         h1, h3 {
             color: #ff6f91;
+            margin-bottom: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .top-bar, .search-bar, .global-actions {
+            background-color: #fff0f5;
+            padding: 16px 24px;
+            border-radius: 16px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+        }
+
+        .btn-main, .btn-edit, .btn-delete, button {
+            display: inline-block;
+            border: none;
+            padding: 10px 18px;
+            font-size: 14px;
+            border-radius: 20px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
 
         .btn-main {
-            display: inline-block;
             background-color: #ff6f91;
             color: white;
-            padding: 10px 16px;
-            border-radius: 20px;
-            font-size: 14px;
-            transition: background-color 0.3s ease;
-            margin-bottom: 10px;
         }
 
         .btn-main:hover {
             background-color: #ff4e74;
         }
 
-        form input {
-            margin: 6px 8px;
-            padding: 8px 12px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-        }
-
-        button {
-            background-color: #88d8b0;
-            border: none;
-            padding: 8px 14px;
-            color: white;
-            font-size: 14px;
-            border-radius: 20px;
-            cursor: pointer;
-        }
-
-        .global-actions {
-            margin-top: 15px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            align-items: center;
-        }
-
         .btn-edit {
             background-color: #6c5ce7;
             color: white;
-            padding: 10px 16px;
-            border-radius: 20px;
         }
 
         .btn-delete {
             background-color: #ff7675;
             color: white;
-            padding: 10px 16px;
-            border-radius: 20px;
+        }
+
+        .btn-cancel {
+            background-color: #ccc;
+            color: white;
         }
 
         .table-wrapper {
             overflow-x: auto;
-            margin-top: 20px;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
             border-radius: 12px;
             overflow: hidden;
-            background: white;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
         }
 
         th, td {
             padding: 14px 12px;
             border-bottom: 1px solid #eee;
-            white-space: nowrap;
+            text-align: left;
             font-size: 15px;
         }
 
@@ -111,13 +96,21 @@
             background-color: #fff0f5;
         }
 
+        .home-link {
+            text-align: center;
+            margin-top: 40px;
+            display: block;
+            color: #ff6f91;
+            text-decoration: none;
+        }
 
+        /* Popup xoá */
         #popupXoa {
             display: none;
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background-color: rgba(0,0,0,0.4);
+            background-color: rgba(0, 0, 0, 0.4);
             z-index: 999;
         }
 
@@ -127,98 +120,133 @@
             margin: 12% auto;
             padding: 30px;
             border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
             text-align: center;
         }
 
         #popupXoa button {
             margin: 10px;
-            padding: 8px 20px;
         }
 
-        .btn-cancel {
-            background-color: #ccc;
+        /* ✅ Form tìm kiếm đẹp hơn */
+        .search-bar form {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 12px;
+            margin-top: 10px;
         }
 
-        .home-link {
-            display: block;
-            margin-top: 30px;
-            text-align: center;
+        .search-bar label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .search-bar input[type="text"] {
+            padding: 8px 12px;
+            border-radius: 12px;
+            border: 1px solid #ddd;
+            min-width: 150px;
+        }
+
+        #inputMa, #playerSelect {
+            height: 38px;
+            padding: 6px 12px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            margin-right: 10px;
         }
     </style>
 </head>
 <body>
+<div class="container">
 
-<h1>📋 Danh sách cầu thủ</h1>
+    <h1>📋 Danh sách cầu thủ</h1>
 
-<a href="/cauthu/them" class="btn-main">➕ Thêm cầu thủ mới</a>
+    <div class="top-bar">
+        <a href="/cauthu/them" class="btn-main">➕ Thêm cầu thủ mới</a>
+    </div>
 
-<hr>
+    <div class="search-bar">
+        <h3>🔍 Tìm kiếm cầu thủ</h3>
+        <form action="/cauthu/timkiem" method="get">
+            <label>🆔 Mã:
+                <input type="text" name="ma">
+            </label>
+            <label>🧒 Tên:
+                <input type="text" name="hoTen">
+            </label>
+            <label>📍 Vị trí:
+                <input type="text" name="viTri">
+            </label>
+            <label>🌍 Quốc tịch:
+                <input type="text" name="quocTich">
+            </label>
+            <button type="submit" class="btn-main">🔎 Tìm kiếm</button>
+        </form>
+    </div>
 
-<h3>🔍 Tìm kiếm cầu thủ</h3>
-<form action="/cauthu/timkiem" method="get">
-    🆔 Mã: <input type="text" name="ma">
-    🧒 Tên: <input type="text" name="hoTen">
-    📍 Vị trí: <input type="text" name="viTri">
-    🌍 Quốc tịch: <input type="text" name="quocTich">
-    <button type="submit">🔎 Tìm kiếm</button>
-</form>
+    <div class="global-actions">
+        <label><strong>Mã cầu thủ:</strong></label>
+        <input type="text" id="inputMa" placeholder="VD: CT001">
+        <select id="playerSelect">
+            <option disabled selected>-- Chọn mã cầu thủ --</option>
+            <option th:each="ct : ${danhSach}" th:value="${ct.ma}" th:text="${ct.ma}"></option>
+        </select>
+        <a href="#" class="btn-edit" onclick="editPlayer()">Sửa</a>
+        <a href="#" class="btn-delete" onclick="deletePlayer()">Xoá</a>
+    </div>
 
-<div class="global-actions">
-    <label><strong>🔢 Mã cầu thủ:</strong></label>
-    <input type="text" id="inputMa" placeholder="VD: CT001">
-    <select id="playerSelect">
-        <option disabled selected>-- Chọn mã cầu thủ --</option>
-        <option th:each="ct : ${danhSach}" th:value="${ct.ma}" th:text="${ct.ma}"></option>
-    </select>
-    <a href="#" class="btn-edit" onclick="editPlayer()">✏️ Sửa</a>
-    <a href="#" class="btn-delete" onclick="deletePlayer()">❌ Xoá</a>
+    <div class="table-wrapper">
+        <table>
+            <thead>
+            <tr>
+                <th>Mã</th>
+                <th>Họ tên</th>
+                <th>Vị trí</th>
+                <th>Số áo</th>
+                <th>Quốc tịch</th>
+                <th>Chiều cao</th>
+                <th>Cân nặng</th>
+                <th>Số bàn</th>
+                <th>Thẻ vàng</th>
+                <th>Thẻ đỏ</th>
+                <th>Ngày sinh</th>
+                <th>Hết HĐ</th>
+                <th>Tuổi</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${#lists.isEmpty(danhSach)}">
+                <td colspan="13">🚫 Không có cầu thủ nào.</td>
+            </tr>
+            <tr th:each="ct : ${danhSach}">
+                <td th:text="${ct.ma}"></td>
+                <td th:text="${ct.hoTen}"></td>
+                <td th:text="${ct.viTri}"></td>
+                <td th:text="${ct.soAo}"></td>
+                <td th:text="${ct.quocTich}"></td>
+                <td th:text="${ct.chieuCao}"></td>
+                <td th:text="${ct.canNang}"></td>
+                <td th:text="${ct.soBanThang}"></td>
+                <td th:text="${ct.theVang}"></td>
+                <td th:text="${ct.theDo}"></td>
+                <td th:text="${#temporals.format(ct.ngaySinh, 'dd/MM/yyyy')}"></td>
+                <td th:text="${#temporals.format(ct.ngayHetHanHopDong, 'dd/MM/yyyy')}"></td>
+                <td th:text="${ct.tuoi}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <a href="/" class="home-link">🏠 Về trang chủ</a>
 </div>
 
-<div class="table-wrapper">
-    <table>
-        <thead>
-        <tr>
-            <th>Mã</th>
-            <th>Họ tên</th>
-            <th>Vị trí</th>
-            <th>Số áo</th>
-            <th>Quốc tịch</th>
-            <th>Chiều cao</th>
-            <th>Cân nặng</th>
-            <th>Số bàn</th>
-            <th>Thẻ vàng</th>
-            <th>Thẻ đỏ</th>
-            <th>Ngày sinh</th>
-            <th>Hết HĐ</th>
-            <th>Tuổi</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:if="${#lists.isEmpty(danhSach)}">
-            <td colspan="13">🚫 Không có cầu thủ nào.</td>
-        </tr>
-        <tr th:each="ct : ${danhSach}">
-            <td th:text="${ct.ma}"></td>
-            <td th:text="${ct.hoTen}"></td>
-            <td th:text="${ct.viTri}"></td>
-            <td th:text="${ct.soAo}"></td>
-            <td th:text="${ct.quocTich}"></td>
-            <td th:text="${ct.chieuCao}"></td>
-            <td th:text="${ct.canNang}"></td>
-            <td th:text="${ct.soBanThang}"></td>
-            <td th:text="${ct.theVang}"></td>
-            <td th:text="${ct.theDo}"></td>
-            <td th:text="${#temporals.format(ct.ngaySinh, 'dd/MM/yyyy')}"></td>
-            <td th:text="${#temporals.format(ct.ngayHetHanHopDong, 'dd/MM/yyyy')}"></td>
-            <td th:text="${ct.tuoi}"></td>
-        </tr>
-        </tbody>
-    </table>
-</div>
-
-<a href="/" class="home-link">🏠 Về trang chủ</a>
-
+<!-- Popup xác nhận xoá -->
 <div id="popupXoa">
     <div class="popup-inner">
         <p id="popupXoaMessage">Bạn có chắc chắn muốn xoá cầu thủ này?</p>
