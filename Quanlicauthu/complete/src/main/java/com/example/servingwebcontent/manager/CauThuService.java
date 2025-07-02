@@ -48,7 +48,7 @@ public class CauThuService {
             ct.setNgaySinh(cauThuMoi.getNgaySinh());
             ct.setNgayHetHanHopDong(cauThuMoi.getNgayHetHanHopDong());
 
-            cauThuRepository.save(ct); // lưu vào DB
+            cauThuRepository.save(ct);
 
             System.out.println("✅ Đã cập nhật thông tin đầy đủ cho cầu thủ mã: " + ct.getMa());
         } else {
@@ -116,7 +116,6 @@ public class CauThuService {
         ).toList();
     }
 
-    // Hàm hỗ trợ: so sánh chứa gần đúng, không phân biệt hoa thường, bỏ khoảng trắng
     private boolean stringMatch(String keyword, String actual) {
         return keyword == null || keyword.isBlank()
                 || (actual != null && actual.toLowerCase().contains(keyword.trim().toLowerCase()));

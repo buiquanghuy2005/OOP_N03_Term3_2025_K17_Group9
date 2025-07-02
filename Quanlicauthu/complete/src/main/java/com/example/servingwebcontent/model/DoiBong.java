@@ -3,7 +3,7 @@ package com.example.servingwebcontent.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "doibong")  // 👈 Quan trọng: map chính xác tên bảng trong MySQL
+@Table(name = "doibong")
 public class DoiBong {
 
     @Id

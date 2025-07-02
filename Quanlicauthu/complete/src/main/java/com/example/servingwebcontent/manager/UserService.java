@@ -11,7 +11,7 @@ public class UserService {
     private static final String FILE_NAME = "user.txt";
 
     public UserService() {
-        loadFromFile(); // Đọc từ file khi khởi tạo
+        loadFromFile(); 
     }
 
     public void register(String username, String role, String password) {

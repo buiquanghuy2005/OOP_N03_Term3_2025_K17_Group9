@@ -16,7 +16,6 @@ public class TranDauController {
     @Autowired
     private TranDauService tranDauService;
 
-    // Hiển thị danh sách trận đấu
     @GetMapping
     public String danhSachTranDau(Model model) {
         model.addAttribute("dsTranDau", tranDauService.getAllTranDau());

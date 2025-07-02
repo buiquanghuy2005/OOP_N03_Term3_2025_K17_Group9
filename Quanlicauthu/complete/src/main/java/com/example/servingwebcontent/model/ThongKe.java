@@ -6,7 +6,7 @@ public class ThongKe {
     private int tongSoBanThang;
     private int tongTheVang;
     private int tongTheDo;
-    private double tiLeThang; // Thêm tỷ lệ thắng
+    private double tiLeThang; 
     private CauThu cauThuGhiBanNhieuNhat;
     private CauThu cauThuLonTuoiNhat;
     private CauThu cauThuCaoNhat;

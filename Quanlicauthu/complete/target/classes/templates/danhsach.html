@@ -5,6 +5,16 @@
     <title>Quản lý cầu thủ</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
+        #inputMa,
+        #playerSelect {
+            height: 38px;
+            padding: 6px 12px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Poppins', sans-serif;
             background-color: #fffafc;
@@ -101,7 +111,7 @@
             background-color: #fff0f5;
         }
 
-        /* POPUP */
+
         #popupXoa {
             display: none;
             position: fixed;
@@ -209,7 +219,6 @@
 
 <a href="/" class="home-link">🏠 Về trang chủ</a>
 
-<!-- Popup xác nhận xoá -->
 <div id="popupXoa">
     <div class="popup-inner">
         <p id="popupXoaMessage">Bạn có chắc chắn muốn xoá cầu thủ này?</p>
