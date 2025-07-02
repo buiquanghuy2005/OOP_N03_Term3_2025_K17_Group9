@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sách Huấn Luyện Viên</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px 12px;
+            text-align: center;
+        }
+        th {
+            background-color: #eee;
+        }
+        a.button {
+            padding: 6px 12px;
+            background-color: #28a745;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        a.button:hover {
+            background-color: #218838;
+        }
+        .action-links a {
+            margin: 0 5px;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+
+<h1>📋 Danh sách Huấn Luyện Viên</h1>
+
+<a href="/hlv/them" class="button">➕ Thêm HLV mới</a>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Họ tên</th>
+            <th>Tuổi</th>
+            <th>Chức vụ</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="hlv : ${dsHlv}">
+            <td th:text="${hlv.id}"></td>
+            <td th:text="${hlv.ten}"></td>
+            <td th:text="${hlv.tuoi}"></td>
+            <td th:text="${hlv.chucVu}"></td>
+            <td class="action-links">
+                <a th:href="@{/hlv/sua/{id}(id=${hlv.id})}">✏ Sửa</a>
+                <a th:href="@{/hlv/xoa/{id}(id=${hlv.id})}" onclick="return confirm('Bạn có chắc muốn xoá HLV này?')">🗑 Xoá</a>
+            </td>
+        </tr>
+        <tr th:if="${#lists.isEmpty(dsHlv)}">
+            <td colspan="5">Không có HLV nào.</td>
+        </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
