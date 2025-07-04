@@ -4,10 +4,17 @@
     <meta charset="UTF-8">
     <title>Form Cầu Thủ</title>
     <style>
+        /* Căn giữa nội dung toàn bộ trang */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            padding: 40px;
-            background: #ffe6f0; 
+            background: #ffe6f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            margin: 0;
         }
 
         h1 {
@@ -18,26 +25,32 @@
         }
 
         form {
-            max-width: 800px;
-            margin: auto;
+            width: 100%;
+            max-width: 600px;
             background: #fff0f6;
             padding: 30px;
             border-radius: 20px;
             box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
             display: flex;
             flex-direction: column;
-            gap: 18px;
+            gap: 15px;
         }
 
-        label {
+        .form-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-group label {
+            width: 180px;
             font-weight: 600;
             color: #b53471;
         }
 
-        input {
+        .form-group input {
+            flex: 1;
             padding: 10px;
-            margin-top: 6px;
-            box-sizing: border-box;
             border: 1px solid #f5c2e7;
             border-radius: 6px;
             background-color: #fff;
@@ -54,7 +67,8 @@
             text-align: center;
             border: none;
             transition: all 0.3s ease;
-            margin-top: 20px;
+            margin-top: 10px;
+            align-self: center;
         }
 
         button:hover {
@@ -65,7 +79,7 @@
         a {
             display: block;
             text-align: center;
-            margin-top: 20px;
+            margin-top: 15px;
             color: #c44569;
             font-size: 16px;
             text-decoration: none;
@@ -76,8 +90,17 @@
         }
 
         @media (max-width: 600px) {
-            body {
-                margin: 10px;
+            .form-group {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .form-group label {
+                width: 100%;
+            }
+
+            .form-group input {
+                width: 100%;
             }
 
             form {
@@ -91,22 +114,66 @@
 <h1 th:text="${cauthu.ma == null} ? '📋 Thêm Cầu Thủ Mới' : '📝 Sửa Thông Tin Cầu Thủ'"></h1>
 
 <form th:action="@{/cauthu/luu}" th:method="post" th:object="${cauthu}">
-    <div>
+
+    <div class="form-group">
         <label>Mã:</label>
         <input type="text" th:field="*{ma}" required th:readonly="${cauthu.ma != null}" />
     </div>
 
-    <div><label>Họ tên:</label><input type="text" th:field="*{hoTen}" required /></div>
-    <div><label>Vị trí:</label><input type="text" th:field="*{viTri}" required /></div>
-    <div><label>Số áo:</label><input type="number" th:field="*{soAo}" required /></div>
-    <div><label>Quốc tịch:</label><input type="text" th:field="*{quocTich}" required /></div>
-    <div><label>Chiều cao (m):</label><input type="number" step="0.01" th:field="*{chieuCao}" required /></div>
-    <div><label>Cân nặng (kg):</label><input type="number" step="0.01" th:field="*{canNang}" required /></div>
-    <div><label>Số bàn thắng:</label><input type="number" th:field="*{soBanThang}" required /></div>
-    <div><label>Thẻ vàng:</label><input type="number" th:field="*{theVang}" required /></div>
-    <div><label>Thẻ đỏ:</label><input type="number" th:field="*{theDo}" required /></div>
-    <div><label>Ngày sinh:</label><input type="date" th:field="*{ngaySinh}" required /></div>
-    <div><label>Hết hạn hợp đồng:</label><input type="date" th:field="*{ngayHetHanHopDong}" required /></div>
+    <div class="form-group">
+        <label>Họ tên:</label>
+        <input type="text" th:field="*{hoTen}" required />
+    </div>
+
+    <div class="form-group">
+        <label>Vị trí:</label>
+        <input type="text" th:field="*{viTri}" required />
+    </div>
+
+    <div class="form-group">
+        <label>Số áo:</label>
+        <input type="number" th:field="*{soAo}" required />
+    </div>
+
+    <div class="form-group">
+        <label>Quốc tịch:</label>
+        <input type="text" th:field="*{quocTich}" required />
+    </div>
+
+    <div class="form-group">
+        <label>Chiều cao (m):</label>
+        <input type="number" step="0.01" th:field="*{chieuCao}" required />
+    </div>
+
+    <div class="form-group">
+        <label>Cân nặng (kg):</label>
+        <input type="number" step="0.01" th:field="*{canNang}" required />
+    </div>
+
+    <div class="form-group">
+        <label>Số bàn thắng:</label>
+        <input type="number" th:field="*{soBanThang}" required />
+    </div>
+
+    <div class="form-group">
+        <label>Thẻ vàng:</label>
+        <input type="number" th:field="*{theVang}" required />
+    </div>
+
+    <div class="form-group">
+        <label>Thẻ đỏ:</label>
+        <input type="number" th:field="*{theDo}" required />
+    </div>
+
+    <div class="form-group">
+        <label>Ngày sinh:</label>
+        <input type="date" th:field="*{ngaySinh}" required />
+    </div>
+
+    <div class="form-group">
+        <label>Hết hạn hợp đồng:</label>
+        <input type="date" th:field="*{ngayHetHanHopDong}" required />
+    </div>
 
     <button type="submit"
             th:text="${cauthu.ma == null} ? '🌸 Thêm Cầu Thủ' : '📝 Cập Nhật Cầu Thủ'">
