@@ -1,71 +1,73 @@
-Project 09[Dự án 09]. Xây dựng ứng dụng quản lý Đội Bóng.
+# Ứng dụng quản lý đội bóng
+Bài tập lớn môn **Lập trình hướng đối tượng** sử dụng Java + Spring Boot + Mô hình MVC
+--- 
 
-Yêu cầu chính :
+## Giới thiệu dự án :
+Quản lý cầu thủ và câu lạc bộ là một bài toán phổ biến trong thực tế thể thao. Dự án này mô phỏng một hệ thống đơn giản giúp thao tác, lưu trữ và tổ chức thông tin đội bóng, hỗ trợ học tập và phát triển phần mềm thực tế.
 
-Giao diện Java Spring Boot
+## Group 09 - N03: 
 
-Chức năng:
+Thành viên nhóm bao gồm:
 
-+)Quản lý cầu thủ
+Nguyễn Thị Nhung - 23010607
 
-+)Quản lý câu lạc bộ(CLB)
+Bùi Quang Huy - 23010317
 
-+)Gán cầu thủ vào câu lạc bộ
+## Các đối tượng :
 
-Cụ thể : 
+* Cầu thủ : Mã cầu thủ, họ tên, tuổi, vị trí, quốc tịch...
+* Trận đấu : Đội nhà/Khách,số bàn thắng,ngày thi đấu,sân vận động...
+* Huấn luyện viên : ID,họ tên, tuổi ,chức vụ...
 
-1.Quản lý cầu thủ
+## Chức năng chính 
 
--Thông tin cầu thủ: Mã cầu thủ, họ tên, tuổi, vị trí, quốc tịch,...
+* Thêm mới cầu thủ,sửa cầu thủ,xoá,tìm kiếm Cầu thủ theo các tiêu chí.Hiển thị danh sách cầu thủ.
+* Thêm,sửa,xoá Trận đấu.
+* Thêm sửa xoá Huấn luyện viên
+* Thống kê các tiêu chí như : số cầu thủ,tuổi trung bình,số bàn thắng,số thẻ đỏ, số thẻ vàng,tỷ lệ thắng,cầu thủ ghi bàn nhiều nhất, cầu thủ lơn tuổi nhất .....
+* Thống kê dạng biểu đồ cho các tiêu chí : số cầu thủ theo vị trí,quốc tịch,tỷ lệ thắng/hoà/thua sau các trận. 
 
--Chức năng:
+## UML Dự Án 
+1.1 UML Class diagram :
+<img src="img/Class-diagram.png" width="600">
 
-+)Thêm cầu thủ
+1.2 UML Sequence diagram:
+* Thêm đối tượng :
+<img src="img/Thêm đối tượng -sequence diagram.png" width="600">
 
-+)Sửa thông tin cầu thủ
+* Sửa đối tượng :
+<img src="img/Sửa đối tượng -seuquence diagram.png" width="600">
 
-+)Xóa cầu thủ
+* Xoá đối tượng :
+<img src="img/Xóa đối tượng-sequence diagram.png" width="600">
 
-+)Liệt kê cầu thủ
+* Tìm kiếm đối tượng :
+<img src="img/Tìm kiếm đối tượng-sequence diagram.png" width="600">
 
-+)Lọc cầu thủ theo độ tuổi, vị trí hoặc quốc tịch
+## Giao diện
 
-2. Quản lý câu lạc bộ (CLB)
+### Giao diện Trang chủ :
+<img src="img/Giao diện trang chủ.png" width="600">
 
--Thông tin CLB: Mã CLB, tên CLB, HLV trưởng, sân vận động,...
+### Giao diện giới thiệu :
+<img src="img/Giao diện giới thiệu.png" width="600">
 
--Chức năng:
+### Giao diện quản lý cầu thủ :
+<img src="img/Giao diện quản lý cầu thủ.png" width="600">
 
-+)Thêm CLB
+### Giao diện quản lý huấn luyện viên :
+<img src="img/Giao diện quản lý huấn luyện viên.png" width="600">
 
-+)Sửa thông tin CLB
+### Giao diện quản lý trận đấu :
+<img src="img/Giao diện quản lý trận đấu.png" width="600">
 
-+)Xóa CLB
+### Giao diện thống kê :
+<img src="img/Giao diện thống kê.png" width="600">
 
-3. Gán cầu thủ cho CLB
+Lưu đồ bài toán
+<img src="img/Lưu đồ bài toán.jpg" width="600">
 
--Mỗi cầu thủ thuộc về 1 CLB
-
--Hiển thị danh sách cầu thủ theo từng CLB
-
-4.Lưu trữ và xử lý dữ liệu
-
-Tạo các class CauThu, CLB, DanhSachCauThu, DanhSachCLB
-
-Lưu dữ liệu xuống file nhị phân (ObjectOutputStream, ObjectInputStream)
-
-Đọc dữ liệu khi ứng dụng khởi chạy
-
-Sử dụng ArrayList<CauThu> và Map<CLB, List<CauThu>> để quản lý trong bộ nhớ.
+## DEMO SẢN PHẨM :
 
 
-Class Diagram :
-https://online.visual-paradigm.com/share.jsp?id=343038303132362d31
-<img src="img/Quanlidoibong.jpg">
-Sequence diagram :
-https://online.visual-paradigm.com/share.jsp?id=343038303132362d32
-<img src="img/Quanlidoibong2.jpg">
-
-Lưu đồ bài toán:
-
-<img src="img/Lưu đồ bài toán.jpg">
+## Cách cài đặt :
