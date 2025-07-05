@@ -68,6 +68,19 @@ Lưu đồ bài toán
 <img src="img/Lưu đồ bài toán.jpg" width="600">
 
 ## DEMO SẢN PHẨM :
-
+https://youtu.be/weKtmzEArBc?si=aONhbvYkPpk7zwSA
 
 ## Cách cài đặt :
+Chạy bằng GitHub Codespaces
+Truy cập repository GitHub : https://github.com/buiquanghuy2005/OOP_N03_Term3_2025_K17_Group9
+
+Nhấn nút Code → chọn tab Codespaces
+
+Bấm Create codespace on branch FinaltermCode
+
+Trong Terminal tích hợp, chạy:
+
+mvn clean install
+mvn spring-boot:run
+
+Nhấn nút "Ports" → chọn 8080 → Open in Browser để truy cập ứng dụng
